@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Anh Đức · Góc nhỏ của tôi</title>
+  <meta name="description" content="Trang chủ của Anh Đức: góc game, tự học ngoại ngữ, phong cách sống, đọc sách & sở thích.">
+  <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%231d2a3a'/><text x='32' y='44' font-size='32' font-family='Georgia,serif' font-weight='700' text-anchor='middle' fill='%23f2b544'>Đ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4efe6; --surface: #fffdf8; --ink: #1d2a3a; --muted: #6b6f76; --line: #e4dccd;
+      --games: #e2553f; --learn: #2f7d6d; --life: #c98a1d; --read: #5b5bb5;
+      --shadow: 0 1px 2px rgba(29,42,58,.06), 0 10px 30px rgba(29,42,58,.08);
+      --display: "Fraunces", Georgia, serif;
+      --font: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #14161a; --surface: #1d2026; --ink: #ece7dd; --muted: #9a9ea6; --line: #2c3038;
+        --games: #f07a64; --learn: #5cbfa9; --life: #e7b04d; --read: #9a9af0;
+        --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.3);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #14161a; --surface: #1d2026; --ink: #ece7dd; --muted: #9a9ea6; --line: #2c3038;
+      --games: #f07a64; --learn: #5cbfa9; --life: #e7b04d; --read: #9a9af0;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.3);
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--font);
+      display: flex; flex-direction: column; }
+    a { color: inherit; }
+    .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    header.top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+    .mark { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600; }
+    .mark i { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-style: normal;
+      background: #1d2a3a; color: #f2b544; font: 700 1.2rem var(--display); }
+    .theme { border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 40px; height: 40px;
+      border-radius: 12px; font-size: 1.05rem; cursor: pointer; }
+
+    .hero { padding: 40px 0 34px; }
+    .eyebrow { margin: 0 0 .6rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    h1 { font: 700 clamp(2.1rem, 5.4vw, 3.6rem)/1.08 var(--display); margin: 0; letter-spacing: -.015em; max-width: 16ch; }
+    h1 em { font-style: italic; font-weight: 500; color: var(--learn); }
+    .lead { margin: 1rem 0 0; color: var(--muted); max-width: 52ch; font-size: 1.05rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding-bottom: 56px; }
+    .tile { --c: var(--learn); position: relative; display: flex; flex-direction: column; gap: .5rem; min-height: 240px;
+      padding: 26px 26px 22px; border-radius: 22px; text-decoration: none; background: var(--surface);
+      border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .tile::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--c); }
+    .tile::after { content: ""; position: absolute; right: -60px; bottom: -60px; width: 200px; height: 200px; border-radius: 50%;
+      background: var(--c); opacity: .08; transition: transform .25s ease, opacity .25s ease; }
+    .tile:hover, .tile:focus-visible { transform: translateY(-4px); border-color: var(--c); outline: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,.06), 0 18px 40px color-mix(in srgb, var(--c) 22%, transparent); }
+    .tile:hover::after { transform: scale(1.25); opacity: .14; }
+    .tile.games { --c: var(--games); } .tile.learn { --c: var(--learn); } .tile.life { --c: var(--life); } .tile.read { --c: var(--read); }
+    .icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; font-size: 1.7rem;
+      background: color-mix(in srgb, var(--c) 14%, var(--surface)); }
+    .tile h2 { margin: .5rem 0 0; font: 700 1.6rem/1.2 var(--display); }
+    .tile p { margin: 0; color: var(--muted); max-width: 40ch; }
+    .meta { margin-top: auto; padding-top: 1rem; display: flex; align-items: center; justify-content: space-between; gap: .8rem; font-size: .85rem; }
+    .host { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8rem; }
+    .go { display: inline-flex; align-items: center; gap: .35rem; font-weight: 600; color: var(--c); white-space: nowrap; }
+    .go span { transition: transform .18s ease; }
+    .tile:hover .go span { transform: translateX(4px); }
+    .pill { position: absolute; top: 22px; right: 22px; font-size: .72rem; font-weight: 600; padding: .2rem .6rem; border-radius: 99px;
+      background: color-mix(in srgb, var(--c) 14%, var(--surface)); color: var(--c); }
+    .tile.soon { cursor: default; }
+    .tile.soon:hover { transform: none; box-shadow: var(--shadow); border-color: var(--line); }
+
+    footer { margin-top: auto; border-top: 1px solid var(--line); padding: 22px 0 30px; color: var(--muted); font-size: .85rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; justify-content: space-between; }
+
+    @media (max-width: 720px) {
+      .hero { padding: 18px 0 24px; }
+      .grid { grid-template-columns: 1fr; gap: 14px; }
+      .tile { min-height: 0; padding: 22px 20px 18px; border-radius: 18px; }
+      .tile h2 { font-size: 1.4rem; }
+      .wrap { padding: 0 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .tile, .tile::after, .go span { transition: none; } }
+  </style>
+</head>
+<body>
+  <header class="wrap top">
+    <a class="mark" href="/"><i>Đ</i><span>anhducafc</span></a>
+    <button class="theme" id="theme" aria-label="Đổi giao diện sáng/tối">🌙</button>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Xin chào, mình là Anh Đức · Tommy</p>
+      <h1>Nơi mình <em>học, chơi</em> và ghi lại những điều mình thích.</h1>
+      <p class="lead">Mỗi góc dưới đây là một trang riêng. Chọn một ô để bắt đầu.</p>
+    </section>
+
+    <section class="grid" id="grid" aria-label="Các trang con"></section>
+  </main>
+
+  <footer>
+    <div class="wrap"><span>© <span id="yr"></span> anhducafc.com</span><span>Làm thủ công, cập nhật dần mỗi tuần.</span></div>
+  </footer>
+
+  <script>
+    /* ====== SỬA Ở ĐÂY: thêm / bớt / đổi link các trang con ======
+       status: "live" (đang chạy) | "new" (mới) | "soon" (sắp có — ô không bấm được) */
+    const SECTIONS = [
+      { key: "games", icon: "🎮", title: "Games Corner", desc: "Giờ ra chơi: game HTML5 nhẹ nhàng, chơi ngay trên trình duyệt, có giới hạn thời gian mỗi ngày.",
+        url: "https://games.anhducafc.com", status: "live" },
+      { key: "learn", icon: "📚", title: "Self Study Language", desc: "Tự học tiếng Anh (CEFR A1–C1) và tiếng Trung (HSK 1–6): lộ trình, flashcard, mini game, theo dõi tiến độ.",
+        url: "https://selfstudy.anhducafc.com", status: "live" },
+      { key: "life", icon: "🌿", title: "Life Style", desc: "Chạy bộ, trail, ăn uống lành mạnh và những thói quen nhỏ giúp sống khoẻ mỗi ngày.",
+        url: "https://lifestyle.anhducafc.com", status: "soon" },
+      { key: "read", icon: "📖", title: "Reading & Hobbies", desc: "Sách đang đọc, ghi chú hay và những sở thích ngoài giờ làm.",
+        url: "https://hobbies.anhducafc.com", status: "soon" }
+    ];
+    const LABEL = { live: "", new: "Mới", soon: "Sắp có" };
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    document.getElementById("grid").innerHTML = SECTIONS.map((s) => {
+      const soon = s.status === "soon";
+      const host = s.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+      const tag = soon ? "div" : "a";
+      const attrs = soon ? `aria-disabled="true"` : `href="${esc(s.url)}"`;
+      return `<${tag} class="tile ${s.key} ${soon ? "soon" : ""}" ${attrs}>
+        ${LABEL[s.status] ? `<span class="pill">${LABEL[s.status]}</span>` : ""}
+        <span class="icon" aria-hidden="true">${s.icon}</span>
+        <h2>${esc(s.title)}</h2>
+        <p>${esc(s.desc)}</p>
+        <span class="meta"><span class="host">${esc(host)}</span>${soon ? "" : `<span class="go">Mở <span>→</span></span>`}</span>
+      </${tag}>`;
+    }).join("");
+    document.getElementById("yr").textContent = new Date().getFullYear();
+
+    /* Sáng / tối (nhớ lựa chọn trên máy này) */
+    const btn = document.getElementById("theme");
+    const isDark = () => document.documentElement.dataset.theme === "dark" ||
+      (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+    const paint = () => { btn.textContent = isDark() ? "☀️" : "🌙"; };
+    try { const t = localStorage.getItem("hub.theme"); if (t) document.documentElement.dataset.theme = t; } catch {}
+    paint();
+    btn.addEventListener("click", () => {
+      const t = isDark() ? "light" : "dark";
+      document.documentElement.dataset.theme = t;
+      try { localStorage.setItem("hub.theme", t); } catch {}
+      paint();
+    });
+  </script>
+</body>
+</html>
