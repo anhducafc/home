@@ -204,9 +204,17 @@ let CSRF = "", POSTS = [], cur = null, dirty = false, filter = "all", saving = f
 async function api(action, body, isForm) {
   const opt = { method: body ? "POST" : "GET", headers: { "X-CSRF": CSRF }, credentials: "same-origin" };
   if (body) { if (isForm) opt.body = body; else { opt.headers["Content-Type"] = "application/json"; opt.body = JSON.stringify(body); } }
-  let r, j;
-  try { r = await fetch("api.php?action=" + action, opt); j = await r.json(); }
-  catch { throw new Error(r ? "Máy chủ trả lỗi (" + r.status + "). Hosting có bật PHP không?" : "Không kết nối được máy chủ."); }
+  let r, txt, j;
+  try { r = await fetch("api.php?action=" + action, opt); txt = await r.text(); }
+  catch { throw new Error("Không kết nối được máy chủ."); }
+  try { j = JSON.parse(txt.replace(/^\uFEFF/, "")); }
+  catch {
+    const raw = txt.trim().slice(0, 400);
+    const why = raw.startsWith("<?php") ? "Máy chủ không chạy PHP mà trả về nguyên mã nguồn."
+      : /parse error|syntax error|fatal error/i.test(raw) ? "PHP báo lỗi (có thể phiên bản PHP quá cũ)."
+      : "Máy chủ trả về dữ liệu lạ (mã " + r.status + ").";
+    const e = new Error(why); e.raw = raw; throw e;
+  }
   if (r.status === 401 && action !== "login") { showLogin(false); }
   if (!r.ok) throw new Error(j.error || "Có lỗi xảy ra.");
   return j;
@@ -608,7 +616,9 @@ function confetti() {
     const s = await api("status"); CSRF = s.csrf;
     if (s.setup) showLogin(true); else if (!s.loggedIn) showLogin(false); else await startApp();
   } catch (er) {
-    document.body.innerHTML = `<div class="welcome"><h2>Chưa chạy được trang quản trị</h2><p>${esc(er.message)}</p><p style="font-size:14px">Trang này cần hosting có PHP (cPanel có sẵn). Nếu bạn đang mở file trực tiếp trên máy thì sẽ không chạy.</p></div>`;
+    document.body.innerHTML = `<div class="welcome" style="max-width:720px"><h2>Chưa chạy được trang quản trị</h2><p>${esc(er.message)}</p>
+      ${er.raw ? `<p style="font-size:14px">Máy chủ trả về (chụp màn hình phần này gửi Claude):</p><pre style="text-align:left;white-space:pre-wrap;word-break:break-all;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px;max-height:40vh;overflow:auto">${esc(er.raw)}</pre>` : ""}
+      <p style="font-size:14px">Trang này cần hosting có PHP 7.0 trở lên (cPanel → Select PHP Version).</p></div>`;
   }
 })();
 </script>
