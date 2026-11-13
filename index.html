@@ -153,6 +153,7 @@ aside h4{font:600 18px var(--serif);margin-bottom:12px}
 .post .back:hover{color:var(--accent)}
 .post h1{font:700 clamp(30px,4.5vw,44px)/1.18 var(--serif);letter-spacing:-.5px;margin:10px 0 16px}
 .post .thumb{aspect-ratio:16/8;margin:28px 0 36px}
+.post .thumb img~.tw{display:none}
 .post .body{font-size:18px;line-height:1.8}
 .post .body p{margin:0 0 1.2em}
 .post .body h2{font:600 26px/1.3 var(--serif);margin:1.6em 0 .6em}
@@ -218,7 +219,7 @@ footer li a:hover{color:var(--accent)}
 </footer>
 <div class="toast" id="toast"></div>
 
-<script src="posts.js"></script>
+<script src="config.js"></script>
 <script>
 /* ============================================================
    CODE GIAO DIỆN — nội dung & bài viết nằm ở posts.js
@@ -226,11 +227,16 @@ footer li a:hover{color:var(--accent)}
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const strip = h => h.replace(/<[^>]+>/g, " ");
+let POSTS = [], byDate = [];
+function prepare(list) {
+POSTS = list.filter(p => p.status !== "draft");
 POSTS.forEach(p => {
+  p.excerpt = p.excerpt || "";
   p.mins = Math.max(1, Math.round(strip(p.body).trim().split(/\s+/).length / 200));
   p.d = new Date(p.date + "T00:00:00");
 });
-const byDate = [...POSTS].sort((a, b) => b.d - a.d);
+byDate = [...POSTS].sort((a, b) => b.d - a.d);
+}
 const fmt = d => d.toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" });
 const catOf = p => CATS[p.cat] || { name: p.cat, color: "#888" };
 const metaHTML = p => `<div class="meta"><i>${fmt(p.d)}</i>·<i>${p.mins} phút đọc</i></div>`;
@@ -267,6 +273,7 @@ let state = { cat: "all", sort: "new", shown: 6, month: null };
 const avatarInner = () => SITE.avatar ? `<img src="${esc(SITE.avatar)}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover">` : esc(SITE.author[0]);
 
 function homeView() {
+  if (!byDate.length) return `<div class="wrap empty" style="padding:120px 0">Chưa có bài viết nào.</div>`;
   const feat = byDate.find(p => p.featured) || byDate[0];
   const fresh = byDate.filter(p => p !== feat).slice(0, 4);
   return `<div class="wrap">
@@ -382,15 +389,16 @@ function route() {
   document.title = "anhducafc. — Ghi chép của một ông bố viết code";
   if (c && CATS[c[1]]) { state.cat = c[1]; state.shown = 6; state.month = null; }
   $("#content").innerHTML = homeView();
-  bindHome();
+  if ($("#latest")) bindHome();
   if (c) $("#latest").scrollIntoView();
 }
 addEventListener("hashchange", route);
-route();
+$("#content").innerHTML = `<div class="wrap empty" style="padding:120px 0">Đang tải bài viết…</div>`;
+fetch("data/posts.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).catch(() => [])
+  .then(list => { prepare(Array.isArray(list) ? list : []); Q.placeholder = `Tìm trong ${POSTS.length} bài viết…`; route(); });
 
 /* Search */
 const S = $("#search"), Q = $("#q"), R = $("#sres");
-Q.placeholder = `Tìm trong ${POSTS.length} bài viết…`;
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "d").toLowerCase();
 const SUG = ["giờ ra chơi", "tiếng anh", "chạy", "con"];
 $("#shint").innerHTML = `Gợi ý: ${SUG.map(s => `<button>${s}</button>`).join("")}<kbd>Esc</kbd>`;
