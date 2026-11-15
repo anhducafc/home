@@ -136,14 +136,84 @@
      "highUSD": 2600
     }
    },
-   "yearNotes": {
-    "2025": "Năm đầu là UTMB World Series Major; UTAMiler 161 km chạy lần đầu."
-   },
+   "yearNotes": {},
    "majorSince": 2025,
-   "article": {
-    "title": "Ultra-Trail Australia by UTMB 2026: Miao Yao sees off Ruth Croft",
-    "source": "RUN247",
-    "url": "https://run247.com/running-news/trail/ultra-trail-australia-by-utmb-results-report-2026"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "UTA100",
+       "George Murray (NZL) 9:32:59",
+       "Emily Gilmour-Walsh (AUS) 11:33:28"
+      ]
+     ],
+     "note": "Cả hai lần đầu đứng bục cao nhất UTA; Murray đăng ký phút chót.",
+     "article": {
+      "title": "2023 UTA100 race wrap",
+      "source": "Ultra-Trail Australia",
+      "url": "https://uta.utmb.world/news/2023-uta100-race-wrap"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "UTA100",
+       "Michael Dimuantes (AUS) 9:01",
+       "Beth McKenzie (USA) 10:41"
+      ]
+     ],
+     "note": "Tên VĐV nam theo bản tin irunfar; thời gian làm tròn phút.",
+     "article": {
+      "title": "This Week In Running: May 20, 2024",
+      "source": "iRunFar",
+      "url": "https://www.irunfar.com/this-week-in-running-may-20-2024"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "UTAMiler 161 km",
+       "Eric Concé (FRA) 18:55:24",
+       "Meghann Coffey (AUS) 21:52:24"
+      ],
+      [
+       "UTA100",
+       "Jia-Sheng Shen (CHN) 9:26",
+       "Eve Moore (GBR) 10:55"
+      ]
+     ],
+     "rec": [
+      "UTAMiler chạy lần đầu — thời gian của Concé/Coffey là mốc đầu tiên"
+     ],
+     "note": "Năm đầu là UTMB World Series Major.",
+     "article": {
+      "title": "Ultra-Trail Australia by UTMB 2025 results report",
+      "source": "RUN247",
+      "url": "https://run247.com/running-news/trail/ultra-trail-australia-by-utmb-2025-results-report"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "UTAMiler 161 km",
+       "Aleksei Tolstenko (AIN) 17:38:27",
+       "Antonina Iushina (AIN) 19:51:13"
+      ],
+      [
+       "UTA100",
+       "Michael Dunstan (AUS) 9:04:19",
+       "Katarzyna Dombrowska (POL) 10:50:55"
+      ]
+     ],
+     "rec": [
+      "Tolstenko và Iushina cùng phá kỷ lục Miler (cũ 18:55:24 / 21:52:24)"
+     ],
+     "article": {
+      "title": "Ultra-Trail Australia by UTMB 2026: Miao Yao sees off Ruth Croft",
+      "source": "RUN247",
+      "url": "https://run247.com/running-news/trail/ultra-trail-australia-by-utmb-results-report-2026"
+     }
+    }
    }
   },
   {
@@ -253,13 +323,73 @@
      "highUSD": 4000
     }
    },
-   "yearNotes": {
-    "2023": "Bão kèm mưa đá khiến BTC tạm dừng VDA 163 km và CHR; khoảng 1.000 VĐV được sơ tán."
-   },
-   "article": {
-    "title": "Concluye la tercera edición de Val d’Aran by UTMB (bão và sơ tán 2023)",
-    "source": "Val d’Aran by UTMB",
-    "url": "https://valdaran.utmb.world/news/concluyeterceraedicionvaldaranbyutmb"
+   "yearNotes": {},
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "PDA 55 km",
+       "Raúl Criado (ESP)",
+       "Oihana Kortazar (ESP)"
+      ],
+      [
+       "CHR 110 km",
+       "Raúl Butaci (ROU)",
+       "Azara García de los Salmones (ESP)"
+      ]
+     ],
+     "note": "Bão mưa đá — VDA 163 km và CHR bị tạm dừng, khoảng 1.000 VĐV sơ tán. Kết quả dưới đây là các cự ly kết thúc được.",
+     "article": {
+      "title": "Concluye la tercera edición de Val d’Aran by UTMB",
+      "source": "Val d’Aran by UTMB",
+      "url": "https://valdaran.utmb.world/news/concluyeterceraedicionvaldaranbyutmb"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "CHR 110 km",
+       "Luke Grenfell-Shaw (GBR) 12:05:03",
+       "Allison Baca (USA)"
+      ]
+     ],
+     "note": "VDA 100 mile bị hoãn vì thời tiết xấu (hủy cả 2023 và 2024). Grenfell-Shaw thắng đúng ngày giỗ anh trai, dưới 50% VĐV 110 km về đích.",
+     "article": {
+      "title": "Luke Grenfell-Shaw wins Val d’Aran by UTMB 2024",
+      "source": "RUN247",
+      "url": "https://run247.com/running-news/trail/luke-grenfell-shaw-wins-val-d-aran-by-utmb-2024"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "VDA 142 km",
+       "Arthur Joyeux-Bouillon (FRA) 16:25:48",
+       "Laura Van Vooren (BEL) 20:26:37"
+      ]
+     ],
+     "note": "VDA trở lại sau 2 năm bị hủy; rút từ 163 km/10.000 m D+ xuống 142 km/7.250 m D+ vì dự báo bão. Hơn 6.000 VĐV, 83 quốc gia.",
+     "article": {
+      "title": "Val d’Aran by UTMB 2025 results report",
+      "source": "RUN247",
+      "url": "https://run247.com/running-news/trail/val-daran-by-utmb-2025-results-report"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "VDA 163 km",
+       "Santos Gabriel Rueda (ARG) ~21:32",
+       "Katarzyna Dombrowska (POL) ~27:33"
+      ]
+     ],
+     "note": "Cự ly 163 km đầy đủ. Ứng viên Beñat Marmissolle bỏ cuộc khi đang thứ 2 (~km 64).",
+     "article": {
+      "title": "This Week In Running: July 6, 2026",
+      "source": "iRunFar",
+      "url": "https://www.irunfar.com/this-week-in-running-july-6-2026"
+     }
+    }
    }
   },
   {
@@ -367,13 +497,79 @@
     }
    },
    "yearNotes": {
-    "2025": "Mưa lạnh và tuyết đêm thứ Sáu; BTC bỏ đoạn Pyramides Calcaires (~2 km, 200 m D+).",
     "2027": "Chưa công bố. UCI Super Mondiaux 24/8–5/9/2027 trùng tuần UTMB nên có thể lùi/lệch 1 tuần."
    },
-   "article": {
-    "title": "2025 UTMB Results: Tom Evans and Ruth Croft Weather the Storm and Win",
-    "source": "iRunFar",
-    "url": "https://www.irunfar.com/2025-utmb-results"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "UTMB",
+       "Jim Walmsley (USA) 19:37:43",
+       "Courtney Dauwalter (USA) 23:29:14"
+      ]
+     ],
+     "rec": [
+      "Walmsley 19:37:43 — kỷ lục giải nam (cũ 19:49:30 của Kilian Jornet); người Mỹ nam đầu tiên thắng UTMB"
+     ],
+     "note": "Dauwalter hoàn tất “bộ ba” Western States – Hardrock – UTMB trong một năm.",
+     "article": {
+      "title": "2023 UTMB Results: Dauwalter and Walmsley Lead American Sweep",
+      "source": "iRunFar",
+      "url": "https://irunfar.com/2023-utmb-results"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "UTMB",
+       "Vincent Bouillard (FRA) 19:54:23",
+       "Katie Schide (USA) 22:09:31"
+      ]
+     ],
+     "rec": [
+      "Schide 22:09:31 — kỷ lục giải nữ (cũ 22:30:54 của Dauwalter, 2021)"
+     ],
+     "note": "Trời nóng, nhiều ứng viên bỏ cuộc (Walmsley, Evans, Grangier); Bouillard là cú sốc.",
+     "article": {
+      "title": "2024 UTMB Results: A Course Record for Schide and a Surprise Win for Bouillard",
+      "source": "iRunFar",
+      "url": "https://irunfar.com/2024-utmb-results"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "UTMB",
+       "Tom Evans (GBR) 19:18:58",
+       "Ruth Croft (NZL) 22:56:23"
+      ]
+     ],
+     "note": "Mưa lạnh và tuyết đêm thứ Sáu; BTC bỏ đoạn Pyramides Calcaires (~2 km, 200 m D+).",
+     "article": {
+      "title": "2025 UTMB Results: Tom Evans and Ruth Croft Weather the Storm and Win",
+      "source": "iRunFar",
+      "url": "https://www.irunfar.com/2025-utmb-results"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "UTMB",
+       "Ben Dhiman (USA) 18:16:29",
+       "Blandine L’Hirondel (FRA) 21:54:49"
+      ]
+     ],
+     "rec": [
+      "Dhiman 18:16:29 — nhanh nhất lịch sử, người đầu tiên dưới 19 giờ (không tính kỷ lục chính thức vì route rút ngắn)",
+      "L’Hirondel — thời gian nữ nhanh nhất giải (route ngắn hơn 3,1 km nên không so trực tiếp)"
+     ],
+     "note": "Bỏ đoạn Pyramides Calcaires, xuất phát lùi 2 giờ vì dự báo giông.",
+     "article": {
+      "title": "UTMB 2026 results report: men",
+      "source": "RUN247",
+      "url": "https://run247.com/running-news/trail/utmb-2026-results-report-men"
+     }
+    }
    }
   },
   {
@@ -483,15 +679,73 @@
      "highUSD": 4800
     }
    },
-   "yearNotes": {
-    "2023": "Kỷ niệm 10 năm giải.",
-    "2025": "Năm đầu là UTMB World Series Major châu Mỹ."
-   },
+   "yearNotes": {},
    "majorSince": 2025,
-   "article": {
-    "title": "HOKA Kodiak: Americas Major",
-    "source": "UTMB World Series",
-    "url": "https://utmb.world/news/HOKA-Kodiak-Americas-Major"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "100 mile",
+       "Vincent Bouillard (FRA) 16:22:07",
+       "Claire Bannwarth (FRA) 21:10:28"
+      ]
+     ],
+     "note": "Kỷ niệm 10 năm giải.",
+     "article": {
+      "title": "Kodiak Ultra Marathons by UTMB World Series 2023 results",
+      "source": "RUN247",
+      "url": "https://run247.com/running-news/trail/kodiak-ultra-marathons-utmb-world-series-2023-results-report"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "100 mile",
+       "Sam Wood (USA) 18:24:08",
+       "Kristina Chang (USA) 21:15:24"
+      ],
+      [
+       "100K",
+       "Nick Hirdt (USA) 8:25:39",
+       "Michelle Buncke (USA) 9:21:08"
+      ]
+     ],
+     "article": {
+      "title": "Thousands of runners converge in Big Bear Lake for the 2024 Kodiak",
+      "source": "Endurance Sportswire",
+      "url": "https://www.endurancesportswire.com/thousands-of-runners-from-around-the-world-converge-in-big-bear-lake-california-for-the-2024-kodiak-ultra-marathons-by-utmb/"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "100 mile",
+       "Hayden Hawks (USA) 16:40:37",
+       "Lin Chen (CHN) 19:31:17"
+      ]
+     ],
+     "note": "Năm đầu là Major châu Mỹ. Cả Chen và Hawks đều “gỡ” lại sau khi bỏ cuộc ở UTMB tháng 8.",
+     "article": {
+      "title": "This Week In Running: October 13, 2025",
+      "source": "iRunFar",
+      "url": "https://www.irunfar.com/this-week-in-running-october-13-2025"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "100 mile",
+       "Cody Poskin (USA) 16:46:21",
+       "Nichole Abma (CAN) 20:43:40"
+      ]
+     ],
+     "note": "Kết quả theo UTMB Live tại thời điểm ghi nhận, có thể chưa phải bảng chính thức. 279/428 VĐV về đích.",
+     "article": {
+      "title": "Kodiak 100M 2026 results",
+      "source": "Multi-Day Running",
+      "url": "https://multidayrunning.com/events/kodiak-100m"
+     }
+    }
    }
   },
   {
@@ -598,14 +852,54 @@
     }
    },
    "yearNotes": {
-    "2023": "Còn mang tên Doi Inthanon Thailand by UTMB (lần thứ 4).",
-    "2024": "Đổi tên Chiang Mai Thailand by UTMB, dời sang Chiang Mai PAO Park (lần thứ 5).",
     "2027": "Chưa công bố trên lịch UTMB World Series."
    },
-   "article": {
-    "title": "This Week In Running: December 9, 2024 (Chiang Mai Thailand by UTMB)",
-    "source": "iRunFar",
-    "url": "https://www.irunfar.com/this-week-in-running-december-9-2024"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Doi Inthanon 175 km",
+       "Ji Duo (CHN) 23:58",
+       "Lin Chen (CHN) 30:05"
+      ]
+     ],
+     "note": "Chung kết châu Á–TBD; cả hai thắng nhận vé vàng Western States. Nữ: cả bục toàn VĐV Trung Quốc.",
+     "article": {
+      "title": "Doi Inthanon Thailand by UTMB 2023 results",
+      "source": "iRunFar",
+      "url": "https://irunfar.com/?p=87511"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Trans-Int 160",
+       "Can-Hua Luo (CHN) 20:25",
+       "Antonina Iushina (AIN) 24:23"
+      ]
+     ],
+     "note": "Đổi tên Chiang Mai Thailand by UTMB; Iushina thắng chỉ 2 tuần sau khi về nhì Cape Town 100K.",
+     "article": {
+      "title": "This Week In Running: December 9, 2024",
+      "source": "iRunFar",
+      "url": "https://www.irunfar.com/this-week-in-running-december-9-2024"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Chiang Dao 160",
+       "Aleksei Beresnev (AIN)",
+       "Antonina Iushina (AIN)"
+      ]
+     ],
+     "note": "Hai cuối tuần (29–30/11 Doi Inthanon; 4–7/12 Chiang Mai PAO Park); kỷ lục 9.656 VĐV từ 89 quốc gia; Iushina thắng 2 năm liên tiếp.",
+     "article": {
+      "title": "HOKA Chiang Mai Thailand by UTMB 2025 concludes historic dual-weekend edition",
+      "source": "RRM",
+      "url": "https://rrm.com/2025/news/icarussports-hoka-chiang-mai-thailand-by-utmb-2025-concludes-historic-dual-weekend-edition-10000-runners/"
+     }
+    }
    }
   },
   {
@@ -657,7 +951,7 @@
     ],
     [
      "Kỷ lục nữ",
-     "2:15:55 · S. Kebede (2024)"
+     "2:14:29 · B. Kosgei (2026)"
     ]
    ],
    "entry": "Bốc thăm (tỉ lệ rất thấp), charity, tour chính thức",
@@ -696,10 +990,78 @@
    "yearNotes": {
     "2027": "Dời sang 7/3 để đăng cai AbbottWMM Age Group World Championships."
    },
-   "article": {
-    "title": "Ethiopians dominate in Tokyo (2025)",
-    "source": "World Marathon Majors",
-    "url": "https://www.worldmarathonmajors.com/content-hub/ethiopians-dominate-in-tokyo"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Deso Gelmisa (ETH) 2:05:22",
+       "Rosemary Wanjiru (KEN) 2:16:28"
+      ]
+     ],
+     "rec": [
+      "Cameron Levins (CAN) 2:05:36 — kỷ lục Bắc Mỹ",
+      "Wanjiru: top 10 mọi thời đại ở nữ"
+     ],
+     "note": "Gelmisa và Mohamed Esa cùng thời gian 2:05:22 sau cuộc nước rút ba người.",
+     "article": {
+      "title": "Wanjiru and Gelmisa win the Tokyo Marathon",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/tokyo-marathon-2023-wanjiru-gelmisa"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Benson Kipruto (KEN) 2:02:16",
+       "Sutume Asefa Kebede (ETH) 2:15:55"
+      ]
+     ],
+     "rec": [
+      "Kipruto 2:02:16 — kỷ lục all-comers Nhật Bản (cũ 2:02:40 của Kipchoge)",
+      "Kebede 2:15:55 — kỷ lục all-comers Nhật Bản (cũ 2:16:02 của Kosgei)"
+     ],
+     "article": {
+      "title": "Kipruto and Kebede take Tokyo titles with Japanese all-comers’ records",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/kipruto-kebede-japanese-all-comers-records-tokyo-marathon-2024"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "Tadese Takele (ETH) 2:03:23",
+       "Sutume Kebede (ETH) 2:16:31"
+      ]
+     ],
+     "note": "Cú đúp Ethiopia; cả hai đều là thành tích dẫn đầu thế giới lúc đó.",
+     "article": {
+      "title": "Takele and Kebede complete Ethiopian double in Tokyo",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/tokyo-marathon-2025-kebede-takele"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "Tadese Takele (ETH) 2:03:37",
+       "Brigid Kosgei (KEN) 2:14:29"
+      ]
+     ],
+     "rec": [
+      "Kosgei 2:14:29 — kỷ lục châu Á all-comers và kỷ lục giải",
+      "Aouani (ITA) 2:04:26 — kỷ lục Ý; Feng Peiyou (CHN) 2:05:58 — kỷ lục quốc gia"
+     ],
+     "note": "Takele bảo vệ thành công ngôi vô địch nam.",
+     "article": {
+      "title": "Kosgei sets Asian all-comers’ record, Takele retains title",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/tokyo-marathon-2026-kosgei-takele"
+     }
+    }
    }
   },
   {
@@ -747,11 +1109,11 @@
     ],
     [
      "Kỷ lục nam",
-     "2:03:02 · G. Mutai (2011)"
+     "2:01:52 · J. Korir (2026)"
     ],
     [
      "Kỷ lục nữ",
-     "2:19:59 · B. Deba (2014)"
+     "2:17:22 · S. Lokedi (2025)"
     ]
    ],
    "entry": "Chuẩn BQ theo tuổi (nam 18–34: 2:55, đã siết 5 phút từ 2026)",
@@ -787,10 +1149,75 @@
      "highUSD": 5000
     }
    },
-   "article": {
-    "title": "Sisay Lemma and Hellen Obiri win 2024 Boston Marathon",
-    "source": "World Athletics",
-    "url": "https://worldathletics.org/competitions/world-athletics-label-road-races/news/sisay-lemma-hellen-obiri-win-2024-boston-marathon"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Evans Chebet (KEN) 2:05:54",
+       "Hellen Obiri (KEN) 2:21:38"
+      ]
+     ],
+     "note": "Chebet bảo vệ danh hiệu; Obiri thắng Major marathon đầu tiên.",
+     "article": {
+      "title": "Chebet defends his Boston title; Obiri wins her first major marathon",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/boston-marathon-2023-obiri-chebet"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Sisay Lemma (ETH) 2:06:17",
+       "Hellen Obiri (KEN) 2:22:37"
+      ]
+     ],
+     "rec": [
+      "Lemma qua nửa đường 1:00:19 — nhanh nhất lịch sử Boston"
+     ],
+     "article": {
+      "title": "Sisay Lemma and Hellen Obiri win 2024 Boston Marathon",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/competitions/world-athletics-label-road-races/news/sisay-lemma-hellen-obiri-win-2024-boston-marathon"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "John Korir (KEN) 2:04:45",
+       "Sharon Lokedi (KEN) 2:17:22"
+      ]
+     ],
+     "rec": [
+      "Lokedi 2:17:22 — kỷ lục giải nữ, phá mốc cũ 2:19:59 (2014) hơn 2 phút 37 giây"
+     ],
+     "note": "Cú đúp Kenya; 5 người nam dưới 2:06 — sâu nhất lịch sử giải.",
+     "article": {
+      "title": "Lokedi breaks Boston course record, Korir wins in 2:04:45",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/lokedi-korir-boston-marathon-course-record-2025"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "John Korir (KEN) 2:01:52",
+       "Sharon Lokedi (KEN) 2:18:51"
+      ]
+     ],
+     "rec": [
+      "Korir 2:01:52 — kỷ lục giải nam (course điểm-điểm nên không được công nhận kỷ lục/PB)"
+     ],
+     "note": "Lokedi bảo vệ ngôi vô địch.",
+     "article": {
+      "title": "Korir sets Boston course record as Lokedi retains title",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/competitions/world-athletics-label-road-races/news/korir-lokedi-course-record-boston-marathon"
+     }
+    }
    }
   },
   {
@@ -838,7 +1265,7 @@
     ],
     [
      "Kỷ lục nam",
-     "2:01:25 · K. Kiptum (2023)"
+     "1:59:30 · S. Sawe (2026, WR chờ phê chuẩn)"
     ],
     [
      "Kỷ lục nữ",
@@ -848,7 +1275,8 @@
    "entry": "Ballot (>1 triệu đơn), Good-for-Age, charity",
    "facts": [
     "Marathon đông người về đích nhất thế giới 2025",
-    "2:15:50 của T. Assefa (2025) là WR nữ women-only"
+    "2:15:41 của T. Assefa (2026) là WR nữ women-only",
+    "Sawe 1:59:30 (2026): lần đầu marathon dưới 2 giờ theo luật thi đấu"
    ],
    "coach": [
     "Ballot rất khó — charity/tour là đường thực tế.",
@@ -881,10 +1309,80 @@
    "yearNotes": {
     "2027": "Marathon 25/4; ban tổ chức có thêm hoạt động ngày 24/4."
    },
-   "article": {
-    "title": "Assefa breaks women-only marathon world record in London (2025)",
-    "source": "World Athletics",
-    "url": "https://worldathletics.org/news/report/tigist-assefa-women-only-world-marathon-record-london"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Kelvin Kiptum (KEN) 2:01:25",
+       "Sifan Hassan (NED) 2:18:33"
+      ]
+     ],
+     "rec": [
+      "Kiptum 2:01:25 — kỷ lục giải (cũ 2:02:37 của Kipchoge, 2019)"
+     ],
+     "note": "Hassan thắng ngay trận ra mắt marathon.",
+     "article": {
+      "title": "Kiptum charges to 2:01:25 triumph, Hassan stuns on marathon debut",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/kelvin-kiptum-sifan-hassan-london-marathon"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Alexander Mutiso Munyao (KEN) 2:04:01",
+       "Peres Jepchirchir (KEN) 2:16:16"
+      ]
+     ],
+     "rec": [
+      "Jepchirchir 2:16:16 — kỷ lục thế giới women-only (WA ghi chú: chờ phê chuẩn)",
+      "Kenenisa Bekele (ETH) 2:04:15 — nhanh nhất mọi thời đại ở độ tuổi trên 40"
+     ],
+     "article": {
+      "title": "Peres Jepchirchir breaks women-only world marathon record in London",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/peres-jepchirchir-women-world-marathon-record-london"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "Sabastian Sawe (KEN) 2:02:27",
+       "Tigist Assefa (ETH) 2:15:50"
+      ]
+     ],
+     "rec": [
+      "Assefa 2:15:50 — kỷ lục thế giới women-only",
+      "Kiplimo (UGA) 2:03:37 — kỷ lục Uganda"
+     ],
+     "article": {
+      "title": "Assefa breaks women-only marathon world record with 2:15:50",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/tigist-assefa-women-only-world-marathon-record-london"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "Sabastian Sawe (KEN) 1:59:30",
+       "Tigst Assefa (ETH) 2:15:41"
+      ]
+     ],
+     "rec": [
+      "Sawe 1:59:30 — người đầu tiên chạy marathon dưới 2 giờ theo luật thi đấu (WR nam, chờ phê chuẩn)",
+      "Assefa 2:15:41 — kỷ lục thế giới women-only",
+      "Kejelcha (ETH) 1:59:41 và Kiplimo (UGA) 2:00:28 — kỷ lục quốc gia"
+     ],
+     "article": {
+      "title": "Sawe runs sub-two-hour marathon, Assefa world record in London",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/sawe-two-hour-assefa-world-record-london-marathon"
+     }
+    }
    }
   },
   {
@@ -973,19 +1471,76 @@
     }
    },
    "yearNotes": {
-    "2025": "Bị hủy ~90 phút trước giờ xuất phát vì gió mạnh.",
     "2026": "Chuyển từ tháng 10 sang tháng 5.",
     "2027": "Lần đầu chạy như một Abbott World Marathon Major."
    },
    "majorSince": 2027,
-   "article": {
-    "title": "Devastation as “severe winds” see Cape Town Marathon cancelled on the day (2025)",
-    "source": "IOL",
-    "url": "https://iol.co.za/sport/2025-10-19-devastation-as-sanlam-cape-town-marathon-cancelled-on-day-but-some-still-ran-it-unofficially/"
-   },
    "cancelled": [
     2025
-   ]
+   ],
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Adane Kebede Gebre (ETH) 2:11:28",
+       "Tsige Haileslase Abreha (ETH) 2:24:17"
+      ]
+     ],
+     "rec": [
+      "Abreha kém kỷ lục giải nữ 15 giây"
+     ],
+     "article": {
+      "title": "Ethiopians storm to 2023 Sanlam Cape Town Marathon titles",
+      "source": "Cape Town Marathon",
+      "url": "https://capetownmarathon.com/ethiopians-storm-to-2023-sanlam-cape-town-marathon-titles/"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Abdisa Tola (ETH) 2:08:16",
+       "Glenrose Xaba (RSA) 2:22:22"
+      ]
+     ],
+     "rec": [
+      "Tola 2:08:16 — kỷ lục giải nam",
+      "Xaba 2:22:22 — kỷ lục giải nữ và kỷ lục quốc gia Nam Phi, ngay trận ra mắt"
+     ],
+     "article": {
+      "title": "Glenrose Xaba shatters South African and Cape Town Marathon records on debut",
+      "source": "Running Calendar SA",
+      "url": "https://runningcalendar.co.za/articles/glenrose-xaba-shatters-south-african-and-sanlam-cape-town-marathon-records-on-debut"
+     }
+    },
+    "2025": {
+     "rows": [],
+     "note": "Giải bị hủy trước giờ xuất phát khoảng 90 phút vì gió mạnh — không có kết quả.",
+     "article": {
+      "title": "Devastation as “severe winds” see Cape Town Marathon cancelled on the day",
+      "source": "IOL",
+      "url": "https://iol.co.za/sport/2025-10-19-devastation-as-sanlam-cape-town-marathon-cancelled-on-day-but-some-still-ran-it-unofficially/"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "Mohamed Esa (ETH) 2:04:55",
+       "Dera Dida (ETH) 2:23:18"
+      ]
+     ],
+     "rec": [
+      "Esa 2:04:55 — kỷ lục châu Phi all-comers, nhanh hơn kỷ lục giải cũ (2:08:16) hơn 3 phút"
+     ],
+     "article": {
+      "title": "Esa and Dida win in Cape Town as Kipchoge kicks off World Tour",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/cape-town-marathon-2026-esa-dida-kipchoge"
+     }
+    }
+   }
   },
   {
    "id": "sydney",
@@ -1042,7 +1597,7 @@
    "entry": "Ballot, chuẩn thời gian, charity",
    "facts": [
     "Marathon tăng trưởng nhanh nhất thế giới",
-    "Peres Jepchirchir thắng nữ 2026"
+    "Kỷ lục giải nam 2:04:42 của Gobena (2026)"
    ],
    "coach": [
     "Mát nhưng có dốc — không phải course PR.",
@@ -1072,16 +1627,79 @@
      "highUSD": 2800
     }
    },
-   "yearNotes": {
-    "2023": "Chưa thuộc Abbott WMM (trở thành Major từ 31/8/2025).",
-    "2024": "Chưa thuộc Abbott WMM (được nâng lên Major ngày 4/11/2024).",
-    "2025": "Lần đầu là Abbott WMM; Hassan và Kiros phá kỷ lục course."
-   },
+   "yearNotes": {},
    "majorSince": 2025,
-   "article": {
-    "title": "Sydney Marathon 2025: Hassan and Kiros smash course records",
-    "source": "World Athletics",
-    "url": "https://worldathletics.org/news/report/sydney-marathon-2025-hassan-kiros"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Othmane El Goumri (MAR) 2:08:20",
+       "Betsy Saina (USA) 2:26:47"
+      ]
+     ],
+     "note": "Chưa thuộc Abbott WMM.",
+     "article": {
+      "title": "Saina and El Goumri win Sydney Marathon titles",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/saina-el-goumri-sydney-marathon-2023"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Brimin Misoi (KEN) 2:06:17",
+       "Workenesh Edesa (ETH) 2:21:40"
+      ]
+     ],
+     "rec": [
+      "Misoi phá kỷ lục giải 46 giây; Edesa phá kỷ lục giải (cũ 2:24:33) gần 3 phút"
+     ],
+     "note": "Chưa thuộc Abbott WMM (được nâng lên Major ngày 4/11/2024).",
+     "article": {
+      "title": "Edesa and Misoi break course records at Sydney Marathon",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/edesa-misoi-course-records-sydney-marathon-2024"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "Hailemaryam Kiros (ETH) 2:06:06",
+       "Sifan Hassan (NED) 2:18:22"
+      ]
+     ],
+     "rec": [
+      "Kiros 2:06:06 — kỷ lục giải nam",
+      "Hassan 2:18:22 — kỷ lục giải nữ (cũ 2:21:40)"
+     ],
+     "note": "Lần đầu là Abbott WMM.",
+     "article": {
+      "title": "Hassan and Kiros run course records at Sydney Marathon",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/sydney-marathon-2025-hassan-kiros"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "Addisu Gobena (ETH) 2:04:42",
+       "Peres Jepchirchir (KEN) 2:18:31"
+      ]
+     ],
+     "rec": [
+      "Gobena 2:04:42 — kỷ lục giải nam (cũ 2:06:06)",
+      "Jepchirchir kém kỷ lục giải nữ 9 giây"
+     ],
+     "article": {
+      "title": "Gobena breaks course record while Jepchirchir dominates in Sydney",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/sydney-marathon-2026-gobena-jepchirchir"
+     }
+    }
    }
   },
   {
@@ -1133,7 +1751,7 @@
     ],
     [
      "Kỷ lục nữ",
-     "2:11:53 · T. Assefa (2023)"
+     "2:11:04 · T. Assefa (2026)"
     ]
    ],
    "entry": "Bốc thăm, tour, charity",
@@ -1172,10 +1790,74 @@
    "yearNotes": {
     "2023": "Tigst Assefa phá kỷ lục thế giới nữ 2:11:53."
    },
-   "article": {
-    "title": "Tigst Assefa smashes the women’s marathon record by more than 2 minutes (2023)",
-    "source": "NPR",
-    "url": "https://www.npr.org/2023/09/24/1201396142/tigst-assefa-smashes-the-womens-marathon-record-by-more-than-2-minutes"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Eliud Kipchoge (KEN) 2:02:42",
+       "Tigst Assefa (ETH) 2:11:53"
+      ]
+     ],
+     "rec": [
+      "Assefa 2:11:53 — kỷ lục thế giới nữ (phá 2:14:04 của Kosgei hơn 2 phút)",
+      "Kipchoge thắng Berlin lần thứ 5 — kỷ lục số lần thắng",
+      "Kỷ lục quốc gia: Amanal Petros (GER) 2:04:58; Tadesse Abraham (SUI) 2:05:10"
+     ],
+     "article": {
+      "title": "Assefa sets women’s world record in Berlin, Kipchoge wins record fifth time",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/tigst-assefa-world-marathon-record-berlin-kipchoge-2023"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Milkesa Mengesha (ETH) 2:03:17",
+       "Tigist Ketema (ETH) 2:16:42"
+      ]
+     ],
+     "note": "Lần thứ 50 của giải; không có kỷ lục nào bị phá.",
+     "article": {
+      "title": "Mengesha and Ketema claim Berlin Marathon crowns (50th edition)",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/50th-berlin-marathon-2024-mengesha-ketema"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "Sabastian Sawe (KEN) 2:02:16",
+       "Rosemary Wanjiru (KEN) 2:21:05"
+      ]
+     ],
+     "note": "Cú đúp Kenya; Sawe nhắm kỷ lục giải 2:01:09 nhưng không phá được.",
+     "article": {
+      "title": "Sawe and Wanjiru secure Kenyan double at Berlin",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/berlin-marathon-2025-sawe"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "Guye Adola (ETH) 2:02:50",
+       "Tigst Assefa (ETH) 2:11:04"
+      ]
+     ],
+     "rec": [
+      "Assefa 2:11:04 — kỷ lục giải nữ (cũ 2:11:53 của chính cô), nhanh thứ 3 lịch sử"
+     ],
+     "note": "Assefa thắng dù chấn thương gân Achilles muộn.",
+     "article": {
+      "title": "Assefa wins in 2:11:04 despite Achilles injury; Adola retakes the title",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/assefa-adola-berlin-marathon-2026"
+     }
+    }
    }
   },
   {
@@ -1266,10 +1948,80 @@
    "yearNotes": {
     "2023": "Kelvin Kiptum chạy 2:00:35, kỷ lục thế giới nam lúc đó."
    },
-   "article": {
-    "title": "Kiptum sets marathon world record in Chicago, 2:00:35 (2023)",
-    "source": "World Athletics",
-    "url": "https://worldathletics.org/news/report/chicago-marathon-2023-kiptum-world-record-hassan"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Kelvin Kiptum (KEN) 2:00:35",
+       "Sifan Hassan (NED) 2:13:44"
+      ]
+     ],
+     "rec": [
+      "Kiptum 2:00:35 — kỷ lục thế giới nam lúc đó (WA ghi: chờ phê chuẩn)",
+      "Hassan 2:13:44 — kỷ lục giải nữ và kỷ lục châu Âu"
+     ],
+     "article": {
+      "title": "Kiptum runs 2:00:35 world record in Chicago",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/chicago-marathon-2023-kiptum-world-record-hassan"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "John Korir (KEN) 2:02:43",
+       "Ruth Chepngetich (KEN) 2:09:56"
+      ]
+     ],
+     "rec": [
+      "Chepngetich 2:09:56 — kỷ lục thế giới nữ lúc đó (WA ghi: chờ phê chuẩn; tình trạng công nhận có thể đã đổi sau đó)"
+     ],
+     "note": "Thời gian của Korir là nhanh thứ hai lịch sử Chicago.",
+     "article": {
+      "title": "Chepngetich sets women’s world marathon record in Chicago",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/chepngetich-world-marathon-record-chicago"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "Jacob Kiplimo (UGA) 2:02:23",
+       "Hawi Feysa (ETH) 2:14:56"
+      ]
+     ],
+     "rec": [
+      "Kiplimo 2:02:23 — kỷ lục quốc gia Uganda; chặng 30 km nhanh nhất lịch sử (1:25:31)",
+      "Conner Mantz (USA) 2:04:43 — kỷ lục Bắc Mỹ"
+     ],
+     "article": {
+      "title": "Kiplimo and Feysa win the 2025 Chicago Marathon",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/feysa-kiplimo-chicago-marathon-2025"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "Amos Kipruto (KEN) 2:01:09",
+       "Hawi Feysa (ETH) 2:13:33"
+      ]
+     ],
+     "rec": [
+      "Kipruto 2:01:09 — thành tích nhanh thứ 5 lịch sử marathon",
+      "Không có kỷ lục thế giới/giải/quốc gia"
+     ],
+     "note": "Cả hai cùng lập PB.",
+     "article": {
+      "title": "Chicago Marathon 2026 results: Amos Kipruto and Hawi Feysa crowned",
+      "source": "Marathons.com",
+      "url": "https://www.marathons.com/en/marathon-de-chicago/chicago-marathon-2026-results-amos-kipruto-and-hawi-feysa-crowned_0njd"
+     }
+    }
    }
   },
   {
@@ -1357,10 +2109,72 @@
      "highUSD": 5500
     }
    },
-   "article": {
-    "title": "2024 New York City Marathon results: Abdi Nageeye, Sheila Chepkirui notch first major wins",
-    "source": "CBS Sports",
-    "url": "https://www.cbssports.com/general/news/2024-new-york-city-marathon-results-dutchman-abdi-nageeye-kenyan-sheila-chepkirui-notch-first-major-wins"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Tamirat Tola (ETH) 2:04:58",
+       "Hellen Obiri (KEN) 2:27:23"
+      ]
+     ],
+     "rec": [
+      "Tola 2:04:58 — kỷ lục giải (cũ 2:05:06 của G. Mutai, 2011); người đầu tiên dưới 2:05 ở NYC"
+     ],
+     "article": {
+      "title": "Obiri outsprints Gidey while Tola breaks the course record",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/new-york-city-marathon-2023-obiri-tola"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Abdi Nageeye (NED) 2:07:39",
+       "Sheila Chepkirui (KEN) 2:24:35"
+      ]
+     ],
+     "note": "Nageeye là người Hà Lan đầu tiên thắng NYC; cả hai cùng thắng Major đầu tiên.",
+     "article": {
+      "title": "Abdi Nageeye, Sheila Chepkirui notch first major wins",
+      "source": "CBS Sports",
+      "url": "https://www.cbssports.com/general/news/2024-new-york-city-marathon-results-dutchman-abdi-nageeye-kenyan-sheila-chepkirui-notch-first-major-wins"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "Benson Kipruto (KEN) 2:08:09",
+       "Hellen Obiri (KEN) 2:19:51"
+      ]
+     ],
+     "rec": [
+      "Obiri 2:19:51 — kỷ lục giải nữ (cũ 2:22:31 của M. Okayo, 2003), nhanh gần 3 phút"
+     ],
+     "note": "Alexander Mutiso về nhì chỉ kém 0,16 giây.",
+     "article": {
+      "title": "Obiri wins New York in 2:19:51, nearly three minutes under course record",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/obiri-new-york-marathon-course-record"
+     }
+    },
+    "2026": {
+     "rows": [
+      [
+       "Marathon",
+       "Andreas Almgren (SWE) 2:06:01",
+       "Sheila Chepkirui (KEN) 2:24:36"
+      ]
+     ],
+     "note": "Almgren thắng ngay trận marathon đầu tiên.",
+     "article": {
+      "title": "2026 NYC Marathon results",
+      "source": "Marathon Handbook",
+      "url": "https://marathonhandbook.com/2026-nyc-marathon-results/"
+     }
+    }
    }
   },
   {
@@ -1448,10 +2262,56 @@
     "2025": "Qua vòng đánh giá ứng viên Abbott WMM năm 2025.",
     "2027": "Chưa công bố; ngày tính theo quy tắc."
    },
-   "article": {
-    "title": "Shanghai Marathon passes 2025 AbbottWMM candidate assessment",
-    "source": "World Marathon Majors",
-    "url": "https://www.worldmarathonmajors.com/content-hub/shanghai-marathon-passes-2025-abbottwmm-candidate-assessment"
+   "editions": {
+    "2023": {
+     "rows": [
+      [
+       "Marathon",
+       "Philimon Kiptoo Kipchumba (KEN) 2:05:35",
+       "Siranesh Yirga Dagne (ETH) 2:21:28"
+      ]
+     ],
+     "rec": [
+      "Kipchumba 2:05:35 — kỷ lục giải và kỷ lục all-comers Trung Quốc"
+     ],
+     "article": {
+      "title": "Kipchumba sets Chinese all-comers’ record in Shanghai",
+      "source": "World Athletics",
+      "url": "https://worldathletics.org/news/report/shanghai-marathon-2023-kipchumba-yirga"
+     }
+    },
+    "2024": {
+     "rows": [
+      [
+       "Marathon",
+       "Samsom Amare (ERI) 2:06:26",
+       "Bekelech Gudeta Borecha (ETH) 2:25:21"
+      ]
+     ],
+     "note": "Không phá được kỷ lục giải 2:05:35.",
+     "article": {
+      "title": "2024 Shanghai Marathon concludes with outstanding performances",
+      "source": "Shanghai Gov",
+      "url": "https://english.shanghai.gov.cn/en-Events/20241201/7c8c8744383446bd9cdee3076f8d4bb1.html"
+     }
+    },
+    "2025": {
+     "rows": [
+      [
+       "Marathon",
+       "Milkesa Mengesha (ETH) 2:06:25",
+       "Brigid Kosgei (KEN) 2:16:36"
+      ]
+     ],
+     "rec": [
+      "Kosgei 2:16:36 — kỷ lục giải nữ (cũ 2:20:37)"
+     ],
+     "article": {
+      "title": "Shanghai Marathon sets women’s record, confirms 2026 date",
+      "source": "Meet in Shanghai",
+      "url": "https://www.meet-in-shanghai.net/en/news/shanghai-marathon-sets-womens-record-confirms-2026-date-668872/"
+     }
+    }
    }
   }
  ],

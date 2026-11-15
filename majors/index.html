@@ -125,7 +125,7 @@ th{font-weight:500;color:var(--ink-soft);font-size:12px}
 td.r,th.r{text-align:right}
 .facts{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px}
 .facts li{padding-left:14px;position:relative}
-.ynote{padding:10px 12px;border-left:3px solid var(--dawn,#d98c3a);background:rgba(217,140,58,.1);border-radius:6px;font-size:13.5px;line-height:1.45}.ynote b{margin-right:6px}.facts li.art a{text-decoration:underline;text-underline-offset:2px}
+.ed{width:100%;border-collapse:collapse;font-size:13px;margin:4px 0 8px}.ed th{text-align:left;font-size:11px;opacity:.65;font-weight:600;padding:3px 6px}.ed td{padding:5px 6px;border-top:1px solid rgba(128,128,128,.25);vertical-align:top}.ynote{padding:10px 12px;border-left:3px solid var(--dawn,#d98c3a);background:rgba(217,140,58,.1);border-radius:6px;font-size:13.5px;line-height:1.45}.ynote b{margin-right:6px}.facts li.art a{text-decoration:underline;text-underline-offset:2px}
 .facts li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--moss)}
 .coach{background:#fff;border-left:3px solid var(--dawn);border-radius:0 10px 10px 0;padding:12px 14px;font-size:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
 .coach b{display:block;font-size:12px;margin-bottom:2px;color:var(--ink-soft)}
@@ -395,6 +395,13 @@ function yearBlock(r){
   if(!bits.length) return '';
   return `<div class="ynote"><b>Năm ${year}</b> ${bits.map(esc).join(' ')}</div>`;
 }
+function edBlock(r){
+  const e=r.editions&&r.editions[String(year)]; if(!e) return '';
+  const rows=(e.rows||[]).length?`<table class="ed"><thead><tr><th>Cự ly</th><th>Nam</th><th>Nữ</th></tr></thead><tbody>${e.rows.map(x=>`<tr><td><b>${esc(x[0])}</b></td><td>${esc(x[1]||'—')}</td><td>${esc(x[2]||'—')}</td></tr>`).join('')}</tbody></table>`:'';
+  const rec=(e.rec||[]).length?`<ul class="facts">${e.rec.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'';
+  const note=e.note?`<p class="note" style="margin:6px 0 0">${esc(e.note)}</p>`:'';
+  return `<div><h3>Kết quả ${year} <small>· Results &amp; records</small></h3>${rows}${rec}${note}</div>`;
+}
 function renderTab(r){
   const b=$('#pbody'); const st=r._st, d=r._d;
   if(tab==='race'){
@@ -409,8 +416,8 @@ function renderTab(r){
         ${r.founded?`<div><div class="k">Thành lập</div><div class="v">${r.founded}</div></div>`:''}
         ${r.meta.map(m=>`<div><div class="k">${m[0]}</div><div class="v ${/\d:\d\d/.test(m[1])?'num':''}" style="font-size:13.5px">${m[1]}</div></div>`).join('')}
       </div>
-      ${yearBlock(r)}${dist}${perks}${entry}
-      <div><h3>Đáng biết <small>· Good to know</small></h3><ul class="facts">${r.facts.map(f=>`<li>${f}</li>`).join('')}${r.article?`<li class="art"><b>Bài nổi bật:</b> <a href="${r.article.url}" target="_blank" rel="noopener">${esc(r.article.title)}</a> <span class="note">· ${esc(r.article.source)}</span></li>`:''}</ul></div>
+      ${yearBlock(r)}${edBlock(r)}${dist}${perks}${entry}
+      <div><h3>Đáng biết <small>· Good to know</small></h3><ul class="facts">${r.facts.map(f=>`<li>${f}</li>`).join('')}${(r.editions&&r.editions[String(year)]&&r.editions[String(year)].article)?(a=>`<li class=\"art\"><b>Bài nổi bật ${year}:</b> <a href=\"${a.url}\" target=\"_blank\" rel=\"noopener\">${esc(a.title)}</a> <span class=\"note\">· ${esc(a.source)}</span></li>`)(r.editions[String(year)].article):''}</ul></div>
       <div class="coach"><b>Góc HLV · Coach's take</b>${r.coach[0]}<div class="en" lang="en">${r.coach[1]}</div></div>`;
   }
   if(tab==='trip'){
