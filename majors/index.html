@@ -53,7 +53,7 @@ a{color:var(--dawn-deep)}
 .side-head{padding:20px 20px 12px}
 h1{font:800 30px/1 Archivo,Inter,sans-serif;letter-spacing:-.02em;margin:0;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .yr{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px;background:#fff}
-.yr button{border:0;background:transparent;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;color:var(--ink-soft)}
+.yr button:disabled{opacity:.3;cursor:default}.yr button{border:0;background:transparent;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;color:var(--ink-soft)}
 .yr button:hover{background:var(--fog)}
 .yr span{font:700 15px/1 "JetBrains Mono",monospace;padding:0 4px}
 .sub{color:var(--ink-soft);margin:8px 0 0;font-size:13.5px;line-height:1.45}
@@ -125,6 +125,7 @@ th{font-weight:500;color:var(--ink-soft);font-size:12px}
 td.r,th.r{text-align:right}
 .facts{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px}
 .facts li{padding-left:14px;position:relative}
+.ynote{padding:10px 12px;border-left:3px solid var(--dawn,#d98c3a);background:rgba(217,140,58,.1);border-radius:6px;font-size:13.5px;line-height:1.45}.ynote b{margin-right:6px}.facts li.art a{text-decoration:underline;text-underline-offset:2px}
 .facts li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--moss)}
 .coach{background:#fff;border-left:3px solid var(--dawn);border-radius:0 10px 10px 0;padding:12px 14px;font-size:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
 .coach b{display:block;font-size:12px;margin-bottom:2px;color:var(--ink-soft)}
@@ -260,12 +261,12 @@ function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('sh
 function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){ return null; } }
 
 /* ---------- state ---------- */
-let DATA, WORLD, RACES=[], ORIGINS={}, originKey='SGN', year=TODAY.getFullYear();
+let DATA, WORLD, RACES=[], ORIGINS={}, originKey='SGN', year=TODAY.getFullYear(), YMIN=year-3, YMAX=year+1;
 const filters={trail:true,road:true,cand:true};
 let selected=null, tab='race', zoomK=1, baseScale=1, W=0, H=0, autoSpin=!matchMedia('(prefers-reduced-motion: reduce)').matches;
 const qs = new URLSearchParams(location.search);
 if (qs.get('origin') && /^(SGN|HAN)$/.test(qs.get('origin'))) originKey=qs.get('origin');
-if (qs.get('year') && /^\d{4}$/.test(qs.get('year'))) year=+qs.get('year');
+if (qs.get('year') && /^\d{4}$/.test(qs.get('year'))) year=Math.min(Math.max(+qs.get('year'),year-3),year+1);
 
 /* ---------- globe ---------- */
 const svg=d3.select('#globe'), stage=$('#globe');
@@ -322,7 +323,7 @@ function flyTo(lon,lat){
 d3.timer(()=>{ if(autoSpin&&countries){const r=projection.rotate();projection.rotate([r[0]+0.1,r[1],0]);render();} });
 
 /* ---------- list + strip ---------- */
-function computeDates(){ RACES.forEach(r=>{ r._d=raceDates(r,year); r._st=status(r._d); }); }
+function computeDates(){ RACES.forEach(r=>{ r._d=raceDates(r,year); r._st=status(r._d); if(r.cancelled&&r.cancelled.includes(year)) r._st={past:true,text:'Bị hủy',cancelled:true}; }); }
 function dateText(r){ const d=r._d; return d.start.getTime()===d.end.getTime()?fmtShort(d.start):`${fmtShort(d.start)}–${fmtShort(d.end)}`; }
 function buildList(){
   const el=$('#list'); el.innerHTML=''; let m=null;
@@ -330,7 +331,7 @@ function buildList(){
     const mm=r._d.start.getMonth()+1;
     if(mm!==m){m=mm;const h=document.createElement('div');h.className='month';h.textContent='Tháng '+mm;el.appendChild(h);}
     const b=document.createElement('button'); b.className='item'+(r._st.past?' past':''); b.dataset.id=r.id; b.dataset.kind=r.kind;
-    b.innerHTML=`<span class="dot ${dotClass(r)}"></span><span><span class="nm">${r.short}</span><br><span class="loc">${r.country}${r._d.confirmed?'':' · lịch dự kiến'}</span></span><span class="dt num">${dateText(r)}${r._st.days!=null&&r._st.days<=120?`<b>còn ${r._st.days} ngày</b>`:''}</span>`;
+    b.innerHTML=`<span class="dot ${dotClass(r)}"></span><span><span class="nm">${r.short}</span><br><span class="loc">${r.country}${r._d.confirmed||r._st.past?'':' · lịch dự kiến'}</span></span><span class="dt num">${dateText(r)}${r._st.days!=null&&r._st.days<=120?`<b>còn ${r._st.days} ngày</b>`:''}</span>`;
     b.onclick=()=>select(r.id,true); el.appendChild(b);
   });
   applyFilters();
@@ -341,8 +342,8 @@ function buildList(){
     const p=document.createElement('button'); p.className=`pin ${r.kind}${r._st.past?' past':''}`; p.style.left=(r._d.start.getDate()/dim*100)+'%'; p.title=`${r.short} · ${dateText(r)}`; p.setAttribute('aria-label',p.title); p.dataset.id=r.id;
     p.onclick=()=>select(r.id,true); mcell.appendChild(p);
   });
-  $('#year').textContent=year;
-  $('#foot').innerHTML=`Dữ liệu cập nhật ${DATA.updated}. Ngày không có trong lịch chính thức được tính theo quy tắc hằng năm (ghi "lịch dự kiến"). Kiểm tra trang chính thức trước khi đăng ký.<br>${CONFIG.credit}`;
+  $('#year').textContent=year; $('#yprev').disabled=year<=YMIN; $('#ynext').disabled=year>=YMAX;
+  $('#foot').innerHTML=`Dữ liệu cập nhật ${DATA.updated}. Chỉ hiển thị ${YMIN}–${YMAX}: 3 năm đã diễn ra (ngày thực tế) và năm kế tiếp. Giải chưa có lịch chính thức được tính theo quy tắc hằng năm (ghi "lịch dự kiến"). Kiểm tra trang chính thức trước khi đăng ký.<br>${CONFIG.credit}`;
 }
 function applyFilters(){
   document.querySelectorAll('.item').forEach(el=>el.classList.toggle('hidden',!filters[el.dataset.kind]));
@@ -352,7 +353,7 @@ function applyFilters(){
 }
 document.querySelectorAll('.chip[data-f]').forEach(c=>c.onclick=()=>{const f=c.dataset.f;filters[f]=!filters[f];c.setAttribute('aria-pressed',filters[f]);applyFilters();});
 $('#yprev').onclick=()=>setYear(year-1); $('#ynext').onclick=()=>setYear(year+1);
-function setYear(y){ year=y; computeDates(); buildList(); if(selected) select(selected,false); render(); }
+function setYear(y){ if(y<YMIN||y>YMAX) return; year=y; computeDates(); buildList(); if(selected) select(selected,false); render(); }
 
 /* ---------- panel ---------- */
 const panel=$('#panel');
@@ -387,6 +388,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&selected)closePanel
 
 function kmFrom(r){ const o=ORIGINS[originKey]; return Math.round(d3.geoDistance([o.lon,o.lat],[r.lon,r.lat])*6371); }
 
+function yearBlock(r){
+  const bits=[]; const n=r.yearNotes&&r.yearNotes[String(year)];
+  if(r.majorSince&&year<r.majorSince) bits.push(`Năm ${year} chưa tính là Major (Major từ ${r.majorSince}).`);
+  if(n) bits.push(n);
+  if(!bits.length) return '';
+  return `<div class="ynote"><b>Năm ${year}</b> ${bits.map(esc).join(' ')}</div>`;
+}
 function renderTab(r){
   const b=$('#pbody'); const st=r._st, d=r._d;
   if(tab==='race'){
@@ -395,14 +403,14 @@ function renderTab(r){
     const entry=r.entry?`<div><h3>Cách giành suất <small>· Entry</small></h3><p style="margin:0;font-size:14px">${r.entry}</p></div>`:'';
     b.innerHTML=`
       <div class="kv">
-        <div><div class="k">Ngày ${year}${d.confirmed?'':' (dự kiến)'}</div><div class="v num">${d.start.getTime()===d.end.getTime()?fmtLong(d.start):fmtShort(d.start)+' – '+fmtLong(d.end)}</div></div>
+        <div><div class="k">Ngày ${year}${d.confirmed||st.past?'':' (dự kiến)'}</div><div class="v num">${d.start.getTime()===d.end.getTime()?fmtLong(d.start):fmtShort(d.start)+' – '+fmtLong(d.end)}</div></div>
         <div><div class="k">Trạng thái</div><div class="v ${st.past?'':'up'}">${st.text}</div></div>
         <div><div class="k">Cách ${ORIGINS[originKey].short}</div><div class="v num">${kmFrom(r).toLocaleString('vi-VN')} km</div></div>
         ${r.founded?`<div><div class="k">Thành lập</div><div class="v">${r.founded}</div></div>`:''}
         ${r.meta.map(m=>`<div><div class="k">${m[0]}</div><div class="v ${/\d:\d\d/.test(m[1])?'num':''}" style="font-size:13.5px">${m[1]}</div></div>`).join('')}
       </div>
-      ${dist}${perks}${entry}
-      <div><h3>Đáng biết <small>· Good to know</small></h3><ul class="facts">${r.facts.map(f=>`<li>${f}</li>`).join('')}</ul></div>
+      ${yearBlock(r)}${dist}${perks}${entry}
+      <div><h3>Đáng biết <small>· Good to know</small></h3><ul class="facts">${r.facts.map(f=>`<li>${f}</li>`).join('')}${r.article?`<li class="art"><b>Bài nổi bật:</b> <a href="${r.article.url}" target="_blank" rel="noopener">${esc(r.article.title)}</a> <span class="note">· ${esc(r.article.source)}</span></li>`:''}</ul></div>
       <div class="coach"><b>Góc HLV · Coach's take</b>${r.coach[0]}<div class="en" lang="en">${r.coach[1]}</div></div>`;
   }
   if(tab==='trip'){
@@ -431,6 +439,7 @@ const plannerState={model:'',nights:5,people:1,style:'comfort',distance:'',inter
 const INTERESTS=['ẩm thực','thiên nhiên','văn hoá & bảo tàng','chụp ảnh','mua sắm','cà phê','đi cùng gia đình','ngân sách tiết kiệm'];
 function renderPlanner(r){
   const b=$('#pbody'); const s=plannerState; const hasEndpoint=!!CONFIG.plannerEndpoint;
+  if(r._st&&r._st.past){ b.innerHTML=`<p class="note" style="padding:6px 2px">Giải năm ${year} ${r._st.cancelled?'đã bị hủy':'đã diễn ra'}, nên không soạn kế hoạch chuyến đi cho năm này. Hãy chuyển sang năm sau bằng nút › ở góc trên bên trái để lên kế hoạch.</p>`; return; }
   const dists=(r.distances||[['Marathon','42,195 km']]).map(x=>x[0]);
   if(!s.distance||!dists.includes(s.distance)) s.distance=dists[Math.min(1,dists.length-1)];
   b.innerHTML=`
