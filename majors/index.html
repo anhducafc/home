@@ -343,7 +343,7 @@ function buildList(){
     p.onclick=()=>select(r.id,true); mcell.appendChild(p);
   });
   $('#year').textContent=year; $('#yprev').disabled=year<=YMIN; $('#ynext').disabled=year>=YMAX;
-  $('#foot').innerHTML=`Dữ liệu cập nhật ${DATA.updated}. Chỉ hiển thị ${YMIN}–${YMAX}: 3 năm đã diễn ra (ngày thực tế) và năm kế tiếp. Giải chưa có lịch chính thức được tính theo quy tắc hằng năm (ghi "lịch dự kiến"). Kiểm tra trang chính thức trước khi đăng ký.<br>${CONFIG.credit}`;
+  $('#foot').innerHTML=`<a href="https://anhducafc.com" target="_blank" rel="noopener">anhducafc©</a>`;
 }
 function applyFilters(){
   document.querySelectorAll('.item').forEach(el=>el.classList.toggle('hidden',!filters[el.dataset.kind]));
