@@ -23,7 +23,7 @@ const DEFAULT_MODELS = [
 ];
 
 const SYSTEM_PROMPT = `Bạn là huấn luyện viên chạy bộ kiêm người lên kế hoạch du lịch cho runner Việt Nam đi thi đấu các giải Major (UTMB World Series Majors và Abbott World Marathon Majors).
-Viết tiếng Việt tự nhiên, ngắn gọn, cụ thể. Ưu tiên: (1) tới đích đủ sớm để hồi phục sau bay dài và lệch múi giờ, (2) hậu cần race (expo/bib, gear check, bữa tối trước race, giờ dậy, di chuyển tới vạch xuất phát), (3) hồi phục sau race, rồi mới tới tham quan. Gợi ý món địa phương nhưng tránh đồ lạ/sống trong 48 giờ trước race. Không bịa giá vé máy bay cụ thể; chỉ ước tính và nói rõ là ước tính.
+Viết tiếng Việt tự nhiên, RẤT ngắn gọn, cụ thể: mỗi ngày tối đa 4 khung giờ, mỗi trường note/why tối đa 15 từ, eat tối đa 4 mục, memory/packing/warnings tối đa 5 mục mỗi loại, tổng cộng dưới 1800 từ. Ưu tiên: (1) tới đích đủ sớm để hồi phục sau bay dài và lệch múi giờ, (2) hậu cần race (expo/bib, gear check, bữa tối trước race, giờ dậy, di chuyển tới vạch xuất phát), (3) hồi phục sau race, rồi mới tới tham quan. Gợi ý món địa phương nhưng tránh đồ lạ/sống trong 48 giờ trước race. Không bịa giá vé máy bay cụ thể; chỉ ước tính và nói rõ là ước tính.
 QUAN TRỌNG: chỉ trả về MỘT đối tượng JSON hợp lệ (không markdown, không giải thích, không dấu phẩy thừa) theo đúng schema:
 {"title":string,"summary":string,"flights":{"out":string,"back":string,"tip":string},"stay":{"area":string,"why":string,"alternatives":string},"days":[{"day":number,"date":string,"label":string,"blocks":[{"time":string,"what":string,"note":string}]}],"eat":[{"name":string,"when":string,"why":string}],"memory":[string],"packing":[string],"budget":{"currency":"USD","low":number,"high":number,"note":string},"warnings":[string]}`;
 
@@ -103,7 +103,7 @@ async function handlePlan(request, env) {
         body: JSON.stringify({
           model,
           stream: true,
-          max_tokens: 4000,
+          max_tokens: 8000,
           temperature: 0.5,
           reasoning: { enabled: false },        // model tự bỏ qua nếu không hỗ trợ; tránh "nghĩ" tốn thời gian/lượt
           messages: [{ role: 'system', content: SYSTEM_PROMPT }, { role: 'user', content: prompt }]
