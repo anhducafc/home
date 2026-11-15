@@ -22,20 +22,18 @@ majors/
 Deep link hữu ích để dẫn thẳng vào một giải trong bài: `/majors/?race=berlin`, `/majors/?race=cm&origin=HAN`, `/majors/?year=2027`.
 ID các giải: `uta vda utmb kodiak cm tokyo boston london capetown sydney berlin chicago nyc shanghai`.
 
-## 2. Tính năng "Lên kế hoạch" bằng AI
+## 2. Tính năng "Lên kế hoạch" bằng AI (model MIỄN PHÍ qua OpenRouter)
 
-Worker `majors` đã có sẵn; chỉ cần biến môi trường:
+Không dùng Anthropic API, không tốn credit. Worker `majors` gọi các model `:free` của OpenRouter, tự chuyển model khác nếu một model bận.
 
-1. dash.cloudflare.com → Workers & Pages → `majors` → Settings.
-2. Variables and Secrets:
-   - `ANTHROPIC_API_KEY` (Secret) — key từ console.anthropic.com (tổ chức Soulfvn của bạn dùng được).
-   - `ALLOWED_ORIGINS` = `https://anhducafc.com,https://www.anhducafc.com` — chỉ site của bạn gọi được.
-   - `MODEL` (tuỳ chọn) — mặc định `claude-sonnet-5-5`.
-   - Giới hạn lượt/ngày (tuỳ chọn): tạo KV namespace, bind tên `RATE`, đặt `DAILY_LIMIT` = `200`.
-3. `index.html` đã trỏ `plannerEndpoint` về `/majors/api/plan` khi chạy trên anhducafc.com — không cần sửa.
-4. Chi phí: mỗi kế hoạch ~3–4k token đầu ra, vài cent. Với `DAILY_LIMIT` 200 thì tối đa vài USD/ngày kể cả khi bị spam.
-
-Muốn cho người xem dùng key riêng của họ (không qua Worker): đặt `allowOwnKey: true`.
+1. Tạo key miễn phí (không cần thẻ) tại openrouter.ai/keys.
+2. dash.cloudflare.com → Workers & Pages → `majors` → Settings → Variables and Secrets:
+   - `OPENROUTER_API_KEY` (Secret) — key vừa tạo.
+   - `ALLOWED_ORIGINS` (Text) = `https://anhducafc.com,https://www.anhducafc.com` — chỉ site của bạn gọi được.
+   - `OPENROUTER_MODELS` (tuỳ chọn) — danh sách model ngăn cách bằng dấu phẩy, thử lần lượt (xem openrouter.ai/models?q=free).
+   - Giới hạn lượt/ngày (tuỳ chọn): KV namespace bind tên `RATE`, `DAILY_LIMIT` = `40`.
+3. Xoá secret `ANTHROPIC_API_KEY` cũ (nếu còn) và thu hồi key đó trong Anthropic Console.
+4. Giới hạn của OpenRouter free: 20 lượt/phút, 50 lượt/ngày (1.000/ngày nếu từng nạp ≥ 10 USD). Trang tự thử lại tối đa 3 lần khi model trả JSON hỏng.
 
 ## 3. Cập nhật hằng năm (5 phút, chỉ sửa `majors.json`)
 
@@ -56,4 +54,4 @@ Thêm giải mới: copy một block trong `races`, đổi `id`, toạ độ (`l
 
 ## 4. Tuỳ biến nhanh trong `index.html`
 
-Khối `CONFIG` ở đầu script: đường dẫn dữ liệu, endpoint AI, model, dòng credit. Màu sắc ở `:root` trong CSS (hệ "Sapa trail": pine/moss/dawn/night).
+Khối `CONFIG` ở đầu script: đường dẫn dữ liệu, endpoint AI, dòng credit. Màu sắc ở `:root` trong CSS (hệ "Sapa trail": pine/moss/dawn/night).

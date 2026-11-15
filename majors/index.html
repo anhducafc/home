@@ -224,10 +224,8 @@ textarea{min-height:64px;resize:vertical}
 const CONFIG = {
   dataUrl: 'majors.json',                 // dữ liệu giải (sửa mỗi năm nếu cần)
   worldUrl: 'countries-110m.json',        // bản đồ nền
-  plannerEndpoint: location.hostname.endsWith('anhducafc.com') ? '/majors/api/plan' : '',  // Worker 'majors' trả lời tại cùng domain; chạy local/pages.dev thì tắt
-  allowOwnKey: false,                     // true = cho người xem dán API key riêng khi không có Worker
-  model: 'claude-sonnet-5-5',             // chỉ dùng khi gọi trực tiếp bằng key riêng
-  credit: 'Phân tích bởi anhducafc / Copyright by anhducafc.com'
+  plannerEndpoint: location.hostname.endsWith('anhducafc.com') ? '/majors/api/plan' : '',  // Worker 'majors' → OpenRouter (model miễn phí); chạy local/pages.dev thì tắt
+  credit: 'Phân tích bởi anhducafc × Claude / Copyright by vietnamtrailseries.com'
 };
 
 /* ---------- helpers ---------- */
@@ -429,10 +427,10 @@ function renderTab(r){
 }
 
 /* ---------- planner ---------- */
-const plannerState={nights:5,people:1,style:'comfort',distance:'',interests:new Set(['ẩm thực','thiên nhiên']),note:'',busy:false,result:null,resultFor:null};
+const plannerState={model:'',nights:5,people:1,style:'comfort',distance:'',interests:new Set(['ẩm thực','thiên nhiên']),note:'',busy:false,result:null,resultFor:null};
 const INTERESTS=['ẩm thực','thiên nhiên','văn hoá & bảo tàng','chụp ảnh','mua sắm','cà phê','đi cùng gia đình','ngân sách tiết kiệm'];
 function renderPlanner(r){
-  const b=$('#pbody'); const s=plannerState; const hasEndpoint=!!CONFIG.plannerEndpoint; const ownKey=store('majors_api_key')||'';
+  const b=$('#pbody'); const s=plannerState; const hasEndpoint=!!CONFIG.plannerEndpoint;
   const dists=(r.distances||[['Marathon','42,195 km']]).map(x=>x[0]);
   if(!s.distance||!dists.includes(s.distance)) s.distance=dists[Math.min(1,dists.length-1)];
   b.innerHTML=`
@@ -444,7 +442,6 @@ function renderPlanner(r){
       <div class="row"><label>Phong cách</label><div class="seg" id="pStyle">${[['budget','Tiết kiệm'],['comfort','Thoải mái'],['premium','Cao cấp']].map(x=>`<button aria-pressed="${s.style===x[0]}" data-k="${x[0]}">${x[1]}</button>`).join('')}</div></div>
       <div class="row" style="align-items:flex-start"><label style="padding-top:5px">Thích gì</label><div class="chips" id="pInt">${INTERESTS.map(x=>`<button class="chip" aria-pressed="${s.interests.has(x)}" data-k="${x}">${x}</button>`).join('')}</div></div>
       <div class="row" style="align-items:flex-start"><label style="padding-top:5px">Ghi chú</label><textarea id="pNote" placeholder="Vd: đi cùng vợ con, muốn ở lại thêm 2 ngày thành phố, dị ứng hải sản, mục tiêu sub 3:30…">${s.note}</textarea></div>
-      ${!hasEndpoint&&CONFIG.allowOwnKey?`<div class="row" style="align-items:flex-start"><label style="padding-top:5px">API key</label><div style="flex:1"><input type="password" id="pKey" value="${ownKey}" placeholder="sk-ant-… (Anthropic API key của bạn)"><p class="note" style="margin:4px 0 0">Key chỉ lưu trong trình duyệt này và gửi thẳng tới Anthropic, không qua máy chủ nào khác.</p></div></div>`:''}
       <div class="gen">
         <button class="btn primary" id="pGo" ${s.busy?'disabled':''}>${s.busy?'<span class="spin"></span>Đang soạn…':'Soạn kế hoạch chuyến đi'}</button>
         ${s.result&&s.resultFor===r.id?`<button class="btn" id="pCopy">Sao chép</button><button class="btn" id="pPrint">In / PDF</button>`:''}
@@ -461,7 +458,7 @@ function renderPlanner(r){
   const cp=$('#pCopy'); if(cp) cp.onclick=()=>{navigator.clipboard.writeText(planText(r,s.result)).then(()=>toast('Đã sao chép kế hoạch'));};
   const pr=$('#pPrint'); if(pr) pr.onclick=()=>window.print();
   if(s.result&&s.resultFor===r.id) renderPlan(r,s.result);
-  else if(!hasEndpoint&&!CONFIG.allowOwnKey) $('#pOut').innerHTML=`<p class="note">Tính năng soạn kế hoạch bằng AI chưa được bật trên trang này. Xem tab "Chuyến đi" để có gợi ý sẵn.</p>`;
+  else if(!hasEndpoint) $('#pOut').innerHTML=`<p class="note">Tính năng soạn kế hoạch bằng AI chỉ chạy trên anhducafc.com. Xem tab "Chuyến đi" để có gợi ý sẵn.</p>`;
 }
 function setOrigin(k){ originKey=k; document.querySelectorAll('#originSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k)); if(selected){const r=RACES.find(x=>x.id===selected); renderTab(r);} render(); }
 
@@ -475,43 +472,45 @@ Ghi chú của runner: ${s.note||'không'}.
 Thông tin nền đã có (dùng, không lặp lại nguyên văn): bay: ${t.flight[originKey]}; visa: ${t.visa}; lưu trú gợi ý: ${t.stay}; điểm tham quan: ${t.see.join('; ')}; món ăn: ${t.eat.join('; ')}; gợi ý kỷ niệm: ${t.memory}; ngân sách tham khảo cho 1 người/${t.budget.nights} đêm: ${t.budget.lowUSD}–${t.budget.highUSD} USD.
 Yêu cầu: lịch trình theo từng ngày với ngày tháng thật (ngày 1 = ngày bay đi), ngày race được đánh dấu bằng label chứa chữ "RACE". Số ngày trong "days" = số đêm + 1 (ngày bay về tính là ngày cuối). Ngân sách tính tổng cho ${s.people} người.`;
 }
+async function requestPlan(prompt){
+  const res=await fetch(CONFIG.plannerEndpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt})});
+  if(!res.ok){
+    let m=''; try{ const j=await res.json(); m=(typeof j.error==='string'?j.error:j.error?.message)||''; }catch(e){}
+    const err=new Error(m||('Lỗi '+res.status)); err.fatal=true; throw err;
+  }
+  const reader=res.body.getReader(), dec=new TextDecoder(); let buf='', text='';
+  while(true){
+    const {value,done}=await reader.read(); if(done) break;
+    buf+=dec.decode(value,{stream:true}); const lines=buf.split('\n'); buf=lines.pop();
+    for(const ln of lines){
+      if(!ln.startsWith('data:')) continue; const js=ln.slice(5).trim(); if(!js) continue;
+      let ev; try{ ev=JSON.parse(js); }catch(e){ continue; }
+      if(ev.type==='meta') plannerState.model=ev.model;
+      else if(ev.type==='content_block_delta'&&ev.delta?.text){ text+=ev.delta.text; const el=$('#pLive'); if(el) el.textContent=`Đang soạn… ${text.length} ký tự`; }
+      else if(ev.type==='error') throw new Error(ev.error?.message||'Model báo lỗi giữa chừng');
+    }
+  }
+  const clean=text.replace(/```(?:json)?/g,'').trim();
+  const a=clean.indexOf('{'), b=clean.lastIndexOf('}');
+  if(a<0||b<a) throw new Error('Model chưa trả về JSON.');
+  let plan; try{ plan=JSON.parse(clean.slice(a,b+1)); }catch(e){ throw new Error('JSON của model bị hỏng.'); }
+  if(!Array.isArray(plan.days)||!plan.days.length) throw new Error('Kế hoạch thiếu lịch trình.');
+  return plan;
+}
 async function generate(r){
   const s=plannerState; if(s.busy) return;
-  const key=$('#pKey')?.value.trim(); if(key) store('majors_api_key',key);
-  if(!CONFIG.plannerEndpoint&&!key){ $('#pStatus').textContent='Cần API key hoặc cấu hình plannerEndpoint.'; return; }
-  s.busy=true; s.result=null; s.resultFor=null; renderPlanner(r);
-  const out=$('#pOut'); out.innerHTML=`<p class="note" id="pLive">Đang kết nối…</p>`;
-  let text='';
-  try{
-    const prompt=buildPrompt(r);
-    let res;
-    if(CONFIG.plannerEndpoint){
-      res=await fetch(CONFIG.plannerEndpoint.replace(/\/$/,''),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt})});
-    } else {
-      res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-        body:JSON.stringify({model:CONFIG.model,max_tokens:4000,stream:true,system:SYSTEM_PROMPT_CLIENT,messages:[{role:'user',content:prompt}]})});
-    }
-    if(!res.ok){ let m=''; try{m=(await res.json()).error?.message||(await res.text());}catch(e){} throw new Error(`${res.status} ${m||''}`.trim()); }
-    const reader=res.body.getReader(), dec=new TextDecoder(); let buf='';
-    while(true){
-      const {value,done}=await reader.read(); if(done) break;
-      buf+=dec.decode(value,{stream:true}); const lines=buf.split('\n'); buf=lines.pop();
-      for(const ln of lines){ if(!ln.startsWith('data:')) continue; const js=ln.slice(5).trim(); if(!js||js==='[DONE]') continue;
-        try{ const ev=JSON.parse(js); if(ev.type==='content_block_delta'&&ev.delta?.text){ text+=ev.delta.text; const el=$('#pLive'); if(el) el.textContent=`Đang soạn… ${text.length} ký tự`; } if(ev.type==='error') throw new Error(ev.error?.message||'stream error'); }catch(e){ if(e.message&&!/JSON/.test(e.message)) throw e; }
-      }
-    }
-    const clean=text.replace(/^```(?:json)?/m,'').replace(/```\s*$/m,'').trim();
-    const start=clean.indexOf('{'), end=clean.lastIndexOf('}');
-    const plan=JSON.parse(clean.slice(start,end+1));
-    s.result=plan; s.resultFor=r.id;
-  }catch(e){
-    s.busy=false; renderPlanner(r);
-    $('#pOut').innerHTML=`<div class="err"><b>Không soạn được kế hoạch.</b><br>${(e.message||e).toString().slice(0,300)}<br><span class="note">Nếu lỗi 401/403: kiểm tra API key hoặc ALLOWED_ORIGINS của Worker. Nếu lỗi mạng khi dùng key riêng: trình duyệt chặn CORS — hãy dùng Worker.</span></div>`;
-    return;
+  if(!CONFIG.plannerEndpoint){ $('#pStatus').textContent='Tính năng AI chỉ chạy trên anhducafc.com.'; return; }
+  s.busy=true; s.result=null; s.resultFor=null; s.model=''; renderPlanner(r);
+  $('#pOut').innerHTML=`<p class="note" id="pLive">Đang kết nối…</p>`;
+  const prompt=buildPrompt(r); let lastErr=null;
+  for(let attempt=1; attempt<=3; attempt++){            // model miễn phí đôi khi trả JSON hỏng: tự thử lại tối đa 3 lần
+    try{ s.result=await requestPlan(prompt); s.resultFor=r.id; lastErr=null; break; }
+    catch(e){ lastErr=e; if(e.fatal) break; const el=$('#pLive'); if(el) el.textContent=`Lần ${attempt} chưa đạt (${e.message}) — đang thử lại…`; }
   }
-  s.busy=false; renderPlanner(r); toast('Kế hoạch đã sẵn sàng');
+  s.busy=false; renderPlanner(r);
+  if(lastErr){ $('#pOut').innerHTML=`<div class="err"><b>Không soạn được kế hoạch.</b><br>${esc(lastErr.message).slice(0,300)}<br><span class="note">Bạn vẫn có thể xem gợi ý sẵn ở tab "Chuyến đi".</span></div>`; return; }
+  toast('Kế hoạch đã sẵn sàng');
 }
-const SYSTEM_PROMPT_CLIENT=`Bạn là huấn luyện viên chạy bộ kiêm người lên kế hoạch du lịch cho runner Việt Nam đi thi đấu các giải Major. Viết tiếng Việt tự nhiên, ngắn gọn, cụ thể. Ưu tiên: tới đích đủ sớm để hồi phục sau bay dài; hậu cần race (expo/bib, gear check, bữa tối trước race, giờ dậy, di chuyển tới vạch xuất phát); hồi phục sau race; rồi mới tới tham quan. Tránh đồ lạ/sống trong 48h trước race. Không bịa giá vé cụ thể, chỉ ước tính và nói rõ. Chỉ trả về JSON hợp lệ theo schema: {"title":string,"summary":string,"flights":{"out":string,"back":string,"tip":string},"stay":{"area":string,"why":string,"alternatives":string},"days":[{"day":number,"date":string,"label":string,"blocks":[{"time":string,"what":string,"note":string}]}],"eat":[{"name":string,"when":string,"why":string}],"memory":[string],"packing":[string],"budget":{"currency":"USD","low":number,"high":number,"note":string},"warnings":[string]} — không markdown, không lời dẫn.`;
 
 function esc(s){ return String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
 function renderPlan(r,p){
@@ -527,7 +526,7 @@ function renderPlan(r,p){
     <h3 style="margin-top:14px">Đồ cần mang riêng cho giải này</h3><ul class="facts">${(p.packing||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
     <div class="kv" style="margin-top:14px"><div><div class="k">Ngân sách ước tính</div><div class="v num">${Number(p.budget?.low||0).toLocaleString('vi-VN')} – ${Number(p.budget?.high||0).toLocaleString('vi-VN')} ${esc(p.budget?.currency||'USD')}</div></div><div><div class="k">Ghi chú</div><div class="v" style="font-weight:500;font-size:13px">${esc(p.budget?.note)}</div></div></div>
     ${(p.warnings||[]).length?`<div class="err" style="margin-top:14px;background:#FFF6E8;border-color:#F0D9B5;color:#6B4A12"><b>Lưu ý</b><br>${p.warnings.map(w=>'• '+esc(w)).join('<br>')}</div>`:''}
-    <p class="note" style="margin-top:12px">Kế hoạch do AI soạn từ dữ liệu trang này và yêu cầu của bạn — hãy kiểm tra lại giờ bay, visa và lịch giải trên trang chính thức.</p>
+    <p class="note" style="margin-top:12px">Kế hoạch do AI (model miễn phí${plannerState.model?': '+esc(plannerState.model.replace(':free','')):''}) soạn từ dữ liệu trang này và yêu cầu của bạn — hãy kiểm tra lại giờ bay, visa và lịch giải trên trang chính thức.</p>
   </div>`;
 }
 function planText(r,p){
