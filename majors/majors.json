@@ -1,0 +1,290 @@
+{
+  "_readme": "Dữ liệu bản đồ Majors. Mỗi năm chỉ cần sửa: dates (nếu lịch chính thức khác quy tắc), records/meta. Quy tắc ngày (rule) tự tính cho mọi năm: month 1..12, weekday 0=CN..6=T7, nth = tuần thứ mấy trong tháng (1..4, -1 = cuối), startOffset/endOffset = số ngày trước/sau ngày neo (bỏ trống = 1 ngày).",
+  "updated": "2026-11-15",
+  "origins": {
+    "SGN": {"name": "TP. Hồ Chí Minh", "short": "TP.HCM", "lon": 106.6297, "lat": 10.8231, "airport": "Tân Sơn Nhất (SGN)"},
+    "HAN": {"name": "Hà Nội", "short": "Hà Nội", "lon": 105.8342, "lat": 21.0278, "airport": "Nội Bài (HAN)"}
+  },
+  "races": [
+    {
+      "id": "uta", "kind": "trail", "name": "HOKA Ultra-Trail Australia by UTMB", "short": "Ultra-Trail Australia",
+      "city": "Katoomba, Blue Mountains", "country": "Úc", "lon": 150.3119, "lat": -33.7146,
+      "role": "Oceania Major", "site": "https://uta.utmb.world",
+      "rule": {"month": 5, "weekday": 6, "nth": 3, "startOffset": -2, "endOffset": 1},
+      "dates": {"2026": ["2026-05-14", "2026-05-17"]},
+      "meta": [["Khởi đầu", "2008 (TNF100)"], ["Quy mô", "8.000+ VĐV"], ["Địa hình", "Sa thạch, bậc thang, rừng bạch đàn"], ["Cutoff Miler", "42 giờ"]],
+      "distances": [["UTAMiler", "161,5 km", "—"], ["UTA100", "~100 km", "~4.400 m"], ["UTA50", "~50 km", "~2.400 m"], ["UTA22", "22 km", "—"], ["UTA11", "11 km", "—"]],
+      "facts": ["Về đích ở Scenic World sau 951 bậc Furber Steps", "UTA100 là giải tính suất Western States 100", "Vé thường bán hết trong vài tuần"],
+      "coach": ["Địa hình nhiều bậc thang — bài kiểm tra sức xuống dốc rất tốt.", "Stair-heavy course — a real downhill-durability test."],
+      "travel": {
+        "flight": {"SGN": "SGN → SYD bay thẳng ~8h30 (Vietnam Airlines/Jetstar/Qantas); từ Sydney đi tàu Blue Mountains Line ~2h tới Katoomba.", "HAN": "HAN → SYD ~9h (bay thẳng hoặc nối chuyến); rồi tàu ~2h tới Katoomba."},
+        "visa": "Visa du lịch Úc (subclass 600), nộp online, xin trước 4–6 tuần.",
+        "stay": "Katoomba hoặc Leura (đi bộ được tới Scenic World/expo); Fairmont Resort là khách sạn chính thức.",
+        "see": ["Three Sisters & Echo Point lúc hoàng hôn", "Scenic World — cáp treo và đường ray dốc nhất thế giới", "Leura Mall: phố nhỏ, quán cà phê"],
+        "eat": ["Pie nóng ở Katoomba", "Đồ nướng kiểu Úc + flat white", "Chợ Leura cuối tuần"],
+        "memory": "Ở lại thêm 2 ngày ở Sydney: chạy recovery quanh Opera House–Botanic Garden lúc bình minh.",
+        "budget": {"nights": 5, "lowUSD": 1400, "highUSD": 2600}
+      }
+    },
+    {
+      "id": "vda", "kind": "trail", "name": "HOKA Val d’Aran by UTMB", "short": "Val d’Aran",
+      "city": "Vielha, Pyrenees", "country": "Tây Ban Nha", "lon": 0.7955, "lat": 42.7022,
+      "role": "Europe Major", "site": "https://valdaran.utmb.world",
+      "rule": {"month": 7, "weekday": 6, "nth": 1, "startOffset": -3, "endOffset": 1},
+      "dates": {"2026": ["2026-07-01", "2026-07-05"]},
+      "meta": [["Vai trò", "Chung kết châu Âu"], ["Dãy núi", "Pyrenees"], ["Địa hình", "Núi cao, đèo đá, hồ băng"], ["Độ khó", "Rất cao"]],
+      "distances": [["VDA", "~163 km", "~10.000 m"], ["CDH", "~110 km", "~6.700 m"], ["PDA", "~55 km", "~3.300 m"]],
+      "facts": ["Giải châu Âu duy nhất trao suất thẳng Top 10 vào UTMB/CCC/OCC", "Thung lũng nói tiếng Aranese, văn hoá riêng"],
+      "coach": ["D+/km gần gấp đôi VMM — chỉ nên tính sau khi đã về đích 100K.", "Vert density near double VMM — a target after a 100K finish."],
+      "travel": {
+        "flight": {"SGN": "SGN → BCN (nối chuyến Doha/Istanbul/Paris) ~17–20h; từ Barcelona thuê xe ~4h hoặc bus ALSA tới Vielha.", "HAN": "HAN → BCN hoặc TLS (Toulouse, chỉ ~2h30 lái xe) ~17–20h nối chuyến."},
+        "visa": "Visa Schengen (LSQ Tây Ban Nha), xin trước 6–8 tuần.",
+        "stay": "Vielha (trung tâm, expo) hoặc Salardú/Baqueira (yên tĩnh, sát núi). Nhà nghỉ kiểu Pyrenees ấm cúng.",
+        "see": ["Làng đá Arties, Salardú với nhà thờ Romanesque", "Hồ băng Colomèrs (trek nhẹ ngày sau race)", "Baqueira-Beret mùa hè"],
+        "eat": ["Olla aranesa (món hầm vùng núi)", "Phô mai và xúc xích địa phương", "Crema catalana"],
+        "memory": "Kết hợp 2 ngày Barcelona cuối chuyến: Sagrada Família + chạy dọc biển Barceloneta.",
+        "budget": {"nights": 7, "lowUSD": 2200, "highUSD": 4000}
+      }
+    },
+    {
+      "id": "utmb", "kind": "trail", "final": true, "name": "HOKA UTMB Mont-Blanc", "short": "UTMB Mont-Blanc",
+      "city": "Chamonix", "country": "Pháp", "lon": 6.8694, "lat": 45.9237,
+      "role": "World Series Finals", "site": "https://montblanc.utmb.world",
+      "rule": {"month": 8, "weekday": 0, "nth": -1, "startOffset": -6, "endOffset": 0},
+      "dates": {"2026": ["2026-08-24", "2026-08-30"]},
+      "meta": [["Khởi đầu", "2003"], ["Vòng", "Quanh khối Mont Blanc (Pháp–Ý–Thụy Sĩ)"], ["Cách vào", "Bốc thăm bằng Running Stones"], ["Vai trò", "Đích đến của cả hệ thống"]],
+      "distances": [["UTMB", "~174 km", "~10.000 m"], ["CCC", "~100 km", "~6.100 m"], ["OCC", "~57 km", "~3.500 m"]],
+      "facts": ["Không phải Major mà là Chung kết mà 4 Major dẫn tới", "Danh hiệu UTMB World Series trao tại 3 cự ly này"],
+      "coach": ["CCC (100 km) là cự ly hợp lý nhất để đặt mục tiêu dài hạn.", "CCC is the natural long-term target."],
+      "travel": {
+        "flight": {"SGN": "SGN → GVA (Geneva) nối chuyến ~16–18h; từ Geneva shuttle ~1h15 tới Chamonix.", "HAN": "HAN → GVA hoặc CDG (rồi TGV tới Saint-Gervais) ~16–18h."},
+        "visa": "Visa Schengen (LSQ Pháp). Mùa UTMB khách sạn kín sớm — đặt từ tháng 1.",
+        "stay": "Chamonix trung tâm (đắt, không khí lễ hội) hoặc Les Houches/Argentière (rẻ hơn, bus miễn phí).",
+        "see": ["Aiguille du Midi 3.842 m", "Tàu Montenvers – Mer de Glace", "Cổ vũ đêm ở Chamonix khi UTMB về đích"],
+        "eat": ["Tartiflette, raclette, fondue", "Bánh mì + phô mai Beaufort cho bữa trưa trek", "Bia Mont Blanc"],
+        "memory": "Đứng ở Place du Triangle de l'Amitié lúc xuất phát UTMB 18h thứ Sáu — ký ức cả đời, dù bạn chạy cự ly nào.",
+        "budget": {"nights": 7, "lowUSD": 2500, "highUSD": 4500}
+      }
+    },
+    {
+      "id": "kodiak", "kind": "trail", "name": "HOKA Kodiak Ultra Marathons by UTMB", "short": "Kodiak Ultra",
+      "city": "Big Bear Lake, California", "country": "Mỹ", "lon": -116.9114, "lat": 34.2439,
+      "role": "Americas Major", "site": "https://kodiak.utmb.world",
+      "rule": {"month": 10, "weekday": 6, "nth": 2, "startOffset": -2, "endOffset": 1},
+      "dates": {"2026": ["2026-10-08", "2026-10-11"]},
+      "meta": [["Vai trò", "Chung kết châu Mỹ"], ["Độ cao", "Hồ ~2.000 m"], ["Địa hình", "Núi San Bernardino, rừng thông, đường khô"], ["Cự ly phụ", "21K, 10K"]],
+      "distances": [["100M", "~161 km", "—"], ["100K", "~100 km", "—"], ["50K", "~50 km", "—"]],
+      "facts": ["Giải duy nhất ở châu Mỹ trao suất thẳng Top 10 vào UTMB Finals", "Người về đích nhận gấp đôi Running Stones"],
+      "coach": ["Độ cao ~2.000 m+ — tới sớm 3–5 ngày để thích nghi.", "Altitude ~2,000 m+ — arrive 3–5 days early."],
+      "travel": {
+        "flight": {"SGN": "SGN → LAX bay thẳng ~15h (Vietnam Airlines) hoặc nối chuyến; thuê xe lái ~2h30 lên Big Bear.", "HAN": "HAN → LAX nối chuyến (Tokyo/Seoul/Taipei) ~18–20h; thuê xe ~2h30."},
+        "visa": "Visa Mỹ B1/B2 — lịch phỏng vấn có thể chờ nhiều tháng, xin thật sớm.",
+        "stay": "Cabin quanh Big Bear Lake (thuê nhóm rất hợp) hoặc khách sạn ở Big Bear Village.",
+        "see": ["Big Bear Lake — chèo kayak ngày trước race", "Joshua Tree National Park (2h lái xe)", "Los Angeles: Santa Monica, Griffith Observatory"],
+        "eat": ["Burger & BBQ kiểu Mỹ", "Taco Mexico ở LA", "Pancake sáng sớm ở Village"],
+        "memory": "Thuê cabin có lò sưởi, ngắm sao đêm trên núi sau khi về đích — trời tháng 10 rất trong.",
+        "budget": {"nights": 7, "lowUSD": 2600, "highUSD": 4800}
+      }
+    },
+    {
+      "id": "cm", "kind": "trail", "name": "HOKA Chiang Mai Thailand by UTMB", "short": "Chiang Mai by UTMB",
+      "city": "Doi Inthanon, Chiang Mai", "country": "Thái Lan", "lon": 98.4870, "lat": 18.5883,
+      "role": "Asia-Pacific Major", "site": "https://chiangmai.utmb.world",
+      "rule": {"month": 12, "weekday": 6, "nth": 1, "startOffset": -7, "endOffset": 1},
+      "dates": {"2026": ["2026-11-28", "2026-12-06"]},
+      "meta": [["Vai trò", "Chung kết châu Á–TBD"], ["Đỉnh cao nhất", "Doi Inthanon 2.565 m"], ["Khí hậu", "Mùa khô, đêm lạnh trên đỉnh"], ["Địa hình", "Rừng nhiệt đới, ruộng bậc thang"]],
+      "distances": [["100M", "~160 km", "—"], ["100K", "~100 km", "—"], ["50K", "~50 km", "—"]],
+      "facts": ["Major gần Việt Nam nhất", "Top 10 mỗi cự ly chính có suất thẳng vào UTMB Finals"],
+      "coach": ["Địa hình và khí hậu gần Sapa nhất — lựa chọn tự nhiên để phục thù VMM.", "Closest to Sapa in terrain and climate — the natural VMM redemption race."],
+      "travel": {
+        "flight": {"SGN": "SGN → CNX bay thẳng ~2h (VietJet/AirAsia) hoặc qua BKK; từ Chiang Mai thuê xe ~2h tới Doi Inthanon.", "HAN": "HAN → CNX bay thẳng ~1h50 (tuỳ mùa) hoặc qua BKK."},
+        "visa": "Miễn visa 30 ngày cho hộ chiếu Việt Nam.",
+        "stay": "Đêm trước race ở gần Chom Thong/Mae Chaem (sát vạch xuất phát); các đêm khác ở phố cổ Chiang Mai hoặc Nimman.",
+        "see": ["Doi Suthep lúc bình minh", "Phố cổ – chùa Chedi Luang", "Chợ đêm Chủ nhật Tha Phae"],
+        "eat": ["Khao soi (mì cà ri Bắc Thái)", "Sai ua – xúc xích Chiang Mai", "Xôi xoài & cà phê Akha Ama"],
+        "memory": "Dậy 5h ở Doi Inthanon ngắm biển mây từ hai tháp Napamethanidon — rồi đi ăn khao soi mừng về đích.",
+        "budget": {"nights": 4, "lowUSD": 500, "highUSD": 1100}
+      }
+    },
+    {
+      "id": "tokyo", "kind": "road", "name": "Tokyo Marathon", "short": "Tokyo",
+      "city": "Tokyo", "country": "Nhật Bản", "lon": 139.6917, "lat": 35.6895,
+      "role": "Abbott WMM", "founded": "2007 · Major từ 2013", "site": "https://www.marathon.tokyo",
+      "rule": {"month": 3, "weekday": 0, "nth": 1},
+      "dates": {"2026": ["2026-03-01"]},
+      "meta": [["Quy mô", "~38.000 VĐV"], ["Course", "Phẳng, về đích ga Tokyo"], ["Kỷ lục nam", "2:02:16 · B. Kipruto (2024)"], ["Kỷ lục nữ", "2:15:55 · S. Kebede (2024)"]],
+      "entry": "Bốc thăm (tỉ lệ rất thấp), charity, tour chính thức",
+      "facts": ["Đầu tháng 3 mát, ít gió", "Hậu cần tốt nhất trong các Major"],
+      "coach": ["Course nhanh, gần VN, lệch 2 múi giờ — Major dễ tiếp cận nhất.", "Fast, close, only 2 h jet lag — the most accessible Major."],
+      "travel": {
+        "flight": {"SGN": "SGN → NRT/HND bay thẳng ~6h (Vietnam Airlines, ANA, JAL, VietJet).", "HAN": "HAN → NRT/HND bay thẳng ~5h30."},
+        "visa": "Visa Nhật (nộp qua đại lý uỷ thác), 1–2 tuần; tour marathon thường hỗ trợ.",
+        "stay": "Shinjuku (sát xuất phát) hoặc Marunouchi/Ginza (gần đích ga Tokyo).",
+        "see": ["Đền Meiji + Harajuku", "Shibuya Sky lúc chiều", "Asakusa – Senso-ji sáng sớm"],
+        "eat": ["Ramen sau race", "Sushi chợ Toyosu", "Onigiri cửa hàng tiện lợi trước race"],
+        "memory": "Chạy shakeout quanh Hoàng cung (5 km) sáng thứ Bảy cùng hàng nghìn runner quốc tế.",
+        "budget": {"nights": 5, "lowUSD": 1200, "highUSD": 2400}
+      }
+    },
+    {
+      "id": "boston", "kind": "road", "name": "Boston Marathon", "short": "Boston",
+      "city": "Hopkinton → Boston", "country": "Mỹ", "lon": -71.0589, "lat": 42.3601,
+      "role": "Abbott WMM", "founded": "1897", "site": "https://www.baa.org",
+      "rule": {"month": 4, "weekday": 1, "nth": 3},
+      "dates": {"2026": ["2026-04-20"]},
+      "meta": [["Quy mô", "~30.000 VĐV"], ["Course", "Điểm-điểm, dốc xuống ròng, Newton Hills"], ["Kỷ lục nam", "2:03:02 · G. Mutai (2011)"], ["Kỷ lục nữ", "2:19:59 · B. Deba (2014)"]],
+      "entry": "Chuẩn BQ theo tuổi (nam 18–34: 2:55, đã siết 5 phút từ 2026)",
+      "facts": ["Marathon thường niên lâu đời nhất thế giới", "Course không đủ điều kiện công nhận WR"],
+      "coach": ["Chuẩn BQ là mục tiêu nhiều năm từ PR 3:30–3:45.", "BQ is a multi-year goal from a 3:30–3:45 PR."],
+      "travel": {
+        "flight": {"SGN": "SGN → BOS nối chuyến (Tokyo/Doha/Istanbul) ~22–26h.", "HAN": "HAN → BOS nối chuyến ~22–26h."},
+        "visa": "Visa Mỹ B1/B2 — xin sớm nhiều tháng.",
+        "stay": "Back Bay (sát đích) — đắt; Cambridge rẻ hơn, đi tàu T.",
+        "see": ["Freedom Trail", "Harvard & MIT", "Fenway Park"],
+        "eat": ["Clam chowder", "Lobster roll", "Cannoli ở North End"],
+        "memory": "Chạm tay vào vạch đích sơn trên Boylston Street chiều thứ Bảy trước race.",
+        "budget": {"nights": 6, "lowUSD": 2800, "highUSD": 5000}
+      }
+    },
+    {
+      "id": "london", "kind": "road", "name": "TCS London Marathon", "short": "London",
+      "city": "Greenwich → The Mall", "country": "Anh", "lon": -0.1419, "lat": 51.5014,
+      "role": "Abbott WMM", "founded": "1981", "site": "https://www.tcslondonmarathon.com",
+      "rule": {"month": 4, "weekday": 0, "nth": -1},
+      "dates": {"2026": ["2026-04-26"]},
+      "meta": [["Quy mô", "~56.000 về đích"], ["Course", "Phẳng, qua Tower Bridge"], ["Kỷ lục nam", "2:01:25 · K. Kiptum (2023)"], ["Kỷ lục nữ", "2:15:25 · P. Radcliffe (2003)"]],
+      "entry": "Ballot (>1 triệu đơn), Good-for-Age, charity",
+      "facts": ["Marathon đông người về đích nhất thế giới 2025", "2:15:50 của T. Assefa (2025) là WR nữ women-only"],
+      "coach": ["Ballot rất khó — charity/tour là đường thực tế.", "Ballot odds are tiny — charity/tour is the realistic route."],
+      "travel": {
+        "flight": {"SGN": "SGN → LHR bay thẳng ~13h (Vietnam Airlines) hoặc nối chuyến.", "HAN": "HAN → LHR bay thẳng ~12h30."},
+        "visa": "Visa Anh Standard Visitor, xin trước 6–8 tuần.",
+        "stay": "Westminster/Victoria (gần đích) hoặc Greenwich (gần xuất phát, rẻ hơn).",
+        "see": ["Greenwich Observatory – kinh tuyến gốc", "Tower Bridge đi bộ ban đêm", "British Museum (miễn phí)"],
+        "eat": ["Fish & chips", "Sunday roast sau race", "Borough Market"],
+        "memory": "Đi tàu sông Thames từ Greenwich về Westminster — đúng hướng course bạn sẽ chạy.",
+        "budget": {"nights": 6, "lowUSD": 2400, "highUSD": 4500}
+      }
+    },
+    {
+      "id": "capetown", "kind": "road", "name": "Sanlam Cape Town Marathon", "short": "Cape Town",
+      "city": "Cape Town", "country": "Nam Phi", "lon": 18.4241, "lat": -33.9249,
+      "role": "Abbott WMM · Major thứ 8", "founded": "~1994 · Major từ 2026", "site": "https://capetownmarathon.com",
+      "rule": {"month": 5, "weekday": 0, "nth": 4},
+      "dates": {"2026": ["2026-05-24"]},
+      "meta": [["Trạng thái", "Chính thức là Major từ 6/2026"], ["Course", "Nhìn Table Mountain, gió biển"], ["Ghi chú", "Bản 2025 bị hủy vì gió mạnh"], ["Khí hậu", "Thu Nam bán cầu, 12–20°C"]],
+      "entry": "Đăng ký mở, dễ hơn nhiều so với 6 Major gốc",
+      "facts": ["Major đầu tiên ở châu Phi", "Cũng tổ chức AbbottWMM Age Group World Championships"],
+      "coach": ["Cơ hội lấy sao Major sớm nhất về thủ tục.", "The easiest Major star to secure."],
+      "travel": {
+        "flight": {"SGN": "SGN → CPT nối chuyến Doha/Dubai/Singapore ~18–22h.", "HAN": "HAN → CPT nối chuyến ~19–23h."},
+        "visa": "Hộ chiếu Việt Nam cần visa Nam Phi — nộp tại ĐSQ Hà Nội, 2–4 tuần.",
+        "stay": "V&A Waterfront hoặc Green Point (gần xuất phát/đích, an toàn, đi bộ được).",
+        "see": ["Table Mountain (cáp treo)", "Mũi Hảo Vọng & chim cánh cụt Boulders Beach", "Vườn nho Stellenbosch"],
+        "eat": ["Braai (BBQ Nam Phi)", "Bobotie", "Hải sản ở Kalk Bay"],
+        "memory": "Bình minh trên Lion's Head ngày sau race — nhìn toàn bộ course bạn vừa chạy.",
+        "budget": {"nights": 6, "lowUSD": 1800, "highUSD": 3400}
+      }
+    },
+    {
+      "id": "sydney", "kind": "road", "name": "TCS Sydney Marathon", "short": "Sydney",
+      "city": "North Sydney → Opera House", "country": "Úc", "lon": 151.2108, "lat": -33.8523,
+      "role": "Abbott WMM · Major thứ 7", "founded": "2001 · Major từ 2025", "site": "https://www.tcssydneymarathon.com",
+      "rule": {"month": 8, "weekday": 0, "nth": -1},
+      "dates": {"2026": ["2026-08-30"]},
+      "meta": [["Quy mô", "~40.000 VĐV, ~120.000 đơn"], ["Course", "Qua Harbour Bridge, có dốc, đích Opera House"], ["Kỷ lục nam", "2:04:42 · A. Gobena (2026)"], ["Kỷ lục nữ", "2:18:22 · S. Hassan (2025)"]],
+      "entry": "Ballot, chuẩn thời gian, charity",
+      "facts": ["Marathon tăng trưởng nhanh nhất thế giới", "Peres Jepchirchir thắng nữ 2026"],
+      "coach": ["Mát nhưng có dốc — không phải course PR.", "Cool, but too hilly to be a PR course."],
+      "travel": {
+        "flight": {"SGN": "SGN → SYD bay thẳng ~8h30.", "HAN": "HAN → SYD ~9h bay thẳng hoặc nối chuyến."},
+        "visa": "Visa du lịch Úc (subclass 600) online, 4–6 tuần.",
+        "stay": "Circular Quay/The Rocks (sát đích) hoặc North Sydney (sát xuất phát).",
+        "see": ["Bondi → Coogee coastal walk", "Blue Mountains trong ngày", "Taronga Zoo nhìn về skyline"],
+        "eat": ["Brunch kiểu Úc + flat white", "Hải sản chợ cá Sydney", "Meat pie"],
+        "memory": "Bơi biển Bondi sáng hôm sau race — nước lạnh tháng 8 là liệu pháp phục hồi tự nhiên.",
+        "budget": {"nights": 5, "lowUSD": 1500, "highUSD": 2800}
+      }
+    },
+    {
+      "id": "berlin", "kind": "road", "name": "BMW BERLIN-MARATHON", "short": "Berlin",
+      "city": "Berlin", "country": "Đức", "lon": 13.3777, "lat": 52.5163,
+      "role": "Abbott WMM", "founded": "1974", "site": "https://www.bmw-berlin-marathon.com",
+      "rule": {"month": 9, "weekday": 0, "nth": -1},
+      "dates": {"2026": ["2026-09-27"]},
+      "meta": [["Quy mô", "~55.000 VĐV"], ["Course", "Phẳng nhất, đích qua Cổng Brandenburg"], ["Kỷ lục nam", "2:01:09 · E. Kipchoge (2022)"], ["Kỷ lục nữ", "2:11:53 · T. Assefa (2023)"]],
+      "entry": "Bốc thăm, tour, charity",
+      "facts": ["Nơi lập nhiều WR nam nhất lịch sử", "Cuối tháng 9 thường 10–18°C"],
+      "coach": ["Course PR số 1 thế giới — nếu muốn phá 3:30 ở Major, đây là nơi.", "The #1 PR course — the Major for breaking 3:30."],
+      "travel": {
+        "flight": {"SGN": "SGN → FRA bay thẳng ~12h30 (Vietnam Airlines) rồi bay 1h/ICE 4h tới Berlin; hoặc nối chuyến thẳng BER.", "HAN": "HAN → FRA bay thẳng ~12h rồi nối Berlin."},
+        "visa": "Visa Schengen (LSQ Đức), 6–8 tuần.",
+        "stay": "Mitte (gần Brandenburger Tor) hoặc Tiergarten/Charlottenburg.",
+        "see": ["Bức tường Berlin – East Side Gallery", "Đảo Bảo tàng", "Mái vòm Reichstag (đặt trước, miễn phí)"],
+        "eat": ["Currywurst", "Döner kebab ở Kreuzberg", "Bia + pretzel sau race"],
+        "memory": "Chạy xuyên Cổng Brandenburg ở km 42 — 200 m cuối huyền thoại. Đặt bàn tối Chủ nhật từ trước.",
+        "budget": {"nights": 5, "lowUSD": 1800, "highUSD": 3400}
+      }
+    },
+    {
+      "id": "chicago", "kind": "road", "name": "Bank of America Chicago Marathon", "short": "Chicago",
+      "city": "Grant Park, Chicago", "country": "Mỹ", "lon": -87.6244, "lat": 41.8756,
+      "role": "Abbott WMM", "founded": "1977", "site": "https://www.chicagomarathon.com",
+      "rule": {"month": 10, "weekday": 0, "nth": 2},
+      "dates": {"2026": ["2026-10-11"]},
+      "meta": [["Quy mô", "~50.000+ về đích"], ["Course", "Phẳng, vòng 29 khu phố"], ["Kỷ lục nam", "2:00:35 · K. Kiptum (2023)"], ["Kỷ lục nữ", "2:09:56 · R. Chepngetich (2024)"]],
+      "entry": "Bốc thăm, chuẩn thời gian, charity",
+      "facts": ["Phẳng ngang Berlin", "Cao ốc gây nhiễu GPS — chạy theo nhịp tim/cảm giác"],
+      "coach": ["Course PR tuyệt vời; bám vạch xanh, đừng tin pace GPS.", "Great PR course; follow the blue line, not GPS pace."],
+      "travel": {
+        "flight": {"SGN": "SGN → ORD nối chuyến (Tokyo/Seoul/Doha) ~20–24h.", "HAN": "HAN → ORD nối chuyến ~20–24h."},
+        "visa": "Visa Mỹ B1/B2.",
+        "stay": "The Loop/South Loop (đi bộ ra Grant Park).",
+        "see": ["Millennium Park – The Bean", "Tour thuyền kiến trúc sông Chicago", "Skydeck Willis Tower"],
+        "eat": ["Deep-dish pizza (để dành sau race)", "Chicago hot dog", "Bắp rang Garrett"],
+        "memory": "Đi thuyền kiến trúc chiều thứ Bảy — nhẹ chân, và bạn sẽ nhận ra từng cây cầu khi chạy qua hôm sau.",
+        "budget": {"nights": 6, "lowUSD": 2600, "highUSD": 4600}
+      }
+    },
+    {
+      "id": "nyc", "kind": "road", "name": "TCS New York City Marathon", "short": "New York",
+      "city": "Staten Island → Central Park", "country": "Mỹ", "lon": -73.9735, "lat": 40.7725,
+      "role": "Abbott WMM", "founded": "1970", "site": "https://www.nyrr.org/tcsnycmarathon",
+      "rule": {"month": 11, "weekday": 0, "nth": 1},
+      "dates": {"2026": ["2026-11-01"]},
+      "meta": [["Quy mô", "~59.000 về đích"], ["Course", "5 quận, 5 cây cầu"], ["Kỷ lục nam", "2:04:58 · T. Tola (2023)"], ["Kỷ lục nữ", "2:19:51 · H. Obiri (2025)"]],
+      "entry": "Bốc thăm, chuẩn thời gian (rất gắt), 9+1, charity",
+      "facts": ["Marathon lớn nhất thế giới theo số về đích", "Cầu Queensboro ~km 25 là đoạn khó nhất"],
+      "coach": ["Đi để trải nghiệm, không để PR.", "Run it for the experience, not a PR."],
+      "travel": {
+        "flight": {"SGN": "SGN → JFK nối chuyến (Tokyo/Seoul/Doha/Istanbul) ~22–26h.", "HAN": "HAN → JFK nối chuyến ~22–26h."},
+        "visa": "Visa Mỹ B1/B2.",
+        "stay": "Midtown/Upper West Side (gần đích Central Park); sáng race đi phà Staten Island từ 5h.",
+        "see": ["Chạy shakeout Central Park", "Đi bộ Brooklyn Bridge hoàng hôn", "Top of the Rock"],
+        "eat": ["Bagel + lox buổi sáng", "Pizza miếng kiểu NY", "Steak mừng về đích"],
+        "memory": "Khoảnh khắc rẽ vào First Avenue ở km 26 — tiếng hò reo lớn nhất bạn từng nghe.",
+        "budget": {"nights": 6, "lowUSD": 3000, "highUSD": 5500}
+      }
+    },
+    {
+      "id": "shanghai", "kind": "cand", "name": "Shanghai Marathon", "short": "Shanghai",
+      "city": "The Bund, Thượng Hải", "country": "Trung Quốc", "lon": 121.4737, "lat": 31.2304,
+      "role": "Ứng viên AbbottWMM", "founded": "1996", "site": "https://www.shmarathon.com",
+      "rule": {"month": 12, "weekday": 0, "nth": 1},
+      "dates": {"2026": ["2026-12-06"]},
+      "meta": [["Trạng thái", "Đang đánh giá 3 năm"], ["Course", "Phẳng, xuất phát Bến Thượng Hải"], ["Thời tiết", "Đầu tháng 12, mát"], ["Ghi chú", "Có thể thành Major thứ 9"]],
+      "entry": "Bốc thăm",
+      "facts": ["Nếu được duyệt sẽ mở đường cho huy chương Nine Star"],
+      "coach": ["Gần, phẳng, mát — giải PR dự phòng tốt.", "Close, flat, cool — a solid backup PR option."],
+      "travel": {
+        "flight": {"SGN": "SGN → PVG bay thẳng ~4h30 (Vietnam Airlines, China Eastern).", "HAN": "HAN → PVG bay thẳng ~3h30."},
+        "visa": "Hộ chiếu Việt Nam cần visa Trung Quốc (loại L), 1–2 tuần.",
+        "stay": "Khu Bến Thượng Hải/Nam Kinh Đông (sát xuất phát).",
+        "see": ["The Bund về đêm", "Yu Garden & phố cổ", "Tháp Thượng Hải – đài quan sát"],
+        "eat": ["Xiaolongbao Nanxiang", "Shengjianbao", "Cua lông mùa thu–đông"],
+        "memory": "Đi bộ dọc Bến Thượng Hải 6h sáng ngày trước race khi người địa phương tập thái cực quyền.",
+        "budget": {"nights": 4, "lowUSD": 700, "highUSD": 1400}
+      }
+    }
+  ]
+}

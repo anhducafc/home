@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bản đồ Majors — Trail UTMB & Road Marathon</title>
+<meta name="description" content="Quả địa cầu tương tác các giải UTMB World Series Majors và Abbott World Marathon Majors: lịch tự tính theo năm, thông số, và lên kế hoạch chuyến đi từ TP.HCM/Hà Nội.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0F1A22; --night-2:#1B2733; --ocean:#1E2F3B; --land:#3F5449; --land-line:#1B2733;
+  --paper:#F7F9F4; --fog:#EDF1EA; --ink:#22302A; --ink-soft:#5A6960; --line:#D5DED0;
+  --pine:#1E3A2C; --moss:#6E8C6C; --moss-light:#A9BFA3; --dawn:#E39A2E; --dawn-deep:#C77E1E; --home:#E2725A;
+  --glass:rgba(247,249,244,.94);
+  box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0;height:100%;background:var(--night);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.num{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--dawn);outline-offset:2px}
+a{color:var(--dawn-deep)}
+
+/* ---------- stage ---------- */
+.stage{position:relative;width:100%;height:100vh;min-height:620px;overflow:hidden;background:radial-gradient(1200px 800px at 65% 40%,#22323E 0%,var(--night) 70%)}
+#globe{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+#globe:active{cursor:grabbing}
+.sphere{fill:var(--ocean)}
+.atmo{fill:none;stroke:url(#atmo);stroke-width:18;opacity:.9}
+.graticule{fill:none;stroke:#fff;stroke-opacity:.05;stroke-width:.6}
+.land{fill:var(--land);stroke:var(--land-line);stroke-width:.5}
+.land.vn{fill:var(--home);fill-opacity:.6}
+.arc{fill:none;stroke:var(--dawn);stroke-width:1.8;stroke-dasharray:4 5;opacity:.9}
+.arc.trail{stroke:var(--moss-light)}
+.marker{cursor:pointer}
+.marker .hit{fill:transparent}
+.marker.trail .shape{fill:var(--moss-light);stroke:var(--night);stroke-width:1.5}
+.marker.road .shape{fill:var(--dawn);stroke:var(--night);stroke-width:1.5}
+.marker.cand .shape{fill:var(--night-2);stroke:var(--dawn);stroke-width:2.2}
+.marker.final .ring{fill:none;stroke:var(--moss-light);stroke-width:1.3;opacity:.9}
+.marker.past .shape{opacity:.45}
+.marker.sel .shape{stroke:#fff;stroke-width:2.5;opacity:1}
+.marker .pulse{fill:none;stroke:none}
+.marker.sel .pulse{stroke:#fff;stroke-width:1.2;opacity:.55}
+.marker text{font:600 11.5px Inter,sans-serif;fill:#EDF1EA;paint-order:stroke;stroke:var(--night);stroke-width:3px;pointer-events:none}
+.origin circle{fill:var(--home)}
+.origin text{font:600 11px Inter;fill:#F2B8A8;paint-order:stroke;stroke:var(--night);stroke-width:3px}
+
+/* ---------- sidebar ---------- */
+.side{position:absolute;left:18px;top:18px;bottom:88px;width:340px;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:18px;box-shadow:0 20px 50px -24px rgba(0,0,0,.6);display:flex;flex-direction:column;overflow:hidden}
+.side-head{padding:20px 20px 12px}
+h1{font:800 30px/1 Archivo,Inter,sans-serif;letter-spacing:-.02em;margin:0;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.yr{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px;background:#fff}
+.yr button{border:0;background:transparent;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;color:var(--ink-soft)}
+.yr button:hover{background:var(--fog)}
+.yr span{font:700 15px/1 "JetBrains Mono",monospace;padding:0 4px}
+.sub{color:var(--ink-soft);margin:8px 0 0;font-size:13.5px;line-height:1.45}
+.controls{padding:0 20px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px 5px 9px;cursor:pointer;font-size:13px}
+.chip[aria-pressed="false"]{opacity:.45}
+.dot{width:11px;height:11px;display:inline-block;flex:none}
+.dot-trail{background:var(--moss);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.dot-road{background:var(--dawn);border-radius:50%}
+.dot-cand{border:2px solid var(--dawn);border-radius:50%}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;margin-left:auto}
+.seg button{border:0;background:transparent;padding:5px 10px;cursor:pointer;font-size:12.5px;color:var(--ink-soft)}
+.seg button[aria-pressed="true"]{background:var(--pine);color:#fff}
+.list{flex:1;overflow:auto;padding:4px 10px 12px;scrollbar-width:thin}
+.month{font:600 11.5px/1 Inter;color:var(--ink-soft);margin:12px 10px 4px;letter-spacing:.02em}
+.item{display:grid;grid-template-columns:14px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;cursor:pointer;border:0;background:transparent;text-align:left;width:100%}
+.item:hover{background:rgba(30,58,44,.08)}
+.item[aria-current="true"]{background:#fff;box-shadow:inset 3px 0 0 var(--dawn),0 1px 0 var(--line)}
+.item .nm{font-weight:600;font-size:14px;line-height:1.2}
+.item .loc{font-size:12px;color:var(--ink-soft)}
+.item .dt{font-size:12px;color:var(--ink-soft);text-align:right;line-height:1.25}
+.item .dt b{display:block;color:var(--dawn-deep);font-weight:600}
+.item.past .nm,.item.past .dt{color:var(--ink-soft)}
+.item.past .dot{opacity:.4}
+.item.hidden{display:none}
+.side-foot{font-size:11px;color:var(--ink-soft);padding:10px 20px 12px;border-top:1px solid var(--line);line-height:1.4}
+
+/* ---------- month strip ---------- */
+.strip{position:absolute;left:18px;right:18px;bottom:18px;height:56px;background:rgba(27,39,51,.72);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);border-radius:14px;display:grid;grid-template-columns:repeat(12,1fr);overflow:hidden}
+.strip .m{position:relative;border-left:1px solid rgba(255,255,255,.06);padding:6px 0 0 8px;font:600 11px Inter;color:rgba(237,241,234,.55)}
+.strip .m:first-child{border-left:0}
+.strip .m.now{color:var(--dawn)}
+.strip .m.now::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--dawn)}
+.strip .pin{position:absolute;bottom:9px;width:10px;height:10px;cursor:pointer;transform:translateX(-50%)}
+.strip .pin.trail{background:var(--moss-light);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.strip .pin.road{background:var(--dawn);border-radius:50%}
+.strip .pin.cand{border:2px solid var(--dawn);border-radius:50%;width:9px;height:9px}
+.strip .pin.past{opacity:.35}
+.strip .pin.sel{outline:2px solid #fff;outline-offset:2px;border-radius:50%}
+
+.zoom{position:absolute;right:18px;top:18px;display:flex;flex-direction:column;gap:6px;z-index:2}
+.zoom button{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(27,39,51,.75);color:#EDF1EA;cursor:pointer;font-size:18px;backdrop-filter:blur(8px)}
+.hint{position:absolute;right:66px;top:28px;font-size:12px;color:rgba(237,241,234,.5)}
+
+/* ---------- panel ---------- */
+.panel{position:absolute;top:18px;right:66px;bottom:88px;width:min(440px,calc(100% - 440px));background:var(--paper);border-radius:18px;box-shadow:0 24px 60px -24px rgba(0,0,0,.7);display:flex;flex-direction:column;overflow:hidden;transform:translateX(calc(100% + 90px));transition:transform .38s cubic-bezier(.2,.8,.2,1);z-index:3}
+.panel.open{transform:none}
+.p-head{padding:18px 54px 0 20px;position:relative}
+.p-type{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-soft)}
+.p-name{font:800 23px/1.08 Archivo,Inter,sans-serif;margin:6px 0 2px;letter-spacing:-.01em}
+.p-loc{color:var(--ink-soft);font-size:13.5px}
+.close{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:15px}
+.tabs{display:flex;gap:2px;padding:12px 20px 0;border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:transparent;padding:8px 10px;cursor:pointer;font-weight:600;font-size:13.5px;color:var(--ink-soft);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--dawn)}
+.p-body{flex:1;overflow:auto;padding:16px 20px 24px;display:flex;flex-direction:column;gap:16px;scrollbar-width:thin}
+.p-body>*{flex:none}
+.p-body h3{font:700 13.5px/1.2 Archivo,Inter;margin:0 0 8px}
+.p-body h3 small{font:500 12px Inter;color:var(--ink-soft)}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.kv div{background:#fff;padding:10px 12px}
+.kv div:last-child:nth-child(odd){grid-column:span 2}
+.kv .k{font-size:11.5px;color:var(--ink-soft)}
+.kv .v{font-size:14px;font-weight:600;line-height:1.3}
+.up{color:var(--dawn-deep)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+td,th{padding:6px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:500;color:var(--ink-soft);font-size:12px}
+td.r,th.r{text-align:right}
+.facts{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.facts li{padding-left:14px;position:relative}
+.facts li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--moss)}
+.coach{background:#fff;border-left:3px solid var(--dawn);border-radius:0 10px 10px 0;padding:12px 14px;font-size:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.coach b{display:block;font-size:12px;margin-bottom:2px;color:var(--ink-soft)}
+.coach .en{color:var(--ink-soft);font-size:13px;margin-top:4px}
+.note{font-size:12px;color:var(--ink-soft)}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card p{margin:4px 0 0;font-size:14px}
+.card .lbl{font-size:11.5px;color:var(--ink-soft)}
+.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;cursor:pointer;font-size:13.5px;font-weight:600}
+.btn.primary{background:var(--pine);color:#fff;border-color:var(--pine)}
+.btn.primary:disabled{opacity:.5;cursor:default}
+.btn.link{border:0;background:transparent;color:var(--dawn-deep);padding:0;font-weight:600}
+
+/* planner form */
+.form{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row label{font-size:12.5px;color:var(--ink-soft);min-width:84px}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:#fff}
+.stepper button{border:0;background:transparent;width:30px;height:30px;cursor:pointer;font-size:16px;color:var(--ink-soft)}
+.stepper span{min-width:28px;text-align:center;font-weight:600}
+select,textarea,input[type=password],input[type=text]{border:1px solid var(--line);border-radius:10px;background:#fff;padding:7px 10px;font-size:13.5px;width:100%}
+textarea{min-height:64px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips .chip{padding:4px 10px}
+.gen{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .8s linear infinite;display:inline-block;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.plan .day{border-left:2px solid var(--line);padding-left:14px;position:relative;margin-left:4px}
+.plan .day::before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--dawn);border:2px solid var(--paper)}
+.plan .day.race::before{background:var(--pine)}
+.plan .day h4{margin:0 0 4px;font:700 14px Archivo,Inter}
+.plan .day h4 small{font:500 12px Inter;color:var(--ink-soft);margin-left:6px}
+.plan .blk{display:grid;grid-template-columns:62px 1fr;gap:8px;font-size:13.5px;padding:3px 0}
+.plan .blk .t{color:var(--ink-soft);font-size:12px}
+.plan .blk .n{color:var(--ink-soft);font-size:12.5px}
+.plan .eat li{margin-bottom:4px}
+.err{background:#FBEDE8;border:1px solid #F1C9BD;color:#8A2E16;border-radius:10px;padding:10px 12px;font-size:13.5px}
+.toast{position:absolute;left:50%;bottom:90px;transform:translateX(-50%);background:var(--pine);color:#fff;padding:8px 14px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:5}
+.toast.show{opacity:1}
+
+@media (max-width:900px){
+  .stage{height:auto;min-height:0;display:flex;flex-direction:column}
+  #globe{position:relative;height:52vh;min-height:320px}
+  .side{position:relative;left:0;top:0;bottom:auto;width:auto;border-radius:0;max-height:none;margin:0;backdrop-filter:none;background:var(--paper)}
+  .list{max-height:420px}
+  .strip{position:relative;left:0;right:0;bottom:0;border-radius:0;height:46px;margin:0}
+  .zoom{top:12px;right:12px}
+  .hint{display:none}
+  h1{font-size:26px}
+  .panel{position:fixed;left:0;right:0;top:auto;bottom:0;width:auto;max-height:64vh;border-radius:18px 18px 0 0;transform:translateY(105%);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .panel.open{transform:none}
+}
+@media (prefers-reduced-motion:reduce){.panel{transition:none}.spin{animation:none}}
+@media print{.stage>*:not(.panel){display:none!important}.panel{position:static;transform:none;box-shadow:none;width:auto;height:auto}.p-body{overflow:visible}.close,.tabs,.gen{display:none}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <svg id="globe" role="img" aria-label="Quả địa cầu tương tác các giải Majors">
+    <defs><radialGradient id="atmo" cx="50%" cy="50%" r="50%"><stop offset="85%" stop-color="#A9BFA3" stop-opacity="0"/><stop offset="100%" stop-color="#A9BFA3" stop-opacity=".35"/></radialGradient></defs>
+  </svg>
+
+  <aside class="side">
+    <div class="side-head">
+      <h1>Bản đồ Majors <span class="yr"><button id="yprev" aria-label="Năm trước">‹</button><span id="year" class="num"></span><button id="ynext" aria-label="Năm sau">›</button></span></h1>
+      <p class="sub">Các giải UTMB World Series Majors và Abbott World Marathon Majors trên một quả địa cầu. Bấm vào một giải để xem thông số và lên kế hoạch chuyến đi.</p>
+    </div>
+    <div class="controls" role="group" aria-label="Lọc">
+      <button class="chip" data-f="trail" aria-pressed="true"><span class="dot dot-trail"></span>Trail</button>
+      <button class="chip" data-f="road" aria-pressed="true"><span class="dot dot-road"></span>Road</button>
+      <button class="chip" data-f="cand" aria-pressed="true"><span class="dot dot-cand"></span>Ứng viên</button>
+      <div class="seg" role="group" aria-label="Điểm khởi hành" id="originSeg"></div>
+    </div>
+    <div id="list" class="list" aria-label="Lịch các giải"></div>
+    <div class="side-foot" id="foot"></div>
+  </aside>
+
+  <div class="zoom">
+    <button id="zin" aria-label="Phóng to">+</button>
+    <button id="zout" aria-label="Thu nhỏ">−</button>
+    <button id="zhome" aria-label="Về điểm khởi hành" title="Về điểm khởi hành">⌂</button>
+  </div>
+  <div class="hint">Kéo để xoay · cuộn để phóng to</div>
+
+  <div class="strip" id="strip" aria-label="Dòng thời gian trong năm"></div>
+
+  <section id="panel" class="panel" aria-live="polite"></section>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="vendor/d3.min.js"></script>
+<script src="vendor/topojson-client.min.js"></script>
+<script>
+/* =========================================================
+   CẤU HÌNH — chỉnh ở đây
+   ========================================================= */
+const CONFIG = {
+  dataUrl: 'majors.json',                 // dữ liệu giải (sửa mỗi năm nếu cần)
+  worldUrl: 'countries-110m.json',        // bản đồ nền
+  plannerEndpoint: '',                    // URL Cloudflare Worker, vd 'https://majors-planner.xxx.workers.dev' — để trống nếu chưa triển khai
+  allowOwnKey: true,                      // cho phép người xem dán API key Anthropic của riêng họ (lưu trong trình duyệt của họ)
+  model: 'claude-sonnet-5-5',             // chỉ dùng khi gọi trực tiếp bằng key riêng
+  credit: 'Phân tích bởi anhducafc × Claude / Copyright by vietnamtrailseries.com'
+};
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,'0');
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parse = s => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
+const fmtShort = d => `${d.getDate()}/${d.getMonth()+1}`;
+const fmtLong = d => d.toLocaleDateString('vi-VN',{weekday:'short',day:'numeric',month:'numeric',year:'numeric'});
+const TODAY = new Date(); TODAY.setHours(0,0,0,0);
+
+function nthWeekday(year, month, weekday, nth){
+  if (nth>0){ const first=new Date(year,month-1,1); const off=(weekday-first.getDay()+7)%7; return new Date(year,month-1,1+off+(nth-1)*7); }
+  const last=new Date(year,month,0); const off=(last.getDay()-weekday+7)%7; return new Date(year,month-1,last.getDate()-off);
+}
+function raceDates(r, year){
+  const o = r.dates && r.dates[String(year)];
+  if (o) return {start:parse(o[0]), end:parse(o[1]||o[0]), confirmed:true};
+  const a = nthWeekday(year, r.rule.month, r.rule.weekday, r.rule.nth);
+  const s = new Date(a); s.setDate(a.getDate()+(r.rule.startOffset||0));
+  const e = new Date(a); e.setDate(a.getDate()+(r.rule.endOffset||0));
+  return {start:s,end:e,confirmed:false};
+}
+function status(d){
+  if (d.end < TODAY) return {past:true, text:'Đã diễn ra'};
+  if (d.start <= TODAY) return {past:false, text:'Đang diễn ra', live:true};
+  const days=Math.round((d.start-TODAY)/864e5); return {past:false, text:`Còn ${days} ngày`, days};
+}
+const kindLabel = r => r.kind==='trail' ? (r.final?'UTMB World Series Finals':'UTMB World Series Major') : r.kind==='cand' ? 'Ứng viên Road Major' : 'Abbott World Marathon Major';
+const dotClass = r => r.kind==='trail'?'dot-trail':r.kind==='cand'?'dot-cand':'dot-road';
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2200); }
+function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){ return null; } }
+
+/* ---------- state ---------- */
+let DATA, WORLD, RACES=[], ORIGINS={}, originKey='SGN', year=TODAY.getFullYear();
+const filters={trail:true,road:true,cand:true};
+let selected=null, tab='race', zoomK=1, baseScale=1, W=0, H=0, autoSpin=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+const qs = new URLSearchParams(location.search);
+if (qs.get('origin') && /^(SGN|HAN)$/.test(qs.get('origin'))) originKey=qs.get('origin');
+if (qs.get('year') && /^\d{4}$/.test(qs.get('year'))) year=+qs.get('year');
+
+/* ---------- globe ---------- */
+const svg=d3.select('#globe'), stage=$('#globe');
+const projection=d3.geoOrthographic().clipAngle(90).precision(.4);
+const path=d3.geoPath(projection);
+const gSphere=svg.append('path').attr('class','sphere');
+const gAtmo=svg.append('path').attr('class','atmo');
+const gGrat=svg.append('path').attr('class','graticule').datum(d3.geoGraticule10());
+const gLand=svg.append('g');
+const gArc=svg.append('path').attr('class','arc');
+const gOrigin=svg.append('g').attr('class','origin');
+gOrigin.append('circle').attr('r',4.5); gOrigin.append('text').attr('x',8).attr('y',4);
+const gMarks=svg.append('g');
+let countries, marks;
+
+function cx(){ return (selected && W>900) ? Math.max(W*0.42, 360 + (W-360-500)/2) : (W>900 ? W/2+150 : W/2); }
+function visible(lon,lat){ const c=projection.invert([cx(),H/2]); return c && d3.geoDistance([lon,lat],c) < Math.PI/2-.02; }
+function resize(){
+  const r=stage.getBoundingClientRect(); W=r.width; H=r.height;
+  svg.attr('viewBox',`0 0 ${W} ${H}`);
+  baseScale=Math.min(W>900?W-360:W, H)/2 - 30;
+  projection.translate([cx(),H/2]).scale(baseScale*zoomK);
+  render();
+}
+function render(){
+  if(!countries) return;
+  projection.translate([cx(),H/2]);
+  gSphere.attr('d',path({type:'Sphere'})); gAtmo.attr('d',path({type:'Sphere'})); gGrat.attr('d',path); countries.attr('d',path);
+  const o=ORIGINS[originKey]; const op=projection([o.lon,o.lat]);
+  gOrigin.attr('transform',`translate(${op})`).style('display',visible(o.lon,o.lat)?null:'none').select('text').text(o.short);
+  marks.each(function(d){
+    const p=projection([d.lon,d.lat]); const on=filters[d.kind]&&visible(d.lon,d.lat);
+    d3.select(this).attr('transform',`translate(${p})`).style('display',on?null:'none').classed('sel',selected===d.id).classed('past',d._st.past);
+  });
+  marks.select('text').style('display',d=>(zoomK>=1.7||selected===d.id)?null:'none');
+  if(selected){
+    const r=RACES.find(x=>x.id===selected); const ip=d3.geoInterpolate([o.lon,o.lat],[r.lon,r.lat]);
+    gArc.datum({type:'LineString',coordinates:d3.range(0,1.0001,.02).map(ip)}).attr('d',path).attr('class','arc'+(r.kind==='trail'?' trail':''));
+  } else gArc.attr('d',null);
+}
+let r0,p0;
+svg.call(d3.drag().on('start',e=>{autoSpin=false;r0=projection.rotate();p0=[e.x,e.y];}).on('drag',e=>{
+  const k=180/(Math.PI*projection.scale()); projection.rotate([r0[0]+(e.x-p0[0])*k, Math.max(-80,Math.min(80,r0[1]-(e.y-p0[1])*k)),0]); render();
+}));
+svg.on('wheel',e=>{e.preventDefault();autoSpin=false;setZoom(zoomK*(e.deltaY<0?1.12:1/1.12));},{passive:false});
+function setZoom(k){ zoomK=Math.max(.8,Math.min(5,k)); projection.scale(baseScale*zoomK); render(); }
+$('#zin').onclick=()=>setZoom(zoomK*1.3); $('#zout').onclick=()=>setZoom(zoomK/1.3);
+$('#zhome').onclick=()=>{autoSpin=false;const o=ORIGINS[originKey];flyTo(o.lon,o.lat);};
+function flyTo(lon,lat){
+  const from=projection.rotate(), to=[-lon,-lat*.85,0]; let dl=to[0]-from[0]; dl=((dl+540)%360)-180; to[0]=from[0]+dl;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){projection.rotate(to);render();return;}
+  const ir=d3.interpolate(from,to); d3.transition().duration(1100).ease(d3.easeCubicInOut).tween('rot',()=>t=>{projection.rotate(ir(t));render();});
+}
+d3.timer(()=>{ if(autoSpin&&countries){const r=projection.rotate();projection.rotate([r[0]+0.1,r[1],0]);render();} });
+
+/* ---------- list + strip ---------- */
+function computeDates(){ RACES.forEach(r=>{ r._d=raceDates(r,year); r._st=status(r._d); }); }
+function dateText(r){ const d=r._d; return d.start.getTime()===d.end.getTime()?fmtShort(d.start):`${fmtShort(d.start)}–${fmtShort(d.end)}`; }
+function buildList(){
+  const el=$('#list'); el.innerHTML=''; let m=null;
+  [...RACES].sort((a,b)=>a._d.start-b._d.start).forEach(r=>{
+    const mm=r._d.start.getMonth()+1;
+    if(mm!==m){m=mm;const h=document.createElement('div');h.className='month';h.textContent='Tháng '+mm;el.appendChild(h);}
+    const b=document.createElement('button'); b.className='item'+(r._st.past?' past':''); b.dataset.id=r.id; b.dataset.kind=r.kind;
+    b.innerHTML=`<span class="dot ${dotClass(r)}"></span><span><span class="nm">${r.short}</span><br><span class="loc">${r.country}${r._d.confirmed?'':' · lịch dự kiến'}</span></span><span class="dt num">${dateText(r)}${r._st.days!=null&&r._st.days<=120?`<b>còn ${r._st.days} ngày</b>`:''}</span>`;
+    b.onclick=()=>select(r.id,true); el.appendChild(b);
+  });
+  applyFilters();
+  const s=$('#strip'); s.innerHTML='';
+  for(let i=1;i<=12;i++){ const d=document.createElement('div'); d.className='m'+(year===TODAY.getFullYear()&&i===TODAY.getMonth()+1?' now':''); d.textContent='T'+i; d.dataset.m=i; s.appendChild(d); }
+  RACES.forEach(r=>{
+    const mcell=s.children[r._d.start.getMonth()]; const dim=new Date(year,r._d.start.getMonth()+1,0).getDate();
+    const p=document.createElement('button'); p.className=`pin ${r.kind}${r._st.past?' past':''}`; p.style.left=(r._d.start.getDate()/dim*100)+'%'; p.title=`${r.short} · ${dateText(r)}`; p.setAttribute('aria-label',p.title); p.dataset.id=r.id;
+    p.onclick=()=>select(r.id,true); mcell.appendChild(p);
+  });
+  $('#year').textContent=year;
+  $('#foot').innerHTML=`Dữ liệu cập nhật ${DATA.updated}. Ngày không có trong lịch chính thức được tính theo quy tắc hằng năm (ghi "lịch dự kiến"). Kiểm tra trang chính thức trước khi đăng ký.<br>${CONFIG.credit}`;
+}
+function applyFilters(){
+  document.querySelectorAll('.item').forEach(el=>el.classList.toggle('hidden',!filters[el.dataset.kind]));
+  document.querySelectorAll('.month').forEach(h=>{let n=h.nextElementSibling,any=false;while(n&&!n.classList.contains('month')){if(!n.classList.contains('hidden'))any=true;n=n.nextElementSibling;}h.style.display=any?null:'none';});
+  document.querySelectorAll('.strip .pin').forEach(p=>p.style.display=filters[RACES.find(r=>r.id===p.dataset.id).kind]?null:'none');
+  render();
+}
+document.querySelectorAll('.chip[data-f]').forEach(c=>c.onclick=()=>{const f=c.dataset.f;filters[f]=!filters[f];c.setAttribute('aria-pressed',filters[f]);applyFilters();});
+$('#yprev').onclick=()=>setYear(year-1); $('#ynext').onclick=()=>setYear(year+1);
+function setYear(y){ year=y; computeDates(); buildList(); if(selected) select(selected,false); render(); }
+
+/* ---------- panel ---------- */
+const panel=$('#panel');
+function select(id,fly){
+  selected=id; autoSpin=false;
+  const r=RACES.find(x=>x.id===id);
+  document.querySelectorAll('.item').forEach(el=>el.setAttribute('aria-current',el.dataset.id===id));
+  document.querySelectorAll('.strip .pin').forEach(p=>p.classList.toggle('sel',p.dataset.id===id));
+  panel.innerHTML=`
+    <div class="p-head">
+      <button class="close" aria-label="Đóng">✕</button>
+      <span class="p-type"><span class="dot ${dotClass(r)}"></span>${kindLabel(r)} · ${r.role}</span>
+      <h2 class="p-name">${r.name}</h2>
+      <div class="p-loc">${r.city}, ${r.country} · <a href="${r.site}" target="_blank" rel="noopener">trang chính thức</a></div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-t="race" aria-selected="${tab==='race'}">Giải</button>
+      <button role="tab" data-t="trip" aria-selected="${tab==='trip'}">Chuyến đi</button>
+      <button role="tab" data-t="plan" aria-selected="${tab==='plan'}">Lên kế hoạch</button>
+    </div>
+    <div class="p-body" id="pbody"></div>`;
+  panel.classList.add('open');
+  panel.querySelector('.close').onclick=closePanel;
+  panel.querySelectorAll('[role=tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.t;panel.querySelectorAll('[role=tab]').forEach(x=>x.setAttribute('aria-selected',x===b));renderTab(r);});
+  renderTab(r);
+  try{ history.replaceState(null,'',`?race=${id}&origin=${originKey}${year!==TODAY.getFullYear()?'&year='+year:''}`);}catch(e){}
+  if(W<=900) window.scrollTo({top:0,behavior:'smooth'});
+  if(fly){ if(W>900&&zoomK<1.5){zoomK=1.5;projection.scale(baseScale*zoomK);} flyTo(r.lon,r.lat);} else render();
+}
+function closePanel(){ panel.classList.remove('open'); selected=null; document.querySelectorAll('.item').forEach(el=>el.setAttribute('aria-current',false)); document.querySelectorAll('.strip .pin').forEach(p=>p.classList.remove('sel')); try{history.replaceState(null,'',location.pathname);}catch(e){} render(); }
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&selected)closePanel();});
+
+function kmFrom(r){ const o=ORIGINS[originKey]; return Math.round(d3.geoDistance([o.lon,o.lat],[r.lon,r.lat])*6371); }
+
+function renderTab(r){
+  const b=$('#pbody'); const st=r._st, d=r._d;
+  if(tab==='race'){
+    const dist=r.distances?`<div><h3>Các cự ly <small>· Distances</small></h3><table><thead><tr><th>Cự ly</th><th class="r">Quãng đường</th><th class="r">D+</th></tr></thead><tbody>${r.distances.map(x=>`<tr><td><b>${x[0]}</b></td><td class="r num">${x[1]}</td><td class="r num">${x[2]}</td></tr>`).join('')}</tbody></table></div>`:'';
+    const perks=r.kind==='trail'&&!r.final?`<p class="note">Major: người về đích nhận gấp đôi Running Stones; Top 10 nam/nữ ở 100M/100K/50K và người thắng nhóm tuổi có suất thẳng vào UTMB Mont-Blanc.</p>`:'';
+    const entry=r.entry?`<div><h3>Cách giành suất <small>· Entry</small></h3><p style="margin:0;font-size:14px">${r.entry}</p></div>`:'';
+    b.innerHTML=`
+      <div class="kv">
+        <div><div class="k">Ngày ${year}${d.confirmed?'':' (dự kiến)'}</div><div class="v num">${d.start.getTime()===d.end.getTime()?fmtLong(d.start):fmtShort(d.start)+' – '+fmtLong(d.end)}</div></div>
+        <div><div class="k">Trạng thái</div><div class="v ${st.past?'':'up'}">${st.text}</div></div>
+        <div><div class="k">Cách ${ORIGINS[originKey].short}</div><div class="v num">${kmFrom(r).toLocaleString('vi-VN')} km</div></div>
+        ${r.founded?`<div><div class="k">Thành lập</div><div class="v">${r.founded}</div></div>`:''}
+        ${r.meta.map(m=>`<div><div class="k">${m[0]}</div><div class="v ${/\d:\d\d/.test(m[1])?'num':''}" style="font-size:13.5px">${m[1]}</div></div>`).join('')}
+      </div>
+      ${dist}${perks}${entry}
+      <div><h3>Đáng biết <small>· Good to know</small></h3><ul class="facts">${r.facts.map(f=>`<li>${f}</li>`).join('')}</ul></div>
+      <div class="coach"><b>Góc HLV · Coach's take</b>${r.coach[0]}<div class="en" lang="en">${r.coach[1]}</div></div>`;
+  }
+  if(tab==='trip'){
+    const t=r.travel, o=ORIGINS[originKey];
+    const nights=plannerState.nights, ppl=plannerState.people;
+    const scale=ppl*(0.45+0.55*nights/t.budget.nights);
+    const lo=Math.round(t.budget.lowUSD*scale/100)*100, hi=Math.round(t.budget.highUSD*scale/100)*100;
+    b.innerHTML=`
+      <div class="card"><div class="lbl">Bay từ ${o.name}</div><p>${t.flight[originKey]}</p></div>
+      <div class="card"><div class="lbl">Visa (hộ chiếu Việt Nam)</div><p>${t.visa}</p></div>
+      <div class="card"><div class="lbl">Nên ở đâu</div><p>${t.stay}</p></div>
+      <div><h3>Đáng đi <small>· 3 điểm không nên bỏ</small></h3><ul class="facts">${t.see.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div><h3>Đáng ăn</h3><ul class="facts">${t.eat.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="coach"><b>Để chuyến đi đáng nhớ</b>${t.memory}</div>
+      <div class="kv">
+        <div><div class="k">Ước tính chi phí · ${ppl} người · ${nights} đêm</div><div class="v num">${lo.toLocaleString('vi-VN')} – ${hi.toLocaleString('vi-VN')} USD</div></div>
+        <div><div class="k">Gồm</div><div class="v" style="font-weight:500;font-size:13px">Vé máy bay khứ hồi, lưu trú, ăn uống, đi lại tại chỗ. Chưa gồm phí đăng ký giải và visa.</div></div>
+      </div>
+      <p class="note">Chỉnh số đêm và số người ở tab "Lên kế hoạch". Số liệu là ước tính theo mặt bằng giá phổ biến, không phải báo giá.</p>`;
+  }
+  if(tab==='plan') renderPlanner(r);
+}
+
+/* ---------- planner ---------- */
+const plannerState={nights:5,people:1,style:'comfort',distance:'',interests:new Set(['ẩm thực','thiên nhiên']),note:'',busy:false,result:null,resultFor:null};
+const INTERESTS=['ẩm thực','thiên nhiên','văn hoá & bảo tàng','chụp ảnh','mua sắm','cà phê','đi cùng gia đình','ngân sách tiết kiệm'];
+function renderPlanner(r){
+  const b=$('#pbody'); const s=plannerState; const hasEndpoint=!!CONFIG.plannerEndpoint; const ownKey=store('majors_api_key')||'';
+  const dists=(r.distances||[['Marathon','42,195 km']]).map(x=>x[0]);
+  if(!s.distance||!dists.includes(s.distance)) s.distance=dists[Math.min(1,dists.length-1)];
+  b.innerHTML=`
+    <div class="form">
+      <div class="row"><label>Khởi hành</label><div class="seg" id="pOrigin">${Object.keys(ORIGINS).map(k=>`<button aria-pressed="${k===originKey}" data-k="${k}">${ORIGINS[k].short}</button>`).join('')}</div></div>
+      <div class="row"><label>Cự ly</label><select id="pDist">${dists.map(x=>`<option ${x===s.distance?'selected':''}>${x}</option>`).join('')}</select></div>
+      <div class="row"><label>Số đêm</label><div class="stepper"><button data-s="nights" data-d="-1" aria-label="Bớt">−</button><span id="pNights">${s.nights}</span><button data-s="nights" data-d="1" aria-label="Thêm">+</button></div>
+        <label style="min-width:0;margin-left:8px">Số người</label><div class="stepper"><button data-s="people" data-d="-1" aria-label="Bớt">−</button><span id="pPeople">${s.people}</span><button data-s="people" data-d="1" aria-label="Thêm">+</button></div></div>
+      <div class="row"><label>Phong cách</label><div class="seg" id="pStyle">${[['budget','Tiết kiệm'],['comfort','Thoải mái'],['premium','Cao cấp']].map(x=>`<button aria-pressed="${s.style===x[0]}" data-k="${x[0]}">${x[1]}</button>`).join('')}</div></div>
+      <div class="row" style="align-items:flex-start"><label style="padding-top:5px">Thích gì</label><div class="chips" id="pInt">${INTERESTS.map(x=>`<button class="chip" aria-pressed="${s.interests.has(x)}" data-k="${x}">${x}</button>`).join('')}</div></div>
+      <div class="row" style="align-items:flex-start"><label style="padding-top:5px">Ghi chú</label><textarea id="pNote" placeholder="Vd: đi cùng vợ con, muốn ở lại thêm 2 ngày thành phố, dị ứng hải sản, mục tiêu sub 3:30…">${s.note}</textarea></div>
+      ${!hasEndpoint&&CONFIG.allowOwnKey?`<div class="row" style="align-items:flex-start"><label style="padding-top:5px">API key</label><div style="flex:1"><input type="password" id="pKey" value="${ownKey}" placeholder="sk-ant-… (Anthropic API key của bạn)"><p class="note" style="margin:4px 0 0">Key chỉ lưu trong trình duyệt này và gửi thẳng tới Anthropic, không qua máy chủ nào khác.</p></div></div>`:''}
+      <div class="gen">
+        <button class="btn primary" id="pGo" ${s.busy?'disabled':''}>${s.busy?'<span class="spin"></span>Đang soạn…':'Soạn kế hoạch chuyến đi'}</button>
+        ${s.result&&s.resultFor===r.id?`<button class="btn" id="pCopy">Sao chép</button><button class="btn" id="pPrint">In / PDF</button>`:''}
+        <span class="note" id="pStatus"></span>
+      </div>
+    </div>
+    <div id="pOut"></div>`;
+  b.querySelectorAll('#pOrigin button').forEach(x=>x.onclick=()=>setOrigin(x.dataset.k));
+  b.querySelectorAll('#pStyle button').forEach(x=>x.onclick=()=>{s.style=x.dataset.k;renderPlanner(r);});
+  b.querySelectorAll('#pInt .chip').forEach(x=>x.onclick=()=>{const k=x.dataset.k;s.interests.has(k)?s.interests.delete(k):s.interests.add(k);x.setAttribute('aria-pressed',s.interests.has(k));});
+  b.querySelectorAll('.stepper button').forEach(x=>x.onclick=()=>{const k=x.dataset.s,d=+x.dataset.d;s[k]=Math.max(k==='nights'?2:1,Math.min(k==='nights'?21:8,s[k]+d));$('#pNights').textContent=s.nights;$('#pPeople').textContent=s.people;});
+  $('#pDist').onchange=e=>s.distance=e.target.value; $('#pNote').oninput=e=>s.note=e.target.value;
+  $('#pGo').onclick=()=>generate(r);
+  const cp=$('#pCopy'); if(cp) cp.onclick=()=>{navigator.clipboard.writeText(planText(r,s.result)).then(()=>toast('Đã sao chép kế hoạch'));};
+  const pr=$('#pPrint'); if(pr) pr.onclick=()=>window.print();
+  if(s.result&&s.resultFor===r.id) renderPlan(r,s.result);
+  else if(!hasEndpoint&&!CONFIG.allowOwnKey) $('#pOut').innerHTML=`<p class="note">Tính năng soạn kế hoạch bằng AI chưa được bật trên trang này. Xem tab "Chuyến đi" để có gợi ý sẵn.</p>`;
+}
+function setOrigin(k){ originKey=k; document.querySelectorAll('#originSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k)); if(selected){const r=RACES.find(x=>x.id===selected); renderTab(r);} render(); }
+
+function buildPrompt(r){
+  const s=plannerState,o=ORIGINS[originKey],t=r.travel,d=r._d;
+  const raceDay = r.kind==='trail' ? `trong khoảng ${fmtLong(d.start)} → ${fmtLong(d.end)} (ngày cụ thể của cự ly ${s.distance} xem lịch chính thức; hãy giả định cự ly dài xuất phát sớm trong tuần giải)` : fmtLong(d.start);
+  return `Lên kế hoạch chuyến đi thi đấu cho một runner Việt Nam.
+Giải: ${r.name} — ${r.city}, ${r.country}. Loại: ${kindLabel(r)}. Năm ${year}. Ngày giải: ${raceDay}.
+Cự ly chọn: ${s.distance}. Khởi hành từ: ${o.name} (${o.airport}). Số đêm ở nước ngoài: ${s.nights}. Số người: ${s.people}. Phong cách: ${s.style==='budget'?'tiết kiệm':s.style==='premium'?'cao cấp':'thoải mái'}. Sở thích: ${[...s.interests].join(', ')||'không nêu'}.
+Ghi chú của runner: ${s.note||'không'}.
+Thông tin nền đã có (dùng, không lặp lại nguyên văn): bay: ${t.flight[originKey]}; visa: ${t.visa}; lưu trú gợi ý: ${t.stay}; điểm tham quan: ${t.see.join('; ')}; món ăn: ${t.eat.join('; ')}; gợi ý kỷ niệm: ${t.memory}; ngân sách tham khảo cho 1 người/${t.budget.nights} đêm: ${t.budget.lowUSD}–${t.budget.highUSD} USD.
+Yêu cầu: lịch trình theo từng ngày với ngày tháng thật (ngày 1 = ngày bay đi), ngày race được đánh dấu bằng label chứa chữ "RACE". Số ngày trong "days" = số đêm + 1 (ngày bay về tính là ngày cuối). Ngân sách tính tổng cho ${s.people} người.`;
+}
+async function generate(r){
+  const s=plannerState; if(s.busy) return;
+  const key=$('#pKey')?.value.trim(); if(key) store('majors_api_key',key);
+  if(!CONFIG.plannerEndpoint&&!key){ $('#pStatus').textContent='Cần API key hoặc cấu hình plannerEndpoint.'; return; }
+  s.busy=true; s.result=null; s.resultFor=null; renderPlanner(r);
+  const out=$('#pOut'); out.innerHTML=`<p class="note" id="pLive">Đang kết nối…</p>`;
+  let text='';
+  try{
+    const prompt=buildPrompt(r);
+    let res;
+    if(CONFIG.plannerEndpoint){
+      res=await fetch(CONFIG.plannerEndpoint.replace(/\/$/,''),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt})});
+    } else {
+      res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body:JSON.stringify({model:CONFIG.model,max_tokens:4000,stream:true,system:SYSTEM_PROMPT_CLIENT,messages:[{role:'user',content:prompt}]})});
+    }
+    if(!res.ok){ let m=''; try{m=(await res.json()).error?.message||(await res.text());}catch(e){} throw new Error(`${res.status} ${m||''}`.trim()); }
+    const reader=res.body.getReader(), dec=new TextDecoder(); let buf='';
+    while(true){
+      const {value,done}=await reader.read(); if(done) break;
+      buf+=dec.decode(value,{stream:true}); const lines=buf.split('\n'); buf=lines.pop();
+      for(const ln of lines){ if(!ln.startsWith('data:')) continue; const js=ln.slice(5).trim(); if(!js||js==='[DONE]') continue;
+        try{ const ev=JSON.parse(js); if(ev.type==='content_block_delta'&&ev.delta?.text){ text+=ev.delta.text; const el=$('#pLive'); if(el) el.textContent=`Đang soạn… ${text.length} ký tự`; } if(ev.type==='error') throw new Error(ev.error?.message||'stream error'); }catch(e){ if(e.message&&!/JSON/.test(e.message)) throw e; }
+      }
+    }
+    const clean=text.replace(/^```(?:json)?/m,'').replace(/```\s*$/m,'').trim();
+    const start=clean.indexOf('{'), end=clean.lastIndexOf('}');
+    const plan=JSON.parse(clean.slice(start,end+1));
+    s.result=plan; s.resultFor=r.id;
+  }catch(e){
+    s.busy=false; renderPlanner(r);
+    $('#pOut').innerHTML=`<div class="err"><b>Không soạn được kế hoạch.</b><br>${(e.message||e).toString().slice(0,300)}<br><span class="note">Nếu lỗi 401/403: kiểm tra API key hoặc ALLOWED_ORIGINS của Worker. Nếu lỗi mạng khi dùng key riêng: trình duyệt chặn CORS — hãy dùng Worker.</span></div>`;
+    return;
+  }
+  s.busy=false; renderPlanner(r); toast('Kế hoạch đã sẵn sàng');
+}
+const SYSTEM_PROMPT_CLIENT=`Bạn là huấn luyện viên chạy bộ kiêm người lên kế hoạch du lịch cho runner Việt Nam đi thi đấu các giải Major. Viết tiếng Việt tự nhiên, ngắn gọn, cụ thể. Ưu tiên: tới đích đủ sớm để hồi phục sau bay dài; hậu cần race (expo/bib, gear check, bữa tối trước race, giờ dậy, di chuyển tới vạch xuất phát); hồi phục sau race; rồi mới tới tham quan. Tránh đồ lạ/sống trong 48h trước race. Không bịa giá vé cụ thể, chỉ ước tính và nói rõ. Chỉ trả về JSON hợp lệ theo schema: {"title":string,"summary":string,"flights":{"out":string,"back":string,"tip":string},"stay":{"area":string,"why":string,"alternatives":string},"days":[{"day":number,"date":string,"label":string,"blocks":[{"time":string,"what":string,"note":string}]}],"eat":[{"name":string,"when":string,"why":string}],"memory":[string],"packing":[string],"budget":{"currency":"USD","low":number,"high":number,"note":string},"warnings":[string]} — không markdown, không lời dẫn.`;
+
+function esc(s){ return String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function renderPlan(r,p){
+  const out=$('#pOut');
+  out.innerHTML=`<div class="plan">
+    <h3 style="font-size:17px;margin:4px 0 6px">${esc(p.title)}</h3><p style="margin:0 0 14px;font-size:14px">${esc(p.summary)}</p>
+    <div class="kv" style="margin-bottom:14px"><div><div class="k">Bay đi</div><div class="v" style="font-weight:500;font-size:13.5px">${esc(p.flights?.out)}</div></div><div><div class="k">Bay về</div><div class="v" style="font-weight:500;font-size:13.5px">${esc(p.flights?.back)}</div></div><div><div class="k">Mẹo vé</div><div class="v" style="font-weight:500;font-size:13.5px">${esc(p.flights?.tip)}</div></div></div>
+    <div class="card" style="margin-bottom:14px"><div class="lbl">Lưu trú · ${esc(p.stay?.area)}</div><p>${esc(p.stay?.why)}</p><p class="note" style="margin-top:6px">Phương án khác: ${esc(p.stay?.alternatives)}</p></div>
+    <h3>Lịch trình</h3>
+    ${(p.days||[]).map(d=>`<div class="day${/race/i.test(d.label)?' race':''}"><h4>Ngày ${d.day}<small>${esc(d.date)} · ${esc(d.label)}</small></h4>${(d.blocks||[]).map(b=>`<div class="blk"><span class="t num">${esc(b.time)}</span><span>${esc(b.what)}${b.note?`<div class="n">${esc(b.note)}</div>`:''}</span></div>`).join('')}</div>`).join('')}
+    <h3 style="margin-top:14px">Ăn gì, khi nào</h3><ul class="facts eat">${(p.eat||[]).map(e=>`<li><b>${esc(e.name)}</b> — ${esc(e.when)}. <span class="note">${esc(e.why)}</span></li>`).join('')}</ul>
+    <div class="coach" style="margin-top:14px"><b>3 việc làm chuyến đi đáng nhớ</b>${(p.memory||[]).map(m=>`<div>• ${esc(m)}</div>`).join('')}</div>
+    <h3 style="margin-top:14px">Đồ cần mang riêng cho giải này</h3><ul class="facts">${(p.packing||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+    <div class="kv" style="margin-top:14px"><div><div class="k">Ngân sách ước tính</div><div class="v num">${Number(p.budget?.low||0).toLocaleString('vi-VN')} – ${Number(p.budget?.high||0).toLocaleString('vi-VN')} ${esc(p.budget?.currency||'USD')}</div></div><div><div class="k">Ghi chú</div><div class="v" style="font-weight:500;font-size:13px">${esc(p.budget?.note)}</div></div></div>
+    ${(p.warnings||[]).length?`<div class="err" style="margin-top:14px;background:#FFF6E8;border-color:#F0D9B5;color:#6B4A12"><b>Lưu ý</b><br>${p.warnings.map(w=>'• '+esc(w)).join('<br>')}</div>`:''}
+    <p class="note" style="margin-top:12px">Kế hoạch do AI soạn từ dữ liệu trang này và yêu cầu của bạn — hãy kiểm tra lại giờ bay, visa và lịch giải trên trang chính thức.</p>
+  </div>`;
+}
+function planText(r,p){
+  const L=[`${p.title}`,``,p.summary,``,`BAY: đi — ${p.flights?.out}; về — ${p.flights?.back}. ${p.flights?.tip}`,`Ở: ${p.stay?.area} — ${p.stay?.why}`,``];
+  (p.days||[]).forEach(d=>{L.push(`Ngày ${d.day} (${d.date}) — ${d.label}`);(d.blocks||[]).forEach(b=>L.push(`  ${b.time}: ${b.what}${b.note?' ('+b.note+')':''}`));L.push('');});
+  L.push('ĂN:');(p.eat||[]).forEach(e=>L.push(`  - ${e.name} — ${e.when}. ${e.why}`));L.push('','ĐÁNG NHỚ:');(p.memory||[]).forEach(m=>L.push('  - '+m));L.push('','MANG THEO:');(p.packing||[]).forEach(m=>L.push('  - '+m));
+  L.push('',`NGÂN SÁCH: ${p.budget?.low}–${p.budget?.high} ${p.budget?.currency}. ${p.budget?.note}`);(p.warnings||[]).length&&L.push('','LƯU Ý:',...p.warnings.map(w=>'  - '+w));
+  L.push('',CONFIG.credit); return L.join('\n');
+}
+
+/* ---------- boot ---------- */
+Promise.all([fetch(CONFIG.dataUrl).then(r=>r.json()),fetch(CONFIG.worldUrl).then(r=>r.json())]).then(([data,world])=>{
+  DATA=data; RACES=data.races; ORIGINS=data.origins; WORLD=world;
+  const land=topojson.feature(world,world.objects.countries);
+  countries=gLand.selectAll('path').data(land.features).join('path').attr('class',d=>d.id==='704'?'land vn':'land');
+  marks=gMarks.selectAll('g').data(RACES).join('g').attr('class',d=>`marker ${d.kind}${d.final?' final':''}`).attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.short}, ${d.country}`)
+    .on('click',(e,d)=>select(d.id,true)).on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(d.id,true);}});
+  marks.append('circle').attr('class','hit').attr('r',16);
+  marks.append('circle').attr('class','pulse').attr('r',13);
+  marks.each(function(d){const g=d3.select(this); if(d.final) g.append('circle').attr('class','ring').attr('r',12); if(d.kind==='trail') g.append('path').attr('class','shape').attr('d','M0,-8.5 L7.5,5.5 L-7.5,5.5 Z'); else g.append('circle').attr('class','shape').attr('r',6);});
+  marks.append('text').attr('x',11).attr('y',4).text(d=>d.short);
+  const seg=$('#originSeg'); seg.innerHTML=Object.keys(ORIGINS).map(k=>`<button data-k="${k}" aria-pressed="${k===originKey}">${ORIGINS[k].short}</button>`).join('');
+  seg.querySelectorAll('button').forEach(b=>b.onclick=()=>setOrigin(b.dataset.k));
+  const o=ORIGINS[originKey]; projection.rotate([-o.lon+15,-12,0]);
+  computeDates(); buildList(); resize();
+  window.addEventListener('resize',resize);
+  const want=qs.get('race'); if(want&&RACES.some(r=>r.id===want)) setTimeout(()=>select(want,true),300);
+}).catch(e=>{ $('#list').innerHTML=`<div class="err" style="margin:10px">Không tải được dữ liệu (${esc(e.message)}). Kiểm tra majors.json và countries-110m.json nằm cùng thư mục với index.html.</div>`; });
+</script>
+</body>
+</html>
