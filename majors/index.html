@@ -31,6 +31,7 @@ a{color:var(--dawn-deep)}
 .atmo{fill:none;stroke:url(#atmo);stroke-width:18;opacity:.9}
 .graticule{fill:none;stroke:#fff;stroke-opacity:.05;stroke-width:.6}
 .land{fill:var(--land);stroke:var(--land-line);stroke-width:.5}
+.land.hl-trail{fill:#5f8f63}.land.hl-road{fill:#b98a3c}.land.hl-both{fill:#86905a}.land.hl-cand{fill:#6d7f8c}.land.sel{stroke:#fff;stroke-width:1.2;stroke-opacity:.9}
 .land.vn{fill:var(--home);fill-opacity:.6}
 .arc{fill:none;stroke:var(--dawn);stroke-width:1.8;stroke-dasharray:4 5;opacity:.9}
 .arc.trail{stroke:var(--moss-light)}
@@ -191,7 +192,7 @@ textarea{min-height:64px;resize:vertical}
   <aside class="side">
     <div class="side-head">
       <h1>Bản đồ Majors <span class="yr"><button id="yprev" aria-label="Năm trước">‹</button><span id="year" class="num"></span><button id="ynext" aria-label="Năm sau">›</button></span></h1>
-      <p class="sub">Các giải UTMB World Series Majors và Abbott World Marathon Majors trên một quả địa cầu. Bấm vào một giải để xem thông số và lên kế hoạch chuyến đi.</p>
+      <p class="sub">Khám phá các giải UTMB World Series Majors và Abbott World Marathon Majors trên bản đồ thế giới. Chọn giải để xem thông tin và lên kế hoạch chinh phục.</p>
     </div>
     <div class="controls" role="group" aria-label="Lọc">
       <button class="chip" data-f="trail" aria-pressed="true"><span class="dot dot-trail"></span>Trail</button>
@@ -345,11 +346,18 @@ function buildList(){
   $('#year').textContent=year; $('#yprev').disabled=year<=YMIN; $('#ynext').disabled=year>=YMAX;
   $('#foot').innerHTML=`<a href="https://anhducafc.com" target="_blank" rel="noopener">anhducafc©</a>`;
 }
+const ISO={'Anh':826,'Mỹ':840,'Nam Phi':710,'Nhật Bản':392,'Pháp':250,'Thái Lan':764,'Trung Quốc':156,'Tây Ban Nha':724,'Úc':36,'Đức':276};
+function paintCountries(){
+  if(!countries||!DATA) return;
+  const m={}; DATA.races.forEach(r=>{ if(!filters[r.kind]) return; const id=ISO[r.country]; if(!id) return; (m[id]=m[id]||new Set()).add(r.kind); });
+  const sel=selected?DATA.races.find(r=>r.id===selected):null, selId=sel?ISO[sel.country]:null;
+  countries.attr('class',d=>{ const id=+d.id, k=m[id]; let c='land'; if(id===704) c+=' vn'; if(k){ c+= k.size>1?' hl-both':' hl-'+[...k][0]; } if(selId&&id===selId) c+=' sel'; return c; });
+}
 function applyFilters(){
   document.querySelectorAll('.item').forEach(el=>el.classList.toggle('hidden',!filters[el.dataset.kind]));
   document.querySelectorAll('.month').forEach(h=>{let n=h.nextElementSibling,any=false;while(n&&!n.classList.contains('month')){if(!n.classList.contains('hidden'))any=true;n=n.nextElementSibling;}h.style.display=any?null:'none';});
   document.querySelectorAll('.strip .pin').forEach(p=>p.style.display=filters[RACES.find(r=>r.id===p.dataset.id).kind]?null:'none');
-  render();
+  paintCountries(); render();
 }
 document.querySelectorAll('.chip[data-f]').forEach(c=>c.onclick=()=>{const f=c.dataset.f;filters[f]=!filters[f];c.setAttribute('aria-pressed',filters[f]);applyFilters();});
 $('#yprev').onclick=()=>setYear(year-1); $('#ynext').onclick=()=>setYear(year+1);
@@ -358,7 +366,7 @@ function setYear(y){ if(y<YMIN||y>YMAX) return; year=y; computeDates(); buildLis
 /* ---------- panel ---------- */
 const panel=$('#panel');
 function select(id,fly){
-  selected=id; autoSpin=false;
+  selected=id; autoSpin=false; paintCountries();
   const r=RACES.find(x=>x.id===id);
   document.querySelectorAll('.item').forEach(el=>el.setAttribute('aria-current',el.dataset.id===id));
   document.querySelectorAll('.strip .pin').forEach(p=>p.classList.toggle('sel',p.dataset.id===id));
@@ -383,7 +391,7 @@ function select(id,fly){
   if(W<=900) window.scrollTo({top:0,behavior:'smooth'});
   if(fly){ if(W>900&&zoomK<1.5){zoomK=1.5;projection.scale(baseScale*zoomK);} flyTo(r.lon,r.lat);} else render();
 }
-function closePanel(){ panel.classList.remove('open'); selected=null; document.querySelectorAll('.item').forEach(el=>el.setAttribute('aria-current',false)); document.querySelectorAll('.strip .pin').forEach(p=>p.classList.remove('sel')); try{history.replaceState(null,'',location.pathname);}catch(e){} render(); }
+function closePanel(){ panel.classList.remove('open'); selected=null; paintCountries(); document.querySelectorAll('.item').forEach(el=>el.setAttribute('aria-current',false)); document.querySelectorAll('.strip .pin').forEach(p=>p.classList.remove('sel')); try{history.replaceState(null,'',location.pathname);}catch(e){} render(); }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&selected)closePanel();});
 
 function kmFrom(r){ const o=ORIGINS[originKey]; return Math.round(d3.geoDistance([o.lon,o.lat],[r.lon,r.lat])*6371); }
@@ -557,7 +565,7 @@ function planText(r,p){
 Promise.all([fetch(CONFIG.dataUrl).then(r=>r.json()),fetch(CONFIG.worldUrl).then(r=>r.json())]).then(([data,world])=>{
   DATA=data; RACES=data.races; ORIGINS=data.origins; WORLD=world;
   const land=topojson.feature(world,world.objects.countries);
-  countries=gLand.selectAll('path').data(land.features).join('path').attr('class',d=>d.id==='704'?'land vn':'land');
+  countries=gLand.selectAll('path').data(land.features).join('path').attr('class',d=>d.id==='704'?'land vn':'land'); paintCountries();
   marks=gMarks.selectAll('g').data(RACES).join('g').attr('class',d=>`marker ${d.kind}${d.final?' final':''}`).attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.short}, ${d.country}`)
     .on('click',(e,d)=>select(d.id,true)).on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(d.id,true);}});
   marks.append('circle').attr('class','hit').attr('r',16);
