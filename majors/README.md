@@ -12,32 +12,30 @@ majors/
 └── embed-snippet.html    đoạn nhúng vào bài viết
 ```
 
-## 1. Đưa lên anhducafc.com (GitHub Pages)
+## 1. Cách trang được phục vụ (đã cài xong 15/11/2026)
 
-1. Copy nguyên thư mục `majors/` vào repo của site (vd. `anhducafc.com/majors/`).
-2. Push. Trang chạy ở `https://anhducafc.com/majors/`.
-3. Trong bài viết (tag **Khám Phá**, **Cuộc Sống**) dán nội dung `embed-snippet.html`. Iframe cao 820px trên desktop, 100vh trên mobile.
+- Repo GitHub `anhducafc/home` → Cloudflare Pages `home-a9u.pages.dev` (tự deploy khi push).
+- Domain `anhducafc.com` do Worker `anhducafc-home` phục vụ, nên có thêm Worker **`majors`** (code = `worker.js`) với route `anhducafc.com/majors*` và `www.anhducafc.com/majors*`: nó lấy file từ `home-a9u.pages.dev/majors/*` và trả lời AI tại `/majors/api/plan`.
+- Vì vậy: **sửa gì trong thư mục `majors/` chỉ cần push lên GitHub**, không đụng Worker. Cache 5 phút cho .html/.json.
+- Trong bài viết (tag **Khám Phá**, **Cuộc Sống**) dán nội dung `embed-snippet.html`.
 
 Deep link hữu ích để dẫn thẳng vào một giải trong bài: `/majors/?race=berlin`, `/majors/?race=cm&origin=HAN`, `/majors/?year=2027`.
 ID các giải: `uta vda utmb kodiak cm tokyo boston london capetown sydney berlin chicago nyc shanghai`.
 
-## 2. Bật tính năng "Lên kế hoạch" bằng AI
+## 2. Tính năng "Lên kế hoạch" bằng AI
 
-Trang tĩnh không giấu được API key, nên dùng một Cloudflare Worker (miễn phí 100.000 request/ngày) làm cầu nối:
+Worker `majors` đã có sẵn; chỉ cần biến môi trường:
 
-1. dash.cloudflare.com → Workers & Pages → Create → Worker → dán `worker.js` → Deploy.
-2. Settings → Variables and Secrets:
+1. dash.cloudflare.com → Workers & Pages → `majors` → Settings.
+2. Variables and Secrets:
    - `ANTHROPIC_API_KEY` (Secret) — key từ console.anthropic.com (tổ chức Soulfvn của bạn dùng được).
    - `ALLOWED_ORIGINS` = `https://anhducafc.com,https://www.anhducafc.com` — chỉ site của bạn gọi được.
    - `MODEL` (tuỳ chọn) — mặc định `claude-sonnet-5-5`.
    - Giới hạn lượt/ngày (tuỳ chọn): tạo KV namespace, bind tên `RATE`, đặt `DAILY_LIMIT` = `200`.
-3. Copy URL worker (dạng `https://majors-planner.<tài-khoản>.workers.dev`) dán vào `index.html`:
-   ```js
-   plannerEndpoint: 'https://majors-planner.xxx.workers.dev',
-   ```
+3. `index.html` đã trỏ `plannerEndpoint` về `/majors/api/plan` khi chạy trên anhducafc.com — không cần sửa.
 4. Chi phí: mỗi kế hoạch ~3–4k token đầu ra, vài cent. Với `DAILY_LIMIT` 200 thì tối đa vài USD/ngày kể cả khi bị spam.
 
-Chưa có Worker? Để `plannerEndpoint: ''` và `allowOwnKey: true` — người xem có thể dán API key riêng (lưu trong trình duyệt của họ, gọi thẳng Anthropic). Đặt `allowOwnKey: false` nếu muốn ẩn hẳn ô key.
+Muốn cho người xem dùng key riêng của họ (không qua Worker): đặt `allowOwnKey: true`.
 
 ## 3. Cập nhật hằng năm (5 phút, chỉ sửa `majors.json`)
 
