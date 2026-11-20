@@ -31,14 +31,15 @@ a{color:var(--dawn-deep)}
 .atmo{fill:none;stroke:url(#atmo);stroke-width:18;opacity:.9}
 .graticule{fill:none;stroke:#fff;stroke-opacity:.05;stroke-width:.6}
 .land{fill:var(--land);stroke:var(--land-line);stroke-width:.5}
-.land.hl-trail{fill:#5f8f63}.land.hl-road{fill:#b98a3c}.land.hl-both{fill:#86905a}.land.hl-cand{fill:#6d7f8c}.land.sel{stroke:#fff;stroke-width:1.2;stroke-opacity:.9}
+.land.hl-trail{fill:#5f8f63}.land.hl-road{fill:#b98a3c}.land.hl-both{fill:#86905a}.land.hl-wtm{fill:#7f6cb8}.land.hl-cand{fill:#6d7f8c}.land.sel{stroke:#fff;stroke-width:1.2;stroke-opacity:.9}
 .land.vn{fill:var(--home);fill-opacity:.6}
 .arc{fill:none;stroke:var(--dawn);stroke-width:1.8;stroke-dasharray:4 5;opacity:.9}
-.arc.trail{stroke:var(--moss-light)}
+.arc.trail{stroke:var(--moss-light)}.arc.wtm{stroke:#9b87d6}
 .marker{cursor:pointer}
 .marker .hit{fill:transparent}
 .marker.trail .shape{fill:var(--moss-light);stroke:var(--night);stroke-width:1.5}
 .marker.road .shape{fill:var(--dawn);stroke:var(--night);stroke-width:1.5}
+.marker.wtm .shape{fill:#9b87d6;stroke:var(--night);stroke-width:1.5}
 .marker.cand .shape{fill:var(--night-2);stroke:var(--dawn);stroke-width:2.2}
 .marker.final .ring{fill:none;stroke:var(--moss-light);stroke-width:1.3;opacity:.9}
 .marker.past .shape{opacity:.45}
@@ -64,6 +65,7 @@ h1{font:800 30px/1 Archivo,Inter,sans-serif;letter-spacing:-.02em;margin:0;displ
 .dot{width:11px;height:11px;display:inline-block;flex:none}
 .dot-trail{background:var(--moss);clip-path:polygon(50% 0,100% 100%,0 100%)}
 .dot-road{background:var(--dawn);border-radius:50%}
+.dot-wtm{background:#9b87d6;transform:rotate(45deg) scale(.8)}
 .dot-cand{border:2px solid var(--dawn);border-radius:50%}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;margin-left:auto}
 .seg button{border:0;background:transparent;padding:5px 10px;cursor:pointer;font-size:12.5px;color:var(--ink-soft)}
@@ -91,6 +93,7 @@ h1{font:800 30px/1 Archivo,Inter,sans-serif;letter-spacing:-.02em;margin:0;displ
 .strip .pin{position:absolute;bottom:9px;width:10px;height:10px;cursor:pointer;transform:translateX(-50%)}
 .strip .pin.trail{background:var(--moss-light);clip-path:polygon(50% 0,100% 100%,0 100%)}
 .strip .pin.road{background:var(--dawn);border-radius:50%}
+.strip .pin.wtm{background:#9b87d6;transform:rotate(45deg);border-radius:1px}
 .strip .pin.cand{border:2px solid var(--dawn);border-radius:50%;width:9px;height:9px}
 .strip .pin.past{opacity:.35}
 .strip .pin.sel{outline:2px solid #fff;outline-offset:2px;border-radius:50%}
@@ -197,6 +200,7 @@ textarea{min-height:64px;resize:vertical}
     <div class="controls" role="group" aria-label="Lọc">
       <button class="chip" data-f="trail" aria-pressed="true"><span class="dot dot-trail"></span>Trail</button>
       <button class="chip" data-f="road" aria-pressed="true"><span class="dot dot-road"></span>Road</button>
+      <button class="chip" data-f="wtm" aria-pressed="true"><span class="dot dot-wtm"></span>World Trail Majors</button>
       <button class="chip" data-f="cand" aria-pressed="true"><span class="dot dot-cand"></span>Ứng viên</button>
       <div class="seg" role="group" aria-label="Điểm khởi hành" id="originSeg"></div>
     </div>
@@ -256,14 +260,15 @@ function status(d){
   if (d.start <= TODAY) return {past:false, text:'Đang diễn ra', live:true};
   const days=Math.round((d.start-TODAY)/864e5); return {past:false, text:`Còn ${days} ngày`, days};
 }
-const kindLabel = r => r.kind==='trail' ? (r.final?'UTMB World Series Finals':'UTMB World Series Major') : r.kind==='cand' ? 'Ứng viên Road Major' : 'Abbott World Marathon Major';
-const dotClass = r => r.kind==='trail'?'dot-trail':r.kind==='cand'?'dot-cand':'dot-road';
+const kindLabel = r => r.kind==='trail' ? (r.final?'UTMB World Series Finals':'UTMB World Series Major') : r.kind==='wtm' ? 'World Trail Majors' : r.kind==='cand' ? 'Ứng viên Road Major' : 'Abbott World Marathon Major';
+const dotClass = r => r.kind==='trail'?'dot-trail':r.kind==='wtm'?'dot-wtm':r.kind==='cand'?'dot-cand':'dot-road';
 function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2200); }
 function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){ return null; } }
 
 /* ---------- state ---------- */
 let DATA, WORLD, RACES=[], ORIGINS={}, originKey='SGN', year=TODAY.getFullYear(), YMIN=year-3, YMAX=year+1;
-const filters={trail:true,road:true,cand:true};
+const filters={trail:true,road:true,cand:true,wtm:true};
+const isTrailish=k=>k==='trail'||k==='wtm';
 let selected=null, tab='race', zoomK=1, baseScale=1, W=0, H=0, autoSpin=!matchMedia('(prefers-reduced-motion: reduce)').matches;
 const qs = new URLSearchParams(location.search);
 if (qs.get('origin') && /^(SGN|HAN)$/.test(qs.get('origin'))) originKey=qs.get('origin');
@@ -299,13 +304,13 @@ function render(){
   const o=ORIGINS[originKey]; const op=projection([o.lon,o.lat]);
   gOrigin.attr('transform',`translate(${op})`).style('display',visible(o.lon,o.lat)?null:'none').select('text').text(o.short);
   marks.each(function(d){
-    const p=projection([d.lon,d.lat]); const on=filters[d.kind]&&visible(d.lon,d.lat);
+    const p=projection([d.lon,d.lat]); const on=filters[d.kind]&&!d._hide&&visible(d.lon,d.lat);
     d3.select(this).attr('transform',`translate(${p})`).style('display',on?null:'none').classed('sel',selected===d.id).classed('past',d._st.past);
   });
   marks.select('text').style('display',d=>(zoomK>=1.7||selected===d.id)?null:'none');
   if(selected){
     const r=RACES.find(x=>x.id===selected); const ip=d3.geoInterpolate([o.lon,o.lat],[r.lon,r.lat]);
-    gArc.datum({type:'LineString',coordinates:d3.range(0,1.0001,.02).map(ip)}).attr('d',path).attr('class','arc'+(r.kind==='trail'?' trail':''));
+    gArc.datum({type:'LineString',coordinates:d3.range(0,1.0001,.02).map(ip)}).attr('d',path).attr('class','arc'+(r.kind==='trail'?' trail':r.kind==='wtm'?' wtm':''));
   } else gArc.attr('d',null);
 }
 let r0,p0;
@@ -324,11 +329,11 @@ function flyTo(lon,lat){
 d3.timer(()=>{ if(autoSpin&&countries){const r=projection.rotate();projection.rotate([r[0]+0.1,r[1],0]);render();} });
 
 /* ---------- list + strip ---------- */
-function computeDates(){ RACES.forEach(r=>{ r._d=raceDates(r,year); r._st=status(r._d); if(r.cancelled&&r.cancelled.includes(year)) r._st={past:true,text:'Bị hủy',cancelled:true}; }); }
+function computeDates(){ RACES.forEach(r=>{ r._hide=!!(r.years&&!r.years.includes(year)); r._d=raceDates(r,year); r._st=status(r._d); if(r.cancelled&&r.cancelled.includes(year)) r._st={past:true,text:'Bị hủy',cancelled:true}; }); }
 function dateText(r){ const d=r._d; return d.start.getTime()===d.end.getTime()?fmtShort(d.start):`${fmtShort(d.start)}–${fmtShort(d.end)}`; }
 function buildList(){
   const el=$('#list'); el.innerHTML=''; let m=null;
-  [...RACES].sort((a,b)=>a._d.start-b._d.start).forEach(r=>{
+  [...RACES].filter(r=>!r._hide).sort((a,b)=>a._d.start-b._d.start).forEach(r=>{
     const mm=r._d.start.getMonth()+1;
     if(mm!==m){m=mm;const h=document.createElement('div');h.className='month';h.textContent='Tháng '+mm;el.appendChild(h);}
     const b=document.createElement('button'); b.className='item'+(r._st.past?' past':''); b.dataset.id=r.id; b.dataset.kind=r.kind;
@@ -338,7 +343,7 @@ function buildList(){
   applyFilters();
   const s=$('#strip'); s.innerHTML='';
   for(let i=1;i<=12;i++){ const d=document.createElement('div'); d.className='m'+(year===TODAY.getFullYear()&&i===TODAY.getMonth()+1?' now':''); d.textContent='T'+i; d.dataset.m=i; s.appendChild(d); }
-  RACES.forEach(r=>{
+  RACES.filter(r=>!r._hide).forEach(r=>{
     const mcell=s.children[r._d.start.getMonth()]; const dim=new Date(year,r._d.start.getMonth()+1,0).getDate();
     const p=document.createElement('button'); p.className=`pin ${r.kind}${r._st.past?' past':''}`; p.style.left=(r._d.start.getDate()/dim*100)+'%'; p.title=`${r.short} · ${dateText(r)}`; p.setAttribute('aria-label',p.title); p.dataset.id=r.id;
     p.onclick=()=>select(r.id,true); mcell.appendChild(p);
@@ -346,10 +351,10 @@ function buildList(){
   $('#year').textContent=year; $('#yprev').disabled=year<=YMIN; $('#ynext').disabled=year>=YMAX;
   $('#foot').innerHTML=`<a href="https://anhducafc.com" target="_blank" rel="noopener">anhducafc©</a>`;
 }
-const ISO={'Anh':826,'Mỹ':840,'Nam Phi':710,'Nhật Bản':392,'Pháp':250,'Thái Lan':764,'Trung Quốc':156,'Tây Ban Nha':724,'Úc':36,'Đức':276};
+const ISO={'Anh':826,'Mỹ':840,'Nam Phi':710,'Nhật Bản':392,'Pháp':250,'Thái Lan':764,'Trung Quốc':156,'Tây Ban Nha':724,'Hồng Kông':0,'Việt Nam':704,'Thụy Sĩ':756,'Canada':124,'Bồ Đào Nha':620,'Úc':36,'Đức':276};
 function paintCountries(){
   if(!countries||!DATA) return;
-  const m={}; DATA.races.forEach(r=>{ if(!filters[r.kind]) return; const id=ISO[r.country]; if(!id) return; (m[id]=m[id]||new Set()).add(r.kind); });
+  const m={}; DATA.races.forEach(r=>{ if(!filters[r.kind]||r._hide) return; const id=ISO[r.country]; if(!id) return; (m[id]=m[id]||new Set()).add(r.kind); });
   const sel=selected?DATA.races.find(r=>r.id===selected):null, selId=sel?ISO[sel.country]:null;
   countries.attr('class',d=>{ const id=+d.id, k=m[id]; let c='land'; if(id===704) c+=' vn'; if(k){ c+= k.size>1?' hl-both':' hl-'+[...k][0]; } if(selId&&id===selId) c+=' sel'; return c; });
 }
@@ -361,7 +366,7 @@ function applyFilters(){
 }
 document.querySelectorAll('.chip[data-f]').forEach(c=>c.onclick=()=>{const f=c.dataset.f;filters[f]=!filters[f];c.setAttribute('aria-pressed',filters[f]);applyFilters();});
 $('#yprev').onclick=()=>setYear(year-1); $('#ynext').onclick=()=>setYear(year+1);
-function setYear(y){ if(y<YMIN||y>YMAX) return; year=y; computeDates(); buildList(); if(selected) select(selected,false); render(); }
+function setYear(y){ if(y<YMIN||y>YMAX) return; year=y; computeDates(); const sr=selected&&RACES.find(r=>r.id===selected); if(sr&&sr._hide){ buildList(); closePanel(); return; } buildList(); if(selected) select(selected,false); render(); }
 
 /* ---------- panel ---------- */
 const panel=$('#panel');
@@ -414,7 +419,7 @@ function renderTab(r){
   const b=$('#pbody'); const st=r._st, d=r._d;
   if(tab==='race'){
     const dist=r.distances?`<div><h3>Các cự ly <small>· Distances</small></h3><table><thead><tr><th>Cự ly</th><th class="r">Quãng đường</th><th class="r">D+</th></tr></thead><tbody>${r.distances.map(x=>`<tr><td><b>${x[0]}</b></td><td class="r num">${x[1]}</td><td class="r num">${x[2]}</td></tr>`).join('')}</tbody></table></div>`:'';
-    const perks=r.kind==='trail'&&!r.final?`<p class="note">Major: người về đích nhận gấp đôi Running Stones; Top 10 nam/nữ ở 100M/100K/50K và người thắng nhóm tuổi có suất thẳng vào UTMB Mont-Blanc.</p>`:'';
+    const perks=r.kind==='trail'&&!r.final?`<p class="note">Major: Running Stones nhân đôi; top 10 nam/nữ ở 50K/100K/100M có suất thẳng vào một giải Finals (OCC, CCC hoặc UTMB).</p>`:r.kind==='wtm'?`<p class="note">World Trail Majors: hệ giải độc lập do chính các giám đốc giải điều hành, khác UTMB World Series.</p>`:'';
     const entry=r.entry?`<div><h3>Cách giành suất <small>· Entry</small></h3><p style="margin:0;font-size:14px">${r.entry}</p></div>`:'';
     b.innerHTML=`
       <div class="kv">
@@ -488,7 +493,7 @@ function setOrigin(k){ originKey=k; document.querySelectorAll('#originSeg button
 
 function buildPrompt(r){
   const s=plannerState,o=ORIGINS[originKey],t=r.travel,d=r._d;
-  const raceDay = r.kind==='trail' ? `trong khoảng ${fmtLong(d.start)} → ${fmtLong(d.end)} (ngày cụ thể của cự ly ${s.distance} xem lịch chính thức; hãy giả định cự ly dài xuất phát sớm trong tuần giải)` : fmtLong(d.start);
+  const raceDay = isTrailish(r.kind) ? `trong khoảng ${fmtLong(d.start)} → ${fmtLong(d.end)} (ngày cụ thể của cự ly ${s.distance} xem lịch chính thức; hãy giả định cự ly dài xuất phát sớm trong tuần giải)` : fmtLong(d.start);
   return `Lên kế hoạch chuyến đi thi đấu cho một runner Việt Nam.
 Giải: ${r.name} — ${r.city}, ${r.country}. Loại: ${kindLabel(r)}. Năm ${year}. Ngày giải: ${raceDay}.
 Cự ly chọn: ${s.distance}. Khởi hành từ: ${o.name} (${o.airport}). Số đêm ở nước ngoài: ${s.nights}. Số người: ${s.people}. Phong cách: ${s.style==='budget'?'tiết kiệm':s.style==='premium'?'cao cấp':'thoải mái'}. Sở thích: ${[...s.interests].join(', ')||'không nêu'}.
@@ -570,7 +575,7 @@ Promise.all([fetch(CONFIG.dataUrl).then(r=>r.json()),fetch(CONFIG.worldUrl).then
     .on('click',(e,d)=>select(d.id,true)).on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(d.id,true);}});
   marks.append('circle').attr('class','hit').attr('r',16);
   marks.append('circle').attr('class','pulse').attr('r',13);
-  marks.each(function(d){const g=d3.select(this); if(d.final) g.append('circle').attr('class','ring').attr('r',12); if(d.kind==='trail') g.append('path').attr('class','shape').attr('d','M0,-8.5 L7.5,5.5 L-7.5,5.5 Z'); else g.append('circle').attr('class','shape').attr('r',6);});
+  marks.each(function(d){const g=d3.select(this); if(d.final) g.append('circle').attr('class','ring').attr('r',12); if(d.kind==='trail') g.append('path').attr('class','shape').attr('d','M0,-8.5 L7.5,5.5 L-7.5,5.5 Z'); else if(d.kind==='wtm') g.append('path').attr('class','shape').attr('d','M0,-8 L7,0 L0,8 L-7,0 Z'); else g.append('circle').attr('class','shape').attr('r',6);});
   marks.append('text').attr('x',11).attr('y',4).text(d=>d.short);
   const seg=$('#originSeg'); seg.innerHTML=Object.keys(ORIGINS).map(k=>`<button data-k="${k}" aria-pressed="${k===originKey}">${ORIGINS[k].short}</button>`).join('');
   seg.querySelectorAll('button').forEach(b=>b.onclick=()=>setOrigin(b.dataset.k));

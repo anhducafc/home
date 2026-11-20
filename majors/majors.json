@@ -1,6 +1,6 @@
 {
  "_readme": "Dữ liệu bản đồ Majors. Mỗi năm chỉ cần sửa: dates (nếu lịch chính thức khác quy tắc), records/meta. Quy tắc ngày (rule) tự tính cho mọi năm: month 1..12, weekday 0=CN..6=T7, nth = tuần thứ mấy trong tháng (1..4, -1 = cuối), startOffset/endOffset = số ngày trước/sau ngày neo (bỏ trống = 1 ngày). Dữ liệu chỉ giữ 3 năm trước + 1 năm sau năm hiện tại (back/forward trong yearRange). Năm đã qua: ghi ngày thực tế vào dates; yearNotes = ghi chú theo năm; majorSince = năm bắt đầu là Major; article = 1 bài nổi bật hiện trong \"Đáng biết\".",
- "updated": "2026-11-15",
+ "updated": "2026-11-20",
  "origins": {
   "SGN": {
    "name": "TP. Hồ Chí Minh",
@@ -2354,6 +2354,1263 @@
       "url": "https://www.meet-in-shanghai.net/en/news/shanghai-marathon-sets-womens-record-confirms-2026-date-668872/"
      }
     }
+   }
+  },
+  {
+   "id": "hk100",
+   "kind": "wtm",
+   "name": "Hong Kong 100 Ultra Trail",
+   "short": "Hong Kong 100",
+   "city": "Hồng Kông",
+   "country": "Hồng Kông",
+   "lon": 114.27,
+   "lat": 22.38,
+   "role": "Hệ giải độc lập",
+   "site": "https://transgrancanaria.net/en/world-trail-majors/",
+   "rule": {
+    "month": 1,
+    "weekday": 0,
+    "nth": 4
+   },
+   "dates": {
+    "2026": [
+     "2026-01-22",
+     "2026-01-24"
+    ],
+    "2027": [
+     "2027-01-21",
+     "2027-01-24"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Giải mở màn mùa WTM"
+    ],
+    [
+     "Khí hậu",
+     "Đầu năm mát, khô"
+    ],
+    [
+     "Địa hình",
+     "Núi ven biển, bậc thang, đường mòn"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors"
+    ]
+   ],
+   "distances": [
+    [
+     "Hong Kong 100",
+     "~100 km",
+     "—"
+    ],
+    [
+     "Cự ly 53",
+     "53 km",
+     "—"
+    ],
+    [
+     "Cự ly 34",
+     "34 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Giải mở màn mùa World Trail Majors",
+    "Số liệu D+ và quãng đường chính xác cần xem trang chính thức của giải"
+   ],
+   "coach": [
+    "Đầu năm lạnh, nhiều đoạn bậc thang kéo dài — tập xuống dốc và bậc cao.",
+    "Cool, dry weather but relentless stairs and short punchy climbs."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → HKG bay thẳng ~3h (nhiều hãng); rất gần, chi phí vé thấp.",
+     "HAN": "HAN → HKG bay thẳng ~2h30."
+    },
+    "visa": "Kiểm tra điều kiện nhập cảnh Hồng Kông cho hộ chiếu Việt Nam (thường cần đăng ký trực tuyến trước).",
+    "stay": "Khu Kowloon/Mong Kok (tàu điện tiện, giá mềm) hoặc gần Sai Kung.",
+    "see": [
+     "Peak Tram & Victoria Peak",
+     "Lantau — Tượng Phật Đại Phật",
+     "Sai Kung — đi thuyền ra đảo"
+    ],
+    "eat": [
+     "Dim sum sáng",
+     "Mì wonton",
+     "Trà sữa kiểu Hồng Kông"
+    ],
+    "memory": "Ở thêm 2 ngày dạo phố sau giải, ăn dim sum thoải mái.",
+    "budget": {
+     "nights": 5,
+     "lowUSD": 700,
+     "highUSD": 1500
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "blackcanyon",
+   "kind": "wtm",
+   "name": "Black Canyon Ultras (HOKA)",
+   "short": "Black Canyon",
+   "city": "Mayer, Arizona",
+   "country": "Mỹ",
+   "lon": -112.24,
+   "lat": 34.4,
+   "role": "Hệ giải độc lập",
+   "site": "https://www.aravaiparunning.com/blackcanyon",
+   "rule": {
+    "month": 2,
+    "weekday": 6,
+    "nth": 2,
+    "endOffset": 1
+   },
+   "dates": {
+    "2026": [
+     "2026-02-14",
+     "2026-02-15"
+    ],
+    "2027": [
+     "2027-02-13",
+     "2027-02-14"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Lần thứ 13 vào năm 2026"
+    ],
+    [
+     "Địa hình",
+     "Sa mạc Sonoran, singletrack nhanh"
+    ],
+    [
+     "Cự ly",
+     "100K (100,3 km) và 50K"
+    ],
+    [
+     "Golden Ticket",
+     "Top 3 nam/nữ 100K vào Western States"
+    ]
+   ],
+   "distances": [
+    [
+     "Black Canyon 100K",
+     "100,3 km",
+     "—"
+    ],
+    [
+     "Black Canyon 50K",
+     "~52 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Course point-to-point trên Black Canyon National Recreation Trail",
+    "100K là giải Golden Ticket của Western States (top 3 nam và top 3 nữ)",
+    "Mỗi cự ly giới hạn khoảng 1.200 VĐV"
+   ],
+   "coach": [
+    "Course chạy nhanh, ít D+ — giải rất hợp để săn PR 100K.",
+    "Fast desert singletrack: ideal for a 100K PR attempt."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → PHX nối chuyến ~20h (qua LAX/SFO/Tokyo).",
+     "HAN": "HAN → PHX nối chuyến ~22h."
+    },
+    "visa": "Visa Mỹ B1/B2 — lịch phỏng vấn thường chờ lâu, xin thật sớm.",
+    "stay": "Phoenix (thuê xe, cách điểm xuất phát ~1h).",
+    "see": [
+     "Sedona (2h lái xe)",
+     "Grand Canyon (3h30)",
+     "Phoenix Desert Botanical Garden"
+    ],
+    "eat": [
+     "Tex-Mex & burrito",
+     "BBQ kiểu Mỹ",
+     "Breakfast diner"
+    ],
+    "memory": "Ghé Sedona và Grand Canyon sau giải để hồi phục nhẹ.",
+    "budget": {
+     "nights": 6,
+     "lowUSD": 2000,
+     "highUSD": 3600
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "tgc",
+   "kind": "wtm",
+   "name": "The North Face Transgrancanaria HG",
+   "short": "Transgrancanaria",
+   "city": "Las Palmas de Gran Canaria",
+   "country": "Tây Ban Nha",
+   "lon": -15.43,
+   "lat": 28.12,
+   "role": "Hệ giải độc lập",
+   "site": "https://www.transgrancanaria.net",
+   "rule": {
+    "month": 3,
+    "weekday": 3,
+    "nth": 1,
+    "endOffset": 4
+   },
+   "dates": {
+    "2026": [
+     "2026-03-04",
+     "2026-03-08"
+    ],
+    "2027": [
+     "2027-02-23",
+     "2027-02-27"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Một trong 5 giải gốc của Ultra-Trail World Tour cũ"
+    ],
+    [
+     "Địa hình",
+     "Núi lửa, dốc cắt ngang đảo"
+    ],
+    [
+     "Khí hậu",
+     "Đầu xuân, ấm, nắng gắt miền núi"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors"
+    ]
+   ],
+   "distances": [
+    [
+     "Transgrancanaria",
+     "126 km",
+     "—"
+    ],
+    [
+     "Cự ly 82",
+     "82 km",
+     "—"
+    ],
+    [
+     "Cự ly 47",
+     "47 km",
+     "—"
+    ],
+    [
+     "Cự ly 22,9",
+     "22,9 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Sự kiện nhiều ngày với nhiều cự ly từ 5 km đến 126 km",
+    "Ngày 2027: Finishers ghi 23–27/2, Ahotu ghi 24–27/2 — kiểm tra trang giải"
+   ],
+   "coach": [
+    "Chạy từ Bắc xuống Nam đảo: nhiều đoạn kỹ thuật xuống dốc đá núi lửa.",
+    "Technical volcanic descents and long exposed climbs under strong sun."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → LPA nối chuyến ~20h (qua Madrid hoặc Doha).",
+     "HAN": "HAN → LPA nối chuyến ~21h."
+    },
+    "visa": "Visa Schengen (Tây Ban Nha) — nộp trước 4–8 tuần.",
+    "stay": "Las Palmas (bãi Las Canteras) hoặc Maspalomas.",
+    "see": [
+     "Roque Nublo",
+     "Cồn cát Maspalomas",
+     "Phố cổ Vegueta"
+    ],
+    "eat": [
+     "Papas arrugadas",
+     "Hải sản nướng",
+     "Cà phê barraquito"
+    ],
+    "memory": "Ở lại 3 ngày sau giải, đi biển Las Canteras.",
+    "budget": {
+     "nights": 7,
+     "lowUSD": 1900,
+     "highUSD": 3300
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "fuji",
+   "kind": "wtm",
+   "name": "Mt. FUJI 100",
+   "short": "Mt. Fuji 100",
+   "city": "Fujiyoshida, Yamanashi",
+   "country": "Nhật Bản",
+   "lon": 138.8,
+   "lat": 35.49,
+   "role": "Hệ giải độc lập",
+   "site": "https://en.mtfuji100.com",
+   "rule": {
+    "month": 4,
+    "weekday": 5,
+    "nth": 4,
+    "endOffset": 2
+   },
+   "dates": {
+    "2026": [
+     "2026-04-24",
+     "2026-04-26"
+    ],
+    "2027": [
+     "2027-04-23",
+     "2027-04-25"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Lần thứ 14 vào năm 2026"
+    ],
+    [
+     "Quy mô",
+     "Kỷ lục 4.470 đăng ký (2026), ~32% là VĐV nước ngoài"
+    ],
+    [
+     "Phí FUJI100mi",
+     "50.000 yên (general) · 105.000 yên (donation)"
+    ],
+    [
+     "Điều kiện",
+     "ITRA 4 điểm (1 giải) hoặc 2 giải 3 điểm"
+    ]
+   ],
+   "distances": [
+    [
+     "FUJI100mi",
+     "165,3 km",
+     "—"
+    ],
+    [
+     "KAI70k",
+     "67,9–70,2 km",
+     "—"
+    ],
+    [
+     "ASUMI40k",
+     "38,5 km",
+     "—"
+    ],
+    [
+     "Cự ly ngắn",
+     "5,7 / 8,6 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Giải tính suất Western States 100 năm 2027 (FUJI100mi)",
+    "General entry: 1.900 suất, bốc thăm; donation entry 100 suất, ai đăng ký trước được trước",
+    "Đã đóng tiền thì không hoàn phí, không chuyển nhượng",
+    "Đợt đăng ký giải 2027 đóng ngày 15/11/2026; kết quả bốc thăm 1/12/2026"
+   ],
+   "coach": [
+    "Nhiều đoạn kỹ thuật, đêm lạnh — chuẩn bị đồ giữ ấm và chạy đêm tốt.",
+    "Technical night sections with big temperature swings — pack warm layers."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → NRT/HND bay thẳng ~5h30–6h, sau đó xe buýt tới Fujiyoshida ~2h.",
+     "HAN": "HAN → NRT/HND bay thẳng ~4h30–5h."
+    },
+    "visa": "Cần visa Nhật (du lịch ngắn hạn) — xin sớm; kiểm tra yêu cầu mới nhất.",
+    "stay": "Fujiyoshida hoặc Kawaguchiko (gần điểm xuất phát/đích).",
+    "see": [
+     "Hồ Kawaguchiko ngắm Phú Sĩ",
+     "Chùa Chureito",
+     "Phố đêm Shinjuku, Tokyo"
+    ],
+    "eat": [
+     "Houtou (mì udon núi Yamanashi)",
+     "Ramen & gyoza",
+     "Bento nhà ga"
+    ],
+    "memory": "Dành 2–3 ngày ở Tokyo sau giải: tàu Shinkansen, chợ cá.",
+    "budget": {
+     "nights": 7,
+     "lowUSD": 2200,
+     "highUSD": 3800
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ],
+   "yearNotes": {
+    "2027": "Đợt đăng ký giải 2027 đã đóng ngày 15/11/2026; kết quả bốc thăm 1/12. Đợt tiếp theo mở đầu tháng 11/2027 (cho giải 2028)."
+   }
+  },
+  {
+   "id": "miut",
+   "kind": "wtm",
+   "name": "MIUT – Madeira Island Ultra-Trail",
+   "short": "MIUT",
+   "city": "Porto Moniz, Madeira",
+   "country": "Bồ Đào Nha",
+   "lon": -17.17,
+   "lat": 32.87,
+   "role": "Hệ giải độc lập",
+   "site": "https://transgrancanaria.net/en/world-trail-majors/",
+   "rule": {
+    "month": 4,
+    "weekday": 6,
+    "nth": 4
+   },
+   "dates": {
+    "2026": [
+     "2026-04-25",
+     "2026-04-25"
+    ],
+    "2027": [
+     "2027-04-24",
+     "2027-04-25"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Một trong 5 giải gốc của Ultra-Trail World Tour cũ"
+    ],
+    [
+     "Địa hình",
+     "Núi lửa, rừng laurisilva, bậc thang đá"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors"
+    ],
+    [
+     "Xuất phát",
+     "Porto Moniz (Tây Bắc Madeira)"
+    ]
+   ],
+   "distances": [
+    [
+     "MIUT",
+     "110–115 km",
+     "—"
+    ],
+    [
+     "Cự ly 80",
+     "80 km",
+     "—"
+    ],
+    [
+     "Cự ly 56",
+     "56 km",
+     "—"
+    ],
+    [
+     "Cự ly 40",
+     "40 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Cự ly chính MIUT chạy xuyên đảo",
+    "Ngày 2026 ghi theo Ahotu (25/4); Finishers ghi 2027 là 24–25/4"
+   ],
+   "coach": [
+    "Đảo nhiều bậc thang đá dốc — quads và đầu gối cần sẵn sàng.",
+    "Steep stone stairs everywhere: prepare your quads."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → FNC nối chuyến ~22h (qua châu Âu, Lisbon).",
+     "HAN": "HAN → FNC nối chuyến ~22h."
+    },
+    "visa": "Visa Schengen (Bồ Đào Nha).",
+    "stay": "Funchal hoặc Porto Moniz (đi xe đưa đón giải).",
+    "see": [
+     "Levada Walks",
+     "Cabo Girão",
+     "Chợ Mercado dos Lavradores"
+    ],
+    "eat": [
+     "Espetada",
+     "Bolo do caco",
+     "Poncha"
+    ],
+    "memory": "Thuê xe 1 ngày lái quanh đảo.",
+    "budget": {
+     "nights": 7,
+     "lowUSD": 2000,
+     "highUSD": 3400
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "sdw100",
+   "kind": "wtm",
+   "name": "Centurion South Downs Way 100",
+   "short": "South Downs Way 100",
+   "city": "Winchester → Eastbourne",
+   "country": "Anh",
+   "lon": -1.31,
+   "lat": 51.06,
+   "role": "Hệ giải độc lập",
+   "site": "https://centurionrunning.com/landing/gran-canaria-world-trail-majors",
+   "rule": {
+    "month": 6,
+    "weekday": 6,
+    "nth": 2
+   },
+   "dates": {
+    "2026": [
+     "2026-06-13",
+     "2026-06-13"
+    ],
+    "2027": [
+     "2027-06-12",
+     "2027-06-12"
+    ]
+   },
+   "meta": [
+    [
+     "Cự ly",
+     "160 km"
+    ],
+    [
+     "Địa hình",
+     "Đường đồi South Downs"
+    ],
+    [
+     "Khí hậu",
+     "Đầu hè, 10–20°C"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors"
+    ]
+   ],
+   "distances": [
+    [
+     "South Downs Way 100",
+     "160 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Giải 100 dặm kinh điển của Anh, chạy từ Winchester đến Eastbourne",
+    "Cự ly 160 km, D+ cần kiểm tra trang giải"
+   ],
+   "coach": [
+    "Course chạy được nhiều — chiến thuật nhịp đều và ăn đều quan trọng hơn kỹ thuật.",
+    "Runnable course: pacing and fueling matter more than technique."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → LHR bay thẳng ~13h, tàu tới Winchester ~1h.",
+     "HAN": "HAN → LHR bay thẳng ~13h."
+    },
+    "visa": "Visa Anh (Standard Visitor) — xin trước vài tuần.",
+    "stay": "Winchester (ở trước giải) và Eastbourne (đích).",
+    "see": [
+     "Nhà thờ lớn Winchester",
+     "Seven Sisters Cliffs",
+     "London nếu dư ngày"
+    ],
+    "eat": [
+     "Fish & chips",
+     "Sunday roast",
+     "Pub pie"
+    ],
+    "memory": "Cuối tuần ngắm vách đá Seven Sisters.",
+    "budget": {
+     "nights": 5,
+     "lowUSD": 2000,
+     "highUSD": 3400
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "qmt",
+   "kind": "wtm",
+   "name": "Québec Mega Trail",
+   "short": "Québec Mega Trail",
+   "city": "Beaupré, Québec",
+   "country": "Canada",
+   "lon": -70.9,
+   "lat": 47.04,
+   "role": "Hệ giải độc lập",
+   "site": "https://transgrancanaria.net/en/world-trail-majors/",
+   "rule": {
+    "month": 7,
+    "weekday": 6,
+    "nth": 1,
+    "startOffset": -1,
+    "endOffset": 1
+   },
+   "dates": {
+    "2026": [
+     "2026-07-03",
+     "2026-07-05"
+    ],
+    "2027": [
+     "2027-07-02",
+     "2027-07-04"
+    ]
+   },
+   "meta": [
+    [
+     "Cự ly",
+     "Tối đa 134 km"
+    ],
+    [
+     "Địa hình",
+     "Núi Laurentians, rừng, đường mòn"
+    ],
+    [
+     "Khí hậu",
+     "Đầu hè, ấm"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors"
+    ]
+   ],
+   "distances": [
+    [
+     "QMT 134",
+     "134 km",
+     "—"
+    ],
+    [
+     "QMT 77",
+     "77 km",
+     "—"
+    ],
+    [
+     "QMT 50",
+     "50 km",
+     "—"
+    ],
+    [
+     "QMT 32",
+     "32 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Nhiều cự ly từ 1 km đến 134 km, có cự ly thiếu nhi"
+   ],
+   "coach": [
+    "Kết hợp dốc dài và địa hình ướt — giày bám tốt rất quan trọng.",
+    "Mixed long climbs and wet terrain: grippy shoes help."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → YQB nối chuyến ~22h (qua Montréal/Toronto).",
+     "HAN": "HAN → YQB nối chuyến ~22h."
+    },
+    "visa": "Cần visa Canada (visitor visa) — xin sớm.",
+    "stay": "Thành phố Québec cổ hoặc Beaupré.",
+    "see": [
+     "Phố cổ Québec",
+     "Thác Montmorency",
+     "Đảo Orléans"
+    ],
+    "eat": [
+     "Poutine",
+     "Bánh crêpe",
+     "Syrup phong"
+    ],
+    "memory": "Dành 2 ngày dạo phố cổ Québec.",
+    "budget": {
+     "nights": 6,
+     "lowUSD": 2100,
+     "highUSD": 3600
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "vmm",
+   "kind": "wtm",
+   "name": "Vietnam Mountain Marathon",
+   "short": "Vietnam Mountain Marathon",
+   "city": "Sa Pả, Lào Cai",
+   "country": "Việt Nam",
+   "lon": 103.84,
+   "lat": 22.34,
+   "role": "Hệ giải độc lập",
+   "site": "https://transgrancanaria.net/en/world-trail-majors/",
+   "rule": {
+    "month": 9,
+    "weekday": 0,
+    "nth": 3,
+    "startOffset": -3
+   },
+   "dates": {
+    "2026": [
+     "2026-09-17",
+     "2026-09-20"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Giải trail lớn nhất Việt Nam"
+    ],
+    [
+     "Địa hình",
+     "Ruộng bậc thang, núi cao Sa Pa"
+    ],
+    [
+     "Khí hậu",
+     "Đầu thu, mát; có sương mù"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors"
+    ]
+   ],
+   "distances": [
+    [
+     "VMM 161",
+     "161 km",
+     "—"
+    ],
+    [
+     "VMM 100K",
+     "100,9 km",
+     "—"
+    ],
+    [
+     "VMM 70K",
+     "69,8 km",
+     "—"
+    ],
+    [
+     "VMM 50K",
+     "49,6 km",
+     "—"
+    ],
+    [
+     "VMM 23K",
+     "23 km",
+     "—"
+    ],
+    [
+     "VMM 10K",
+     "10,4 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Giải trong nước duy nhất nằm trong World Trail Majors",
+    "Ngày 2027 chưa công bố (Finishers ghi giữa tháng 9) — tính theo quy tắc, ghi “lịch dự kiến”"
+   ],
+   "coach": [
+    "Giải nhà — dốc đứng nhiều bậc; tập dốc nhiều và chuẩn bị mưa/sương.",
+    "Home race: steep stair-like climbs, fog and rain likely."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → HAN ~2h, rồi xe/tàu lên Sa Pa 5–6h.",
+     "HAN": "HAN → Lào Cai bằng cao tốc/tàu ~4–5h → Sa Pa."
+    },
+    "visa": "Không cần visa — giải ở trong nước.",
+    "stay": "Thị trấn Sa Pa hoặc Sa Pả (gần điểm xuất phát).",
+    "see": [
+     "Fansipan",
+     "Bản Cát Cát",
+     "Thung lũng Mường Hoa"
+    ],
+    "eat": [
+     "Thắng cố",
+     "Lẩu cá hồi",
+     "Gà đen nướng"
+    ],
+    "memory": "Ở thêm 1–2 ngày để ngắm ruộng bậc thang.",
+    "budget": {
+     "nights": 4,
+     "lowUSD": 300,
+     "highUSD": 600
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "gpt100",
+   "kind": "wtm",
+   "name": "Grampians Peaks Trail 100 Miler",
+   "short": "Grampians Peaks Trail",
+   "city": "Halls Gap, Victoria",
+   "country": "Úc",
+   "lon": 142.52,
+   "lat": -37.14,
+   "role": "Hệ giải độc lập",
+   "site": "https://www.finishers.com/en/event/grampians-peaks-trail",
+   "rule": {
+    "month": 11,
+    "weekday": 0,
+    "nth": 1,
+    "startOffset": -3
+   },
+   "dates": {
+    "2026": [
+     "2026-11-05",
+     "2026-11-08"
+    ],
+    "2027": [
+     "2027-11-04",
+     "2027-11-07"
+    ]
+   },
+   "meta": [
+    [
+     "Cự ly",
+     "162 km, ~7.700 m D+"
+    ],
+    [
+     "Địa hình",
+     "Núi đá Gariwerd, đường mòn hoang dã"
+    ],
+    [
+     "Khởi đầu",
+     "Từ Mt Zero (Bắc) đến Dunkeld (Nam)"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors; Hardrock qualifier"
+    ]
+   ],
+   "distances": [
+    [
+     "GPT100 Miler",
+     "162 km",
+     "~7.700 m"
+    ],
+    [
+     "GPT100 Stage Race",
+     "100 dặm / 4 ngày",
+     "—"
+    ],
+    [
+     "GPT50K",
+     "50 km",
+     "—"
+    ],
+    [
+     "Dunkeld 5K",
+     "5 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Gia nhập World Trail Majors từ năm 2025",
+    "Người về đích Miler đủ điều kiện bốc thăm Hardrock 100",
+    "Phí 2026: từ ~A$828 (ưu tiên) đến A$1.104 (đăng ký muộn)"
+   ],
+   "coach": [
+    "Đường mòn đi bộ không thiết kế cho chạy — nhiều đoạn kỹ thuật, tập đá và dốc đứng.",
+    "A hiking trail, not a race course: technical and remote."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → MEL bay thẳng ~8h, rồi lái xe ~3h tới Halls Gap.",
+     "HAN": "HAN → MEL nối chuyến ~11h."
+    },
+    "visa": "Visa du lịch Úc (subclass 600) — nộp online, xin trước 4–6 tuần.",
+    "stay": "Halls Gap (cơ sở của giải).",
+    "see": [
+     "Pinnacle Lookout",
+     "MacKenzie Falls",
+     "Melbourne nếu dư ngày"
+    ],
+    "eat": [
+     "Pie Úc",
+     "Cà phê flat white",
+     "Hải sản Victoria"
+    ],
+    "memory": "Thêm 2 ngày ở Melbourne sau giải.",
+    "budget": {
+     "nights": 6,
+     "lowUSD": 1700,
+     "highUSD": 3000
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "rmbcpt",
+   "kind": "wtm",
+   "name": "RMB Ultra-Trail Cape Town",
+   "short": "Ultra-Trail Cape Town",
+   "city": "Cape Town",
+   "country": "Nam Phi",
+   "lon": 18.42,
+   "lat": -33.92,
+   "role": "Hệ giải độc lập",
+   "site": "https://transgrancanaria.net/en/world-trail-majors/",
+   "rule": {
+    "month": 11,
+    "weekday": 5,
+    "nth": 3,
+    "endOffset": 2
+   },
+   "dates": {
+    "2026": [
+     "2026-11-20",
+     "2026-11-22"
+    ]
+   },
+   "meta": [
+    [
+     "Cự ly",
+     "Tối đa 163 km"
+    ],
+    [
+     "Địa hình",
+     "Núi Table Mountain, bờ biển"
+    ],
+    [
+     "Khí hậu",
+     "Cuối xuân/đầu hè, nắng ấm"
+    ],
+    [
+     "Vai trò",
+     "World Trail Majors"
+    ]
+   ],
+   "distances": [
+    [
+     "UTCT 163",
+     "163 km",
+     "—"
+    ],
+    [
+     "UTCT 99",
+     "99,1 km",
+     "—"
+    ],
+    [
+     "UTCT 57",
+     "56,7 km",
+     "—"
+    ],
+    [
+     "UTCT 35",
+     "34,5 km",
+     "—"
+    ],
+    [
+     "UTCT 24",
+     "23,5 km",
+     "—"
+    ],
+    [
+     "UTCT 16",
+     "15,8 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Giải trail biểu tượng của châu Phi, từng nằm trong Ultra-Trail World Tour cũ",
+    "Ngày 2027 chưa công bố — tính theo quy tắc, ghi “lịch dự kiến”"
+   ],
+   "coach": [
+    "Gió lớn và dốc đá — chuẩn bị áo gió, và đừng xem thường nắng.",
+    "Strong wind and rocky climbs; pack a windproof layer."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → CPT nối chuyến ~20h (qua Doha/Dubai/Johannesburg).",
+     "HAN": "HAN → CPT nối chuyến ~21h."
+    },
+    "visa": "Kiểm tra yêu cầu visa Nam Phi cho hộ chiếu Việt Nam.",
+    "stay": "Cape Town City Bowl hoặc Sea Point.",
+    "see": [
+     "Table Mountain",
+     "Boulders Beach (chim cánh cụt)",
+     "Cape Point"
+    ],
+    "eat": [
+     "Braai",
+     "Bobotie",
+     "Rượu vang Stellenbosch"
+    ],
+    "memory": "Ở thêm 2 ngày đi Cape Point và vang Stellenbosch.",
+    "budget": {
+     "nights": 7,
+     "lowUSD": 2200,
+     "highUSD": 3800
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ]
+  },
+  {
+   "id": "wildstrubel",
+   "kind": "trail",
+   "name": "Wildstrubel by UTMB",
+   "short": "Wildstrubel",
+   "city": "Crans-Montana",
+   "country": "Thụy Sĩ",
+   "lon": 7.48,
+   "lat": 46.31,
+   "role": "Major châu Âu (từ 2027)",
+   "site": "https://wildstrubel.utmb.world",
+   "rule": {
+    "month": 9,
+    "weekday": 6,
+    "nth": 2,
+    "startOffset": -2,
+    "endOffset": 1
+   },
+   "dates": {
+    "2026": [
+     "2026-09-10",
+     "2026-09-13"
+    ],
+    "2027": [
+     "2027-09-09",
+     "2027-09-12"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Mới 5 lần tổ chức"
+    ],
+    [
+     "Địa hình",
+     "Alps Thụy Sĩ, đèo, sông băng Plaine Morte"
+    ],
+    [
+     "Điểm cao nhất",
+     "~2.800 m (lều Wildstrubel)"
+    ],
+    [
+     "Cutoff 110",
+     "30 giờ"
+    ]
+   ],
+   "distances": [
+    [
+     "Wild 110",
+     "113 km",
+     "~6.600 m"
+    ],
+    [
+     "Wild 70",
+     "72 km",
+     "—"
+    ],
+    [
+     "Wild 55",
+     "~55 km",
+     "—"
+    ],
+    [
+     "Wild Glacier Marathon",
+     "—",
+     "—"
+    ],
+    [
+     "Wild 25",
+     "~25 km",
+     "—"
+    ],
+    [
+     "Wild 10",
+     "10 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Vòng quanh khối Wildstrubel, nối 5 điểm đến: Crans-Montana, Leukerbad, Adelboden, Lenk, Kandersteg",
+    "Tất cả cự ly đều về đích ở Crans-Montana",
+    "Wild 110 xuất phát 23:00 thứ Sáu 10/9/2027 (theo trang giải)"
+   ],
+   "coach": [
+    "Đêm lạnh trên cao, chạm đèo ~2.800 m — tập chạy đêm và chịu lạnh.",
+    "Cold nights at altitude, passes up to ~2,800 m."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → ZRH/GVA nối chuyến ~16h, rồi tàu/xe tới Crans-Montana ~3h.",
+     "HAN": "HAN → ZRH/GVA nối chuyến ~16h."
+    },
+    "visa": "Visa Schengen (Thụy Sĩ).",
+    "stay": "Crans-Montana (đích) hoặc Adelboden/Kandersteg (điểm xuất phát khác).",
+    "see": [
+     "Sông băng Plaine Morte",
+     "Hồ Louché / Leukerbad thermal",
+     "Cáp treo Adelboden"
+    ],
+    "eat": [
+     "Raclette",
+     "Fondue",
+     "Rösti"
+    ],
+    "memory": "Ngâm suối nước nóng Leukerbad sau giải.",
+    "budget": {
+     "nights": 7,
+     "lowUSD": 2400,
+     "highUSD": 4200
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ],
+   "majorSince": 2027,
+   "yearNotes": {
+    "2027": "Lần đầu là UTMB World Series Major. Đăng ký mở 17/11/2026 (ưu tiên UTMB Index) và 19/11/2026 (đại trà)."
+   }
+  },
+  {
+   "id": "canyons",
+   "kind": "trail",
+   "name": "HOKA Canyons Endurance Runs by UTMB",
+   "short": "Canyons Endurance Runs",
+   "city": "Auburn, California",
+   "country": "Mỹ",
+   "lon": -121.07,
+   "lat": 38.9,
+   "role": "Major Bắc Mỹ (từ 2027)",
+   "site": "https://canyons.utmb.world",
+   "rule": {
+    "month": 4,
+    "weekday": 6,
+    "nth": 4,
+    "startOffset": -2,
+    "endOffset": 1
+   },
+   "dates": {
+    "2026": [
+     "2026-04-23",
+     "2026-04-26"
+    ],
+    "2027": [
+     "2027-04-22",
+     "2027-04-25"
+    ]
+   },
+   "meta": [
+    [
+     "Khởi đầu",
+     "Tổ chức tại Auburn trong 12 năm"
+    ],
+    [
+     "Địa hình",
+     "Western States Trail, hẻm núi Sierra Nevada"
+    ],
+    [
+     "Super Golden Ticket",
+     "Top 3 nam/nữ 100K vào Western States"
+    ],
+    [
+     "Cự ly",
+     "100M, 100K, 50K, 25K"
+    ]
+   ],
+   "distances": [
+    [
+     "Canyons 100M",
+     "161 km",
+     "17.000+ ft"
+    ],
+    [
+     "Canyons 100K",
+     "100 km",
+     "—"
+    ],
+    [
+     "Canyons 50K",
+     "50 km",
+     "—"
+    ],
+    [
+     "Canyons 25K",
+     "25 km",
+     "—"
+    ]
+   ],
+   "facts": [
+    "Giải cuối cùng trong lịch có Super Golden Ticket vào Western States 100",
+    "100M và 100K là giải tính suất Western States (về đích 100M dưới 35 giờ, 100K dưới 20 giờ)",
+    "Là dual qualifier cho UTMB World Series Finals và Western States",
+    "Ngày 100K năm 2027: 24/4"
+   ],
+   "coach": [
+    "Nóng và nhiều hẻm sâu — tập lên xuống dốc nhiều lần và chịu nhiệt.",
+    "Deep canyons and heat: train repeated up-down efforts."
+   ],
+   "travel": {
+    "flight": {
+     "SGN": "SGN → SMF (Sacramento) nối chuyến ~20h (qua LAX/SFO).",
+     "HAN": "HAN → SMF nối chuyến ~22h."
+    },
+    "visa": "Visa Mỹ B1/B2 — lịch phỏng vấn thường chờ lâu.",
+    "stay": "Auburn (khu phố cổ) hoặc Sacramento.",
+    "see": [
+     "Phố cổ Auburn",
+     "Hồ Folsom / American River",
+     "San Francisco (2h lái xe)"
+    ],
+    "eat": [
+     "Burger & BBQ",
+     "Taco",
+     "Brunch kiểu California"
+    ],
+    "memory": "Thêm 2 ngày ở San Francisco.",
+    "budget": {
+     "nights": 6,
+     "lowUSD": 2000,
+     "highUSD": 3600
+    }
+   },
+   "years": [
+    2026,
+    2027
+   ],
+   "majorSince": 2027,
+   "yearNotes": {
+    "2027": "Lần đầu là UTMB World Series Major (UTMB công bố 4/11/2026)."
    }
   }
  ],
